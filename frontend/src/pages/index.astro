@@ -1,0 +1,172 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<Layout title="START / SERVERLESS">
+  <main>
+    <div class="scroll">
+      <Navbar />
+      <div class="hero-heading-left">
+        <div class="hero-container">
+          <div class="hero-column">
+            <div class="hero-content">
+              <h1>Remove friction from your business by Starting Serverless</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos
+                maiores voluptas id quidem ex corrupti, magnam sint fugit
+                obcaecati quasi est veritatis sapiente aut cum, hic voluptate,
+                molestiae aliquam ipsam.
+              </p>
+              <button>Get Started</button>
+            </div>
+          </div>
+          <div class="hero-column-img">
+            <img
+              src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div id="services" class="services">
+        <Card title="Design. Build. Deliver" body="" />
+        <Card title="Architecture as a Service" body="" />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  html {
+    background: #2f2f2f;
+    color: #ffffff;
+    font-family: "Titillium Web";
+  }
+
+  .scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .navbar-logo-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
+    background: #424242;
+    width: 100%;
+    /* height: 5.15vh; */
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    /* width: 1200px; */
+    width: 95%;
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 625px;
+    width: 100%;
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    height: 36px;
+  }
+
+  .navbar-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+  }
+
+  .hero-heading-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 64px 24px;
+    gap: 80px;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* width: 80vw; */
+    padding: 0px;
+    gap: 80px;
+    border-radius: 0px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+  }
+
+  .hero-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 24px;
+    border-radius: 0px;
+    width: 40vw;
+  }
+
+  .hero-column-img {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+    /* width: 560px; */
+    /* height: 392.9px; */
+    border-radius: 0px;
+  }
+
+  .services {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Electrolize;
+    font-size: 56px;
+  }
+</style>

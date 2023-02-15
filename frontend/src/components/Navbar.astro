@@ -1,0 +1,82 @@
+---
+export interface Props {}
+
+const {} = Astro.props;
+---
+
+<div class="navbar-logo-left">
+  <div class="navbar-container">
+    <div class="navbar-content">
+      <div class="navbar-brand">
+        <!-- <img src="" alt="" /> -->
+        <p>LOGO HERE</p>
+      </div>
+      <div class="navbar-menu">
+        <a href="#services">About</a>
+        <a href="">Features</a>
+        <a href="">Pricing</a>
+        <button>Get Started</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .navbar-logo-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px 24px;
+    background: #424242;
+    width: 100%;
+    /* height: 5.15vh; */
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    /* width: 1200px; */
+    width: 95%;
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 625px;
+    width: 100%;
+    height: 69px;
+    border-radius: 0px;
+  }
+
+  .navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    height: 36px;
+  }
+
+  .navbar-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
