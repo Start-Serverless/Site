@@ -1,4 +1,4 @@
-name: deploy-test
+name: deploy-dev
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::246683029984:role/DevopsStack-DeploymentRoleC7BBCF2C-15UV1X10KCMQR
-          aws-region: us-eest-1
+          aws-region: us-east-1
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
