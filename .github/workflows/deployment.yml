@@ -50,6 +50,7 @@ jobs:
           cdk_args: "--require-approval never --verbose"
           actions_comment: false
           debug_log: true
+          working_dir: "backend"
         env:
           STACK_BUILD_TARGET_ACCOUNT: dev
 
@@ -61,6 +62,7 @@ jobs:
           cdk_args: "--require-approval never --verbose"
           actions_comment: false
           debug_log: true
+          working_dir: "backend"
         env:
           STACK_BUILD_TARGET_ACCOUNT: dev
 
