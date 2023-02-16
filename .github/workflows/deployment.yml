@@ -19,7 +19,8 @@ jobs:
     name: Deploy CDK stacks to dev
     runs-on: ubuntu-latest
     defaults:
-      working-directory: ./backend
+      run:
+        working-directory: ./backend
     permissions:
       actions: write
       contents: read
@@ -69,7 +70,8 @@ jobs:
   #   name: deploy CDK stacks to prod
   #   runs-on: ubuntu-latest
   # defaults:
-  # working-directory: ./backend
+  #     run:
+  #       working-directory: ./backend
   #   permissions:
   #     actions: write
   #     contents: read
