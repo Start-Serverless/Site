@@ -37,7 +37,7 @@ jobs:
           node-version: "16"
 
       - name: Install Node Packages
-        run: cd frontend && npm i
+        run: cd backend && npm i
 
       - name: CDK Synth
         uses: youyo/aws-cdk-github-actions@v2
@@ -85,7 +85,7 @@ jobs:
   #         node-version: "16"
 
   #     - name: Install Node Packages
-  # run: cd frontend && npm i
+  # run: cd backend && npm i
   #       run: npm i
 
   #     - name: cdk deploy
