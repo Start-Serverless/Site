@@ -3,29 +3,97 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: {}
+
 jobs:
-  deploy:
-    name: Deploy CDK stacks to test
+  test:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          # trigger the tests here
+
+  deploy-to-dev:
+    if: github.ref == 'refs/heads/main'
+    needs: [test]
+    name: Deploy CDK stacks to dev
     runs-on: ubuntu-latest
     permissions:
       actions: write
       contents: read
       id-token: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::246683029984:role/DevopsStack-DeploymentRoleC7BBCF2C-15UV1X10KCMQR
           aws-region: us-east-1
-      - name: Checkout repo
-        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: CDK synth
-        run: npx cdk synth --app "npx ts-node src/main.ts" --output "cdk.out"
-      - name: CDK deploy
-        run: npx cdk deploy --all --app "cdk.out" --require-approval never
+          node-version: "16"
+
+      - name: Install Node Packages
+        run: npm i
+
+      - name: CDK Synth
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: "synth"
+          cdk_stack: "*"
+          cdk_args: "--require-approval never --verbose"
+          actions_comment: false
+          debug_log: true
+        env:
+          STACK_BUILD_TARGET_ACCOUNT: dev
+
+      - name: CDK Deploy
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: "deploy"
+          cdk_stack: "*"
+          cdk_args: "--require-approval never --verbose"
+          actions_comment: false
+          debug_log: true
+        env:
+          STACK_BUILD_TARGET_ACCOUNT: dev
+
+  # deploy-to-prod:
+  #   if: github.ref == 'refs/heads/main'
+  #   needs: [deploy-to-dev]
+  #   name: deploy CDK stacks to prod
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     actions: write
+  #     contents: read
+  #     id-token: write
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
+
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         role-to-assume: arn:aws:iam::871600132779:role/DevopsStack-DeploymentRoleC7BBCF2C-2U2BLZBBIYPB
+  #         aws-region: us-east-1
+
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: "16"
+
+  #     - name: Install Node Packages
+  #       run: npm i
+
+  #     - name: cdk deploy
+  #       uses: youyo/aws-cdk-github-actions@v2
+  #       with:
+  #         cdk_subcommand: "deploy"
+  #         cdk_stack: "*"
+  #         cdk_args: "--require-approval never --verbose"
+  #         actions_comment: false
+  #         debug_log: true
+  #       env:
+  #         STACK_BUILD_TARGET_ACCOUNT: prod
