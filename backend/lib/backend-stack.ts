@@ -1,11 +1,6 @@
 import { Stack, StackProps, SecretValue, CfnOutput, aws_amplify }  from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import {
-	App,
-	CustomRule,
-	GitHubSourceCodeProvider,
-	RedirectStatus,
-} from '@aws-cdk/aws-amplify-alpha'
+import { App, GitHubSourceCodeProvider} from '@aws-cdk/aws-amplify-alpha'
 import { BuildSpec } from 'aws-cdk-lib/aws-codebuild';
 
 export class BackendStack extends Stack {
@@ -21,7 +16,6 @@ export class BackendStack extends Stack {
 			region: this.region
 		},
 		buildSpec: BuildSpec.fromObjectToYaml({
-				// Alternatively add a `amplify.yml` to the frontend repo
 				version: 1,
 				frontend: {
 					phases: {
