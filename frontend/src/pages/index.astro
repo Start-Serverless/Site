@@ -2,13 +2,15 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
 ---
 
 <Layout title="START / SERVERLESS">
   <main>
     <div class="scroll">
       <Navbar />
-      <div class="hero-heading-left">
+      <Hero/>
+      <!-- <div class="hero-heading-left">
         <div class="hero-container">
           <div class="hero-column">
             <div class="hero-content">
@@ -33,7 +35,7 @@ import Navbar from "../components/Navbar.astro";
       <div id="services" class="services">
         <Card title="Design. Build. Deliver" body="" />
         <Card title="Architecture as a Service" body="" />
-      </div>
+      </div> -->
     </div>
   </main>
 </Layout>
@@ -62,6 +64,10 @@ import Navbar from "../components/Navbar.astro";
     /* height: 5.15vh; */
     height: 69px;
     border-radius: 0px;
+  }
+
+  p {
+    font-size: 18px;
   }
 
   .navbar-container {
