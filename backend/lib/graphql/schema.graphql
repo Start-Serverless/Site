@@ -1,20 +1,23 @@
+enum Types {
+  contact
+}
+
 type Query {
-    getContacts(id: ID!): Contact
+  getContacts: [Contact]
 }
 
 type Mutation {
-    submitContact(input: ContactInput): Contact
+  submitContact(input: ContactInput): Contact
 }
 
 input ContactInput {
-    name: String!
-    email: String!
-    phone: String!
+  name: String!
+  email: AWSEmail!
+  phone: AWSPhone!
 }
 
 type Contact {
-    id: ID!
-    name: String!
-    email: String!
-    phone: String!
+  name: String!
+  email: AWSEmail!
+  phone: AWSPhone!
 }

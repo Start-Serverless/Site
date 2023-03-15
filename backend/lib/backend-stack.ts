@@ -23,6 +23,20 @@ export class BackendStack extends Stack {
             },
         });
 
-        api.addDynamoDbDataSource("contactTable", table);
+        const tableDataSource = api.addDynamoDbDataSource("contactTable", table);
+
+		tableDataSource.createResolver("MutationSubmitcontact", {
+			typeName: "Mutation",
+			fieldName: 'submitContact',
+			requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
+				new appsync.PrimaryKey( 
+					new appsync.Assign("pk", '"CONTACT"'), 
+					new appsync.Assign("sk", '"EMAIL#$!{input.email}"')
+				),
+				appsync.Values.projecting("input")
+			),
+			responseMappingTemplate: appsync.MappingTemplate.dynamoDbResultItem()
+		})
+
     }
 }
