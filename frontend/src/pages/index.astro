@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import Contact from "../components/Contact.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 ---
@@ -9,7 +10,8 @@ import Hero from "../components/Hero.astro";
   <main>
     <div class="scroll">
       <Navbar />
-      <Hero/>
+      <Hero />
+      <Contact />
     </div>
   </main>
 </Layout>
@@ -83,7 +85,6 @@ import Hero from "../components/Hero.astro";
     padding: 0px;
     gap: 32px;
   }
-
 
   .services {
     height: 100vh;
