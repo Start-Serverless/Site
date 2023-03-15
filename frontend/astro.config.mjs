@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
+import aws from "astro-sst/lambda"
+
+// https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'server'
+	output: 'server',
+	adapter: aws()
 });
