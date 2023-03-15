@@ -3,10 +3,9 @@
 // this is an auto generated file. This will be overwritten
 
 export const getContacts = /* GraphQL */ `
-  query GetContacts($id: ID!) {
-    getContacts(id: $id) {
+  query GetContacts {
+    getContacts {
       email
-      id
       name
       phone
     }

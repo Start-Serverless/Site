@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aws-amplify/api": "^5.0.19",
-    "astro": "^2.0.0"
+    "astro": "^2.0.0",
+    "aws-amplify": "^5.0.19"
   }
 }

@@ -11,7 +11,6 @@ export type ContactInput = {
 export type Contact = {
   __typename: "Contact",
   email: string,
-  id: string,
   name: string,
   phone: string,
 };
@@ -24,22 +23,16 @@ export type SubmitContactMutation = {
   submitContact?:  {
     __typename: "Contact",
     email: string,
-    id: string,
     name: string,
     phone: string,
   } | null,
-};
-
-export type GetContactsQueryVariables = {
-  id: string,
 };
 
 export type GetContactsQuery = {
-  getContacts?:  {
+  getContacts?:  Array< {
     __typename: "Contact",
     email: string,
-    id: string,
     name: string,
     phone: string,
-  } | null,
+  } | null > | null,
 };

@@ -6,7 +6,6 @@ export const submitContact = /* GraphQL */ `
   mutation SubmitContact($input: ContactInput) {
     submitContact(input: $input) {
       email
-      id
       name
       phone
     }

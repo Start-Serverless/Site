@@ -1,38 +1,28 @@
 ---
-import { API, GraphQLQuery } from "@aws-amplify/api";
+import { Amplify, API, withSSRContext } from "aws-amplify";
 import config from "../aws-exports";
 import { submitContact } from "../graphql/mutations";
 
-API.configure(config);
-
-// console.log("test");
+Amplify.configure({ ...config, ssr: true });
 
 if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = data.get("name");
-    const email = data.get("email");
-    const phone = data.get("phone");
-    console.log(`Data: ${phone} ${email} ${name}`);
-    // const { name, phone, email } = data;
-    const response = await API.graphql({
-      query: submitContact,
-      variables: {
-        input: {
-          name: name,
-          phone: phone,
-          email: email,
-        },
+  const SSR = withSSRContext();
+  const data = await Astro.request.formData();
+  const name = data.get("name");
+  const email = data.get("email");
+  const phone = data.get("phone");
+  console.log(`Data: ${phone} ${email} ${name}`);
+  const response = await SSR.API.graphql({
+    query: submitContact,
+    variables: {
+      input: {
+        name: name,
+        phone: phone,
+        email: email,
       },
-    });
-    console.log(response);
-  } catch (error) {
-    if (error instanceof Error) {
-      //   console.log(error.message);
-      console.error(error);
-      throw error;
-    }
-  }
+    },
+  });
+  console.log(response);
 }
 ---
 
