@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astro-aws/adapter": "^0.3.0",
     "@astrojs/vercel": "^3.2.1",
     "@aws-amplify/api": "^5.0.19",
     "astro": "^2.1.3",

@@ -3,26 +3,21 @@ import { Amplify, API, withSSRContext } from "aws-amplify";
 import config from "../aws-exports";
 import { submitContact } from "../graphql/mutations";
 
-Amplify.configure({ ...config, ssr: true });
+Amplify.configure({ ...config });
 
 if (Astro.request.method === "POST") {
   const SSR = withSSRContext();
   const data = await Astro.request.formData();
-  const name = data.get("name");
-  const email = data.get("email");
-  const phone = data.get("phone");
-  console.log(`Data: ${phone} ${email} ${name}`);
-  const response = await SSR.API.graphql({
+  await SSR.API.graphql({
     query: submitContact,
     variables: {
       input: {
-        name: name,
-        phone: phone,
-        email: email,
+        name: data.get("name"),
+        phone: data.get("email"),
+        email: data.get("phone"),
       },
     },
   });
-  console.log(response);
 }
 ---
 

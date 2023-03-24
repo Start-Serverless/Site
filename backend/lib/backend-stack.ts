@@ -3,10 +3,19 @@ import { Table, AttributeType } from "aws-cdk-lib/aws-dynamodb";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import { Construct } from "constructs";
 import * as path from "path";
+import { AstroAWS } from "@astro-aws/constructs";
 
 export class BackendStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
+
+		new AstroAWS(this, "AstroAWS", {
+			output: "server",
+			websiteDir: ".../frontend",
+			cdk: {
+
+			}
+		})
 
         const table = new Table(this, "Contacts", {
             partitionKey: { name: "pk", type: AttributeType.STRING },
@@ -14,7 +23,7 @@ export class BackendStack extends Stack {
         });
 
         const api = new appsync.GraphqlApi(this, "WebsiteAPI", {
-            name: "Websiteapi",
+            name: "WebsiteApi",
             schema: appsync.SchemaFile.fromAsset(
                 path.join(__dirname, "graphql/schema.graphql")
             ),
@@ -25,7 +34,7 @@ export class BackendStack extends Stack {
 
         const tableDataSource = api.addDynamoDbDataSource("contactTable", table);
 
-		tableDataSource.createResolver("MutationSubmitcontact", {
+		tableDataSource.createResolver("MutationSubmitContact", {
 			typeName: "Mutation",
 			fieldName: 'submitContact',
 			requestMappingTemplate: appsync.MappingTemplate.dynamoDbPutItem(
