@@ -18,9 +18,9 @@ jobs:
     needs: [test]
     name: Deploy CDK stacks to dev
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend
+    # defaults:
+    #   run:
+    #     working-directory: ./backend
     permissions:
       actions: write
       contents: read
@@ -41,6 +41,15 @@ jobs:
 
       - name: Install Node Packages
         run: npm i
+        working-directory: ./frontend
+
+      - name: Build Astro Site
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Install Node Packages
+        run: npm i
+        working-directory: ./backend
 
       - name: CDK Synth
         uses: youyo/aws-cdk-github-actions@v2
