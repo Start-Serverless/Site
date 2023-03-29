@@ -33,6 +33,8 @@ export class BackendStack extends Stack {
 				origin: new S3Origin(siteBucket, {
 					originAccessIdentity: originAccessIdentity,
 				}),
+				responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.CORS_ALLOW_ALL_ORIGINS_WITH_PREFLIGHT_AND_SECURITY_HEADERS,
+				originRequestPolicy: cloudfront.OriginRequestPolicy.USER_AGENT_REFERER_HEADERS,
 				viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 				allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
 				cachedMethods: cloudfront.CachedMethods.CACHE_GET_HEAD_OPTIONS,
@@ -41,10 +43,17 @@ export class BackendStack extends Stack {
 					{
 						includeBody: true,
 						eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
+						// eventType: cloudfront.LambdaEdgeEventType.
 						functionVersion: server.currentVersion
 					}
 				]
 			},	
+			errorResponses: [
+				{
+					httpStatus: 404,
+					responsePagePath: "/404"
+				}
+			]
 			// domainNames: ['startserverless.dev'],
 		})
 
