@@ -48,9 +48,16 @@ const {} = Astro.props;
       <div class="icon w-icon-nav-menu"></div>
     </div>
   </div>
+  <div class="w-nav-overlay"></div>
 </div>
 
 <style>
+  .w-nav {
+    position: relative;
+    background: #ddd;
+    z-index: 1000;
+  }
+
   .navbar-logo-left {
     display: flex;
     width: 100%;
@@ -65,17 +72,10 @@ const {} = Astro.props;
     background-color: #181818;
   }
 
-  /* .w-nav {
-    position: relative;
-    background-color: #ddd;
-    z-index: 1000;
-  } */
-
-  /* .w-navbar {
-    position: relative;
-    background: #dddddd;
-    z-index: 1000;
-  } */
+  .w-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .navbarcontainer {
     display: flex;
@@ -86,11 +86,6 @@ const {} = Astro.props;
     align-items: center;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-  }
-
-  .w-container {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .navbar-content {
@@ -159,6 +154,18 @@ const {} = Astro.props;
   .w-nav-menu {
     position: relative;
     float: right;
+  }
+
+  .w-nav-link {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    color: #222222;
+    padding: 20px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .navbar-link {
@@ -265,15 +272,6 @@ const {} = Astro.props;
     color: #181818;
   }
 
-  @media screen and (max-width: 767px) {
-    .button.reach-out {
-      margin-right: 132px;
-      margin-left: 132px;
-      padding-right: 24px;
-      padding-left: 24px;
-    }
-  }
-
   @media screen and (max-width: 479px) {
     .vectors-wrapper {
       width: auto;
@@ -299,48 +297,6 @@ const {} = Astro.props;
     }
   }
 
-  @media screen and (max-width: 991px) {
-    .navbar-logo-left {
-      padding-right: 0;
-    }
-
-    .navbarcontainer {
-      background-color: #181818;
-    }
-
-    .navbar-menu {
-      max-width: unset;
-      background-color: #181818;
-    }
-
-    .navbar-link {
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      background-color: #181818;
-    }
-
-    .button.header {
-      width: 40%;
-      margin-right: auto;
-      margin-bottom: 24px;
-      margin-left: auto;
-    }
-
-    .f2wf-columns {
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
-    }
-  }
-
   .w-nav:before,
   .w-nav:after {
     content: " ";
@@ -359,17 +315,7 @@ const {} = Astro.props;
     text-decoration: none;
     color: #333333;
   }
-  .w-nav-link {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    text-decoration: none;
-    color: #222222;
-    padding: 20px;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-  }
+
   .w-nav-link.w--current {
     color: #0082f3;
   }
@@ -458,14 +404,20 @@ const {} = Astro.props;
   .w--nav-dropdown-list-open {
     position: static;
   }
-  @media screen and (max-width: 991px) {
-    .w-nav[data-collapse="medium"] .w-nav-menu {
-      display: none;
-    }
-    .w-nav[data-collapse="medium"] .w-nav-button {
-      display: block;
-    }
+
+  [class^="w-icon-"],
+  [class*=" w-icon-"] {
+    font-family: "webflow-icons" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   @media screen and (max-width: 767px) {
     .w-nav[data-collapse="small"] .w-nav-menu {
       display: none;
@@ -483,6 +435,72 @@ const {} = Astro.props;
     }
     .w-nav[data-collapse="tiny"] .w-nav-button {
       display: block;
+    }
+  }
+
+  .menu-button {
+    background-color: #181818;
+  }
+
+  .menu-button.w--open {
+    background-color: #181818;
+  }
+
+  @media screen and (max-width: 991px) {
+    .navbar-logo-left {
+      padding-right: 0;
+    }
+
+    .navbarcontainer {
+      background-color: #181818;
+    }
+
+    .navbar-menu {
+      max-width: unset;
+      background-color: #181818;
+    }
+
+    .navbar-link {
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      background-color: #181818;
+    }
+
+    .button.header {
+      width: 40%;
+      margin-right: auto;
+      margin-bottom: 24px;
+      margin-left: auto;
+    }
+
+    .f2wf-columns {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .w-nav[data-collapse="medium"] .w-nav-button {
+      display: block;
+    }
+
+    .w-nav[data-collapse="medium"] .w-nav-menu {
+      display: none;
+    }
+
+    .icon {
+      color: #fff;
+    }
+
+    .menu-button {
+      background-color: #181818;
     }
   }
 </style>
