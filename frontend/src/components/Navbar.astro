@@ -5,7 +5,7 @@ const {} = Astro.props;
 ---
 
 <div class="navbar-logo">
-    <div class="navbarcontainer w-container">
+    <div class="navbar-container">
         <div class="navbar-content">
             <div class="navbar-brand">
                 <a href="index.html" class="w-inline-block w--current">
@@ -50,23 +50,24 @@ const {} = Astro.props;
         align-items: flex-start;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
+        background: #ddd;
         background-color: #181818;
+        position: relative;
+        z-index: 1000;
     }
 
-    .w-container {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .navbarcontainer {
+    .navbar-container {
         display: flex;
         width: 100%;
         max-width: 1200px;
         -webkit-box-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
         align-items: center;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .navbar-content {
@@ -146,6 +147,12 @@ const {} = Astro.props;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
         text-decoration: none;
+        padding: 24px 12px;
+        vertical-align: top;
+        color: #222;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .navigation-text {
@@ -270,6 +277,7 @@ const {} = Astro.props;
             -ms-flex-pack: center;
             justify-content: center;
             background-color: #181818;
+            position: relative;
         }
 
         .button.header {
@@ -280,18 +288,25 @@ const {} = Astro.props;
         }
 
         .navbar-menu {
-            display: flex;
+            /* display: block !important; */
+            display: none;
             transform: translateY(0px) translate(0px);
             transition: transform 400ms ease 0s;
-            /* display: block !important; */
+            margin-top: 40px;
+            -webkit-box-pack: start;
+            -webkit-box-align: center;
+            -webkit-box-flex: 0;
+            max-width: unset;
+            background: #c8c8c8;
+            background-color: #181818;
             position: absolute;
-            top: 100%;
+            top: 0;
             left: 0;
             right: 0;
-            background: #c8c8c8;
             text-align: center;
             overflow: visible;
             min-width: 200px;
+            float: right;
         }
 
         .menu-button-container {
@@ -331,12 +346,12 @@ const {} = Astro.props;
             margin-top: 8px;
         }
 
-        .menu-toggle:checked + .navbar-menu li {
+        .menu-toggle:checked + .navbar-menu {
             display: block !important;
         }
 
-        .navbar-menu > li {
+        /* .navbar-menu > li {
             display: flex;
-        }
+        } */
     }
 </style>
