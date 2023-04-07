@@ -17,7 +17,7 @@ const {} = Astro.props;
                     />
                 </a>
             </div>
-            <input type="checkbox" class="menu-toggle" />
+            <input type="checkbox" id="menu-toggle" />
             <label class="menu-button-container" for="menu-toggle">
                 <div class="menu-button"></div>
             </label>
@@ -35,7 +35,7 @@ const {} = Astro.props;
 </div>
 
 <style>
-    .menu-toggle {
+    #menu-toggle {
         display: none;
     }
 
@@ -147,7 +147,6 @@ const {} = Astro.props;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
         text-decoration: none;
-        padding: 24px 12px;
         vertical-align: top;
         color: #222;
         text-align: left;
@@ -245,31 +244,6 @@ const {} = Astro.props;
         color: #181818;
     }
 
-    @media screen and (max-width: 479px) {
-        .vectors-wrapper {
-            width: auto;
-            height: auto;
-            max-width: 85%;
-            padding-right: 0px;
-            padding-left: 0px;
-            -webkit-box-flex: 0;
-            -webkit-flex: 0 auto;
-            -ms-flex: 0 auto;
-            flex: 0 auto;
-        }
-
-        .button.reach-out {
-            margin-right: 40px;
-            margin-left: 40px;
-        }
-
-        .button.header {
-            width: 75%;
-            margin-right: auto;
-            margin-left: auto;
-        }
-    }
-
     @media screen and (max-width: 991px) {
         .navbar-link {
             -webkit-box-pack: center;
@@ -278,6 +252,7 @@ const {} = Astro.props;
             justify-content: center;
             background-color: #181818;
             position: relative;
+            padding: 24px 12px;
         }
 
         .button.header {
@@ -288,10 +263,7 @@ const {} = Astro.props;
         }
 
         .navbar-menu {
-            /* display: block !important; */
             display: none;
-            transform: translateY(0px) translate(0px);
-            transition: transform 400ms ease 0s;
             margin-top: 40px;
             -webkit-box-pack: start;
             -webkit-box-align: center;
@@ -317,10 +289,9 @@ const {} = Astro.props;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* padding-right: 18px; */
         }
 
-        .menu-toggle {
+        #menu-toggle {
             display: none;
         }
 
@@ -346,8 +317,10 @@ const {} = Astro.props;
             margin-top: 8px;
         }
 
-        .menu-toggle:checked + .navbar-menu {
+        #menu-toggle:checked ~ label + .navbar-menu {
             display: block !important;
+            transform: translateY(0px) translate(0px);
+            transition: transform 400ms ease 0s;
         }
 
         /* .navbar-menu > li {
