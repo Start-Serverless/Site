@@ -132,7 +132,6 @@ const {} = Astro.props;
         flex: 0 auto;
         grid-column-gap: 32px;
         grid-row-gap: 32px;
-        float: right;
     }
 
     .navbar-link {
@@ -244,6 +243,16 @@ const {} = Astro.props;
         color: #181818;
     }
 
+    .menu-button-container {
+        display: none;
+        height: 60px;
+        width: 30px;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     @media screen and (max-width: 991px) {
         .navbar-link {
             -webkit-box-pack: center;
@@ -264,7 +273,7 @@ const {} = Astro.props;
 
         .navbar-menu {
             display: none;
-            margin-top: 40px;
+            margin-top: 60px;
             -webkit-box-pack: start;
             -webkit-box-align: center;
             -webkit-box-flex: 0;
@@ -283,12 +292,6 @@ const {} = Astro.props;
 
         .menu-button-container {
             display: flex;
-            height: 100%;
-            width: 30px;
-            cursor: pointer;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
         #menu-toggle {
@@ -300,7 +303,7 @@ const {} = Astro.props;
         .menu-button::after {
             display: block;
             background-color: #fff;
-            position: relative;
+            position: absolute;
             float: right;
             height: 4px;
             width: 30px;
@@ -319,12 +322,7 @@ const {} = Astro.props;
 
         #menu-toggle:checked ~ label + .navbar-menu {
             display: block !important;
-            transform: translateY(0px) translate(0px);
-            transition: transform 400ms ease 0s;
+            transition: all 0.5s ease-in-out;
         }
-
-        /* .navbar-menu > li {
-            display: flex;
-        } */
     }
 </style>
