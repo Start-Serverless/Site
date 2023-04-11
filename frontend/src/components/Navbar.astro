@@ -23,7 +23,7 @@ const {} = Astro.props;
             </label>
             <ul class="navbar-menu">
                 <li class="navbar-link navigation-text"><a>About</a></li>
-                <li class="navbar-link navigation-text"><a>Blog</a></li>
+                <li class="navbar-link navigation-text"><a href='/blog'>Blog</a></li>
                 <li class="navbar-link">
                     <a class="button header">
                         <span class="get-started">// GET STARTED</span>
@@ -35,6 +35,14 @@ const {} = Astro.props;
 </div>
 
 <style>
+    a {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
     #menu-toggle {
         display: none;
     }
