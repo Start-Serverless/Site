@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Contact from "../components/Contact.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+---
+
+<Layout title="Blog BABY">
+    <main>
+        <div class="homepage-2">
+            <Navbar/>
+            <div class="blog-top">
+                THINK / SERVERLESS
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .blog-top {
+        display: flex;
+        height: 385px;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
