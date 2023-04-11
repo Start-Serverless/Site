@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
+---
+
+<Layout title="About">
+    <main class="page">
+        <Navbar />
+        <Hero />
+    </main>
+</Layout>
+
+<style>
+    .page {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        background-color: #181818;
+    }
+</style>

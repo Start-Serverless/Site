@@ -22,8 +22,12 @@ const {} = Astro.props;
                 <div class="menu-button"></div>
             </label>
             <ul class="navbar-menu">
-                <li class="navbar-link navigation-text"><a>About</a></li>
-                <li class="navbar-link navigation-text"><a>Blog</a></li>
+                <li class="navbar-link">
+                    <a href="/about" class="navigation-text">About</a>
+                </li>
+                <li class="navbar-link">
+                    <a href="/blog" class="navigation-text">Blog</a>
+                </li>
                 <li class="navbar-link">
                     <a class="button header">
                         <span class="get-started">// GET STARTED</span>
@@ -145,12 +149,15 @@ const {} = Astro.props;
         flex: 0 auto;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
-        text-decoration: none;
         vertical-align: top;
         color: #222;
         text-align: left;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    a {
+        text-decoration: none !important;
     }
 
     .navigation-text {

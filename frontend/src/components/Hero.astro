@@ -1,3 +1,13 @@
+---
+export interface Props {
+    img1: string;
+    img2: string;
+    p: string;
+}
+
+const { img, p } = Astro.props;
+---
+
 <div class="hero-heading-left">
     <div class="container-4 hero-content">
         <div
@@ -76,7 +86,6 @@
         padding: 124px 24px;
         -webkit-box-pack: center;
         justify-content: center;
-        /* -webkit-justify-content: center; */
         -webkit-box-align: start;
         grid-column-gap: 80px;
         grid-row-gap: 80px;
@@ -156,7 +165,6 @@
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
-        /* background-image: url(https://uploads-ssl.webflow.com/63faaa3…/63fbe46…_grid-bg.svg); */
         background-image: url("../assets/Group-25-1.svg");
         background-position: 50% 50%;
         background-size: cover;
@@ -387,7 +395,7 @@
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
-            background-image: url("/assets/grid-bg.svg");
+            background-image: url({img2});
             background-position: 50% 50%;
             background-size: cover;
             background-attachment: scroll;
