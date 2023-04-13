@@ -2,85 +2,34 @@
 export interface Props {
     img1: string;
     img2: string;
-    p: string;
 }
 
-const { img, p } = Astro.props;
+const { img1, img2 } = Astro.props;
 ---
 
 <div class="hero-heading-left">
-    <div class="container-4 hero-content">
-        <div
-            data-w-id="ceed402c-600d-7e04-1ef3-a9bc6325c48f"
-            class="hero-image-column bg-arrow mobile"
-        >
-            <img
-                src="assets/Vectors-Wrapper_4.svg"
-                loading="lazy"
-                data-w-id="ceed402c-600d-7e04-1ef3-a9bc6325c490"
-                alt=""
-                class="hero-img mobile"
-            />
-        </div>
+    <div class="hero-content">
         <div class="hero-text-column">
             <div class="hero-text-column">
-                <h1 class="title">
-                    Business Evolves. <br />Start Serverless.<br />
-                </h1>
-                <p class="paragraph-wrap">
-                    <span class="hero-subline"
-                        >Outpace your competitors with infinitely scalable,
-                        cost-effective and fast-to-market technology.
-                    </span>
-                </p>
+                <slot name="header" />
+                <slot name="subline" />
             </div>
             <div class="actions">
                 <a href="#contact-form" class="button-2">
-                    <div class="text-2">
-                        <div class="text-2">
-                            <span class="get-started-1 large"
-                                >// GET STARTED</span
-                            >
-                        </div>
-                    </div>
+                    <span class="get-started-1 large">// GET STARTED</span>
                 </a>
             </div>
         </div>
-        <div
-            data-w-id="05779950-f8e5-7e77-58cf-1b7f46f3eb4d"
-            style="opacity:1"
-            class="hero-image-column bg-arrow homepage"
-        >
-            <img
-                src="assets/Vectors-Wrapper_4.svg"
-                loading="lazy"
-                alt=""
-                class="hero-img"
-            />
+        <div class="bg-arrow">
+            <img src={img1} loading="lazy" alt="" class="hero-img" />
         </div>
     </div>
 </div>
 
 <style>
-    .text-2 {
-        -webkit-transition: background-color 200ms ease;
-        transition: background-color 200ms ease;
-    }
-
-    .container-4 {
-        display: flex;
-        width: 100%;
-        max-width: 1200px;
-        -webkit-box-pack: start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-items: center;
-        align-items: center;
-    }
-
     .hero-heading-left {
-        display: -webkit-box;
-        display: -webkit-flex;
+        align-items: flex-start;
+        box-sizing: border-box;
         display: flex;
         width: 100%;
         padding: 124px 24px;
@@ -107,6 +56,14 @@ const { img, p } = Astro.props;
     }
 
     .hero-content {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-items: center;
+        align-items: center;
         padding-right: 0px;
         padding-left: 0px;
         grid-column-gap: 48px;
@@ -154,7 +111,7 @@ const { img, p } = Astro.props;
         grid-row-gap: 10px;
     }
 
-    .hero-image-column.bg-arrow {
+    .bg-arrow {
         padding-top: 38px;
         padding-bottom: 38px;
         -webkit-box-pack: center;
@@ -165,45 +122,18 @@ const { img, p } = Astro.props;
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
-        background-image: url("../assets/Group-25-1.svg");
+        background-image: url("/assets/Group-25-1.svg");
         background-position: 50% 50%;
         background-size: cover;
         background-attachment: scroll;
         background-clip: padding-box;
         -webkit-text-fill-color: inherit;
-    }
-
-    .hero-image-column.mobile {
-        display: none;
-    }
-
-    .title {
-        margin: 0.67em 0;
-        margin-bottom: 10px;
-        margin-top: 20px;
-        font-family: Electrolize, sans-serif;
-        color: #fff;
-        font-size: 51px;
-        line-height: 120.00000476837158%;
-        font-weight: 400;
-        letter-spacing: 0em;
-        /* text-align: center; */
-    }
-
-    .paragraph-wrap {
-        color: #fff;
-        font-size: 24px;
-        line-height: 150%;
-        letter-spacing: 0em;
-    }
-
-    .hero-subline {
-        font-family: Titillium Web, sans-serif;
-        color: #fff;
-        font-size: 24px;
-        line-height: 150%;
-        font-weight: 400;
-        letter-spacing: 0em;
+        flex-direction: column;
+        /* transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+            rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); */
+        transform-style: preserve-3d;
+        transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+            rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     }
 
     .actions {
@@ -229,6 +159,8 @@ const { img, p } = Astro.props;
     }
 
     .button-2 {
+        -webkit-transition: background-color 200ms ease;
+        transition: background-color 200ms ease;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -284,10 +216,6 @@ const { img, p } = Astro.props;
         box-shadow: inset 3px 3px 0 1px #000;
     }
 
-    .mobile {
-        opacity: 0;
-    }
-
     @media screen and (max-width: 991px) {
         .hero-heading-left {
             padding-top: 48px;
@@ -300,67 +228,13 @@ const { img, p } = Astro.props;
             -webkit-box-direction: normal;
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
-            flex-direction: column;
+            flex-direction: column-reverse;
             -webkit-box-align: center;
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
             grid-column-gap: 56px;
             grid-row-gap: 56px;
-        }
-
-        .mobile {
-            opacity: 1;
-        }
-
-        .hero-image-column {
-            width: 60%;
-        }
-
-        .hero-image-column.bg-arrow {
-            display: none;
-        }
-
-        .hero-image-column.bg-arrow.mobile {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-align-self: center;
-            -ms-flex-item-align: center;
-            align-self: center;
-            -webkit-box-flex: 0;
-            -webkit-flex: 0 auto;
-            -ms-flex: 0 auto;
-            flex: 0 auto;
-            background-image: url("../assets/Group-25-1.svg");
-        }
-
-        .hero-image-column.bg-arrow.mobile.about {
-            background-image: url("../images/grid-bg.svg");
-        }
-
-        .hero-image-column.mobile {
-            display: block;
-            width: 70%;
-        }
-
-        .hero-img.about-mobile {
-            width: 70%;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: row;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            -webkit-box-pack: center;
-            -webkit-justify-content: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-        }
-
-        .hero-content.about {
-            padding-right: 64px;
-            padding-left: 64px;
         }
 
         .hero-image-column {
@@ -381,11 +255,7 @@ const { img, p } = Astro.props;
             grid-row-gap: 10px;
         }
 
-        .hero-image-column.bg-arrow {
-            opacity: 1;
-            transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
-                rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-            transform-style: preserve-3d;
+        .bg-arrow {
             padding-top: 38px;
             padding-bottom: 38px;
             -webkit-box-pack: center;
@@ -395,25 +265,34 @@ const { img, p } = Astro.props;
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
-            background-image: url({img2});
+            /* background-image: url({img2}); */
             background-position: 50% 50%;
             background-size: cover;
             background-attachment: scroll;
             background-clip: padding-box;
             -webkit-text-fill-color: inherit;
-        }
-
-        .hero-image-column.bg-arrow.homepage {
-            background-image: url("/assets/Group-25-1.svg");
-        }
-
-        .hero-image-column.mobile {
-            display: none;
+            width: 100%;
+            padding-right: 16px;
+            padding-left: 16px;
+            background-clip: padding-box;
+            -webkit-text-fill-color: inherit;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-self: center;
+            -ms-flex-item-align: center;
+            align-self: center;
+            -webkit-box-flex: 0;
+            -webkit-flex: 0 auto;
+            -ms-flex: 0 auto;
+            flex: 0 auto;
+            background-image: url("../assets/Group-25-1.svg");
         }
 
         .hero-img {
             position: relative;
-            z-index: 1;
+            /* z-index: 1; */
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -465,6 +344,23 @@ const { img, p } = Astro.props;
             flex: 0 auto;
             grid-column-gap: 80px;
             grid-row-gap: 80px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .bg-arrow {
+            width: 100%;
+            padding-left: 16px;
+            padding-right: 16px;
+            background-clip: padding-box;
+            -webkit-text-fill-color: inherit;
+        }
+    }
+
+    @media screen and (max-width: 479px) {
+        .bg-arrow {
+            padding-left: 24px;
+            padding-right: 24px;
         }
     }
 </style>
