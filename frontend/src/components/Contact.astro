@@ -5,24 +5,27 @@ import { submitContact } from "../graphql/mutations";
 
 Amplify.configure({ ...config });
 
+let success;
 if (Astro.request.method === "POST") {
+    let response = null;
     try {
         const SSR = withSSRContext();
         const data = await Astro.request.formData();
-        await SSR.API.graphql({
+        response = await SSR.API.graphql({
             query: submitContact,
             variables: {
                 input: {
                     name: data.get("name"),
-                    phone: data.get("email"),
-                    email: data.get("phone"),
+                    phone: data.get("phone"),
+                    email: data.get("email"),
                 },
             },
         });
+        success = true;
     } catch (error) {
-        if (error instanceof Error) {
-            console.error(error.message);
-        }
+        console.error(error);
+        // if (error instanceof Error) {
+        // }
     }
 }
 ---
@@ -32,61 +35,67 @@ if (Astro.request.method === "POST") {
         <div class="frame-2">
             <div class="text-6">LET&#x27;S TALK!</div>
         </div>
-        <div class="w-form">
-            <form
-                id="wf-form-Contact-Form"
-                name="wf-form-Contact-Form"
-                data-name="Contact Form"
-                method="POST"
-                class="form"
-            >
-                <label for="name" class="field-label">Name</label><input
-                    type="text"
-                    class="text-field-2 name w-input"
-                    maxlength="256"
-                    name="name"
-                    data-name="Name"
-                    placeholder="Enter your full name"
-                    id="name"
-                /><label for="email" class="field-label">Email address</label
-                ><input
-                    type="email"
-                    class="text-field-3 email w-input"
-                    maxlength="256"
-                    name="email"
-                    data-name="Email"
-                    placeholder="Enter your email address"
-                    id="email"
-                    required=""
-                /><label for="Phone-number" class="field-label"
-                    >Phone number</label
-                ><input
-                    type="tel"
-                    class="text-field phone w-input"
-                    maxlength="256"
-                    name="phone"
-                    data-name="Phone number"
-                    placeholder="Enter your phone number"
-                    id="Phone-number"
-                /><input
-                    type="submit"
-                    value="// REACH OUT"
-                    data-wait="Please wait..."
-                    class="button reach-out w-button"
-                />
-            </form>
-            <div class="success-message w-form-done">
-                <div class="text-block">
-                    Thank you! We&#x27;ll be in touch soon.
+        {
+            success ? (
+                <div class="success-message w-form-done">
+                    <div class="text-block">
+                        Thank you! We&#x27;ll be in touch soon.
+                    </div>
                 </div>
-            </div>
-            <div class="error-message w-form-fail">
-                <div class="text-block-2">
-                    Oops! Something went wrong while submitting the form. Please
-                    try again.
+            ) : (
+                <div class="w-form">
+                    <form method="POST" class="form">
+                        <label for="name" class="field-label">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            class="text-field name w-input"
+                            maxlength="256"
+                            name="name"
+                            placeholder="Enter your full name"
+                            id="name"
+                        />
+                        <label for="email" class="field-label">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            class="text-field email w-input"
+                            maxlength="256"
+                            name="email"
+                            placeholder="Enter your email address"
+                            id="email"
+                            required=""
+                        />
+                        <label for="Phone-number" class="field-label">
+                            Phone number
+                        </label>
+                        <input
+                            type="tel"
+                            class="text-field phone w-input"
+                            maxlength="256"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            id="Phone-number"
+                        />
+                        <input
+                            type="submit"
+                            value="// REACH OUT"
+                            data-wait="Please wait..."
+                            class="button reach-out w-button"
+                        />
+                    </form>
+
+                    <div class="error-message w-form-fail">
+                        <div class="text-block-2">
+                            Oops! Something went wrong while submitting the
+                            form. Please try again.
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            )
+        }
     </div>
 </div>
 
@@ -178,10 +187,11 @@ if (Astro.request.method === "POST") {
     }
 
     .w-form-done {
-        display: none;
+        display: flex;
         padding: 20px;
         text-align: center;
-        background-color: #dddddd;
+        border: 1px solid #00e399;
+        color: #fff;
     }
     .w-form-fail {
         display: none;
@@ -225,12 +235,13 @@ if (Astro.request.method === "POST") {
     }
 
     .text-field {
-        margin-bottom: 32px;
+        margin-bottom: 24px;
+        flex-direction: column;
     }
 
-    .text-field-3 {
+    /* .text-field-3 {
         margin-bottom: 24px;
-    }
+    } */
 
     .button:hover {
         background-color: #00e399;
@@ -242,6 +253,7 @@ if (Astro.request.method === "POST") {
     }
 
     .button.reach-out {
+        margin-top: 20px;
         padding-top: 16px;
         padding-bottom: 16px;
     }
