@@ -71,23 +71,14 @@ const { img1, img2 } = Astro.props;
     }
 
     .hero-text-column {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         width: 100%;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
         flex-direction: column;
         -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
         -webkit-box-align: start;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
         align-items: flex-start;
         grid-column-gap: 16px;
         grid-row-gap: 16px;
@@ -128,7 +119,6 @@ const { img1, img2 } = Astro.props;
         background-attachment: scroll;
         background-clip: padding-box;
         -webkit-text-fill-color: inherit;
-        flex-direction: column;
         /* transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
             rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); */
         transform-style: preserve-3d;
@@ -238,9 +228,6 @@ const { img1, img2 } = Astro.props;
         }
 
         .hero-image-column {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
             display: flex;
             width: 100%;
             -webkit-box-pack: start;
@@ -259,33 +246,14 @@ const { img1, img2 } = Astro.props;
             padding-top: 38px;
             padding-bottom: 38px;
             -webkit-box-pack: center;
-            -webkit-justify-content: center;
-            -ms-flex-pack: center;
             -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
             align-items: center;
-            /* background-image: url({img2}); */
             background-position: 50% 50%;
             background-size: cover;
             background-attachment: scroll;
-            background-clip: padding-box;
-            -webkit-text-fill-color: inherit;
-            width: 100%;
-            padding-right: 16px;
-            padding-left: 16px;
-            background-clip: padding-box;
-            -webkit-text-fill-color: inherit;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-align-self: center;
-            -ms-flex-item-align: center;
             align-self: center;
             -webkit-box-flex: 0;
-            -webkit-flex: 0 auto;
-            -ms-flex: 0 auto;
             flex: 0 auto;
             background-image: url("../assets/Group-25-1.svg");
         }
@@ -358,6 +326,12 @@ const { img1, img2 } = Astro.props;
     }
 
     @media screen and (max-width: 479px) {
+        .hero-heading-left {
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-bottom: 64px;
+        }
+
         .bg-arrow {
             padding-left: 24px;
             padding-right: 24px;
