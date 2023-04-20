@@ -81,7 +81,6 @@ const { img1, img2 } = Astro.props;
         -webkit-box-align: start;
         align-items: flex-start;
         grid-column-gap: 16px;
-        grid-row-gap: 16px;
     }
 
     .hero-image-column {
@@ -330,11 +329,31 @@ const { img1, img2 } = Astro.props;
             padding-left: 24px;
             padding-right: 24px;
             padding-bottom: 64px;
+            overflow-x: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
         }
 
         .bg-arrow {
             padding-left: 24px;
             padding-right: 24px;
+        }
+
+        .hero-text-column {
+            text-align: center;
+        }
+
+        .actions {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .title {
+            font-size: 32px;
+            text-align: center;
+            width: 100%;
         }
     }
 </style>
