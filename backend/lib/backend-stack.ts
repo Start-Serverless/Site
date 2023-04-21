@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import { Table, AttributeType, StreamViewType } from "aws-cdk-lib/aws-dynamodb";
 import { Code, Function, Runtime } from "aws-cdk-lib/aws-lambda"
 import { Bucket, BlockPublicAccess  } from "aws-cdk-lib/aws-s3";
@@ -8,6 +8,7 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import { Construct } from "constructs";
 import * as path from "path";
+import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 
 export class BackendStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -28,8 +29,17 @@ export class BackendStack extends Stack {
 		const originAccessIdentity =  new cloudfront.OriginAccessIdentity(this, "SSR-OIA")
 		siteBucket.grantRead(originAccessIdentity)
 
+		const certificate = Certificate.fromCertificateArn(this, "Cert", 
+			"arn:aws:acm:us-east-1:246683029984:certificate/fdce2497-967d-4671-9934-53ae77f8fbfa"
+		)
+
 		const astroDistribution = new cloudfront.Distribution(this, "Distribution", {
+			domainNames: ["www.startserverless.dev", "startserverless.dev"],
+			certificate: certificate,
 			defaultBehavior: {
+				cachePolicy: new cloudfront.CachePolicy(this, 'Cache',  {
+					defaultTtl: Duration.hours(12)
+				}),
 				origin: new S3Origin(siteBucket, {
 					originAccessIdentity: originAccessIdentity,
 				}),
@@ -46,15 +56,14 @@ export class BackendStack extends Stack {
 						// eventType: cloudfront.LambdaEdgeEventType.
 						functionVersion: server.currentVersion
 					}
-				]
+				],
 			},	
 			errorResponses: [
 				{
 					httpStatus: 404,
 					responsePagePath: "/404"
 				}
-			]
-			// domainNames: ['startserverless.dev'],
+			],
 		})
 
 		const deployment = new BucketDeployment(this, "AstroDeployment", {
