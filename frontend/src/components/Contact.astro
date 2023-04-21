@@ -5,7 +5,7 @@ import { submitContact } from "../graphql/mutations";
 
 Amplify.configure({ ...config });
 
-let success;
+let formState = "start";
 if (Astro.request.method === "POST") {
     let response = null;
     try {
@@ -21,11 +21,9 @@ if (Astro.request.method === "POST") {
                 },
             },
         });
-        success = true;
+        formState = "success";
     } catch (error) {
-        console.error(error);
-        // if (error instanceof Error) {
-        // }
+        console.log(error);
     }
 }
 ---
@@ -36,10 +34,17 @@ if (Astro.request.method === "POST") {
             <div class="text-6">LET&#x27;S TALK!</div>
         </div>
         {
-            success ? (
+            formState === "success" ? (
                 <div class="success-message w-form-done">
                     <div class="text-block">
                         Thank you! We&#x27;ll be in touch soon.
+                    </div>
+                </div>
+            ) : formState == "failed" ? (
+                <div class="error-message w-form-fail">
+                    <div class="text-block-2">
+                        Oops! Something went wrong while submitting the form.
+                        Please try again.
                     </div>
                 </div>
             ) : (
@@ -51,10 +56,11 @@ if (Astro.request.method === "POST") {
                         <input
                             type="text"
                             class="text-field name w-input"
-                            maxlength="256"
+                            maxlength="20"
                             name="name"
                             placeholder="Enter your full name"
                             id="name"
+                            required
                         />
                         <label for="email" class="field-label">
                             Email address
@@ -62,11 +68,11 @@ if (Astro.request.method === "POST") {
                         <input
                             type="email"
                             class="text-field email w-input"
-                            maxlength="256"
+                            maxlength="20"
                             name="email"
                             placeholder="Enter your email address"
                             id="email"
-                            required=""
+                            required
                         />
                         <label for="Phone-number" class="field-label">
                             Phone number
@@ -74,10 +80,11 @@ if (Astro.request.method === "POST") {
                         <input
                             type="tel"
                             class="text-field phone w-input"
-                            maxlength="256"
+                            maxlength="10"
                             name="phone"
                             placeholder="Enter your phone number"
                             id="Phone-number"
+                            required
                         />
                         <input
                             type="submit"
@@ -86,13 +93,6 @@ if (Astro.request.method === "POST") {
                             class="button reach-out w-button"
                         />
                     </form>
-
-                    <div class="error-message w-form-fail">
-                        <div class="text-block-2">
-                            Oops! Something went wrong while submitting the
-                            form. Please try again.
-                        </div>
-                    </div>
                 </div>
             )
         }
