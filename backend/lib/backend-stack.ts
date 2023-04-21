@@ -34,7 +34,7 @@ export class BackendStack extends Stack {
 		)
 
 		const astroDistribution = new cloudfront.Distribution(this, "Distribution", {
-			domainNames: ["www.startserverless.dev", "startserverless.dev"],
+			domainNames: ["www.startserverless.dev"],
 			certificate: certificate,
 			defaultBehavior: {
 				cachePolicy: new cloudfront.CachePolicy(this, 'Cache',  {
