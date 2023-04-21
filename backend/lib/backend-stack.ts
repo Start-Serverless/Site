@@ -9,7 +9,6 @@ import * as appsync from "aws-cdk-lib/aws-appsync";
 import { Construct } from "constructs";
 import * as path from "path";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
-import { HostedZone } from "aws-cdk-lib/aws-route53";
 
 export class BackendStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -65,10 +64,6 @@ export class BackendStack extends Stack {
 					responsePagePath: "/404"
 				}
 			],
-		})
-
-		const zone = new HostedZone(this, "HostedZone", {
-			zoneName: 'www.startserverless.dev'
 		})
 
 		const deployment = new BucketDeployment(this, "AstroDeployment", {
