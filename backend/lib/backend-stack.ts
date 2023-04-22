@@ -8,7 +8,9 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import { Construct } from "constructs";
 import * as path from "path";
-import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
+import { Certificate, CertificateValidation} from "aws-cdk-lib/aws-certificatemanager";
+import { HostedZone, ARecord, RecordTarget} from "aws-cdk-lib/aws-route53";
+import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 
 export class BackendStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -29,9 +31,15 @@ export class BackendStack extends Stack {
 		const originAccessIdentity =  new cloudfront.OriginAccessIdentity(this, "SSR-OIA")
 		siteBucket.grantRead(originAccessIdentity)
 
-		const certificate = Certificate.fromCertificateArn(this, "Cert", 
-			"arn:aws:acm:us-east-1:246683029984:certificate/fdce2497-967d-4671-9934-53ae77f8fbfa"
-		)
+		const zone = new HostedZone(this, "HostedZone", {
+			zoneName: "www.startserverless.dev"
+		})
+
+		const certificate = new Certificate(this, "StartServerlessCert", {
+			domainName: "*.startserverless.dev",
+			subjectAlternativeNames: ["www.startserverless.dev"],
+			validation: CertificateValidation.fromDns()
+		})
 
 		const astroDistribution = new cloudfront.Distribution(this, "Distribution", {
 			domainNames: ["www.startserverless.dev"],
@@ -53,7 +61,6 @@ export class BackendStack extends Stack {
 					{
 						includeBody: true,
 						eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
-						// eventType: cloudfront.LambdaEdgeEventType.
 						functionVersion: server.currentVersion
 					}
 				],
@@ -64,6 +71,11 @@ export class BackendStack extends Stack {
 					responsePagePath: "/404"
 				}
 			],
+		})
+
+		new ARecord(this, "AliasRecord", {
+			zone,
+			target: RecordTarget.fromAlias(new CloudFrontTarget(astroDistribution))
 		})
 
 		const deployment = new BucketDeployment(this, "AstroDeployment", {
