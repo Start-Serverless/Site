@@ -1,4 +1,4 @@
-name: deploy-dev
+name: deploy
 on:
   push:
     branches:
@@ -18,24 +18,21 @@ jobs:
     needs: [test]
     name: Deploy CDK stacks to dev
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: ./backend
     permissions:
       actions: write
       contents: read
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::246683029984:role/DevopsStack-DeploymentRoleC7BBCF2C-15UV1X10KCMQR
           aws-region: us-east-1
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
 
@@ -86,15 +83,15 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::871600132779:role/DevopsStack-DeploymentRoleC7BBCF2C-2U2BLZBBIYPB
           aws-region: us-east-1
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
 
