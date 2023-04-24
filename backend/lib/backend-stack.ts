@@ -22,6 +22,8 @@ export class BackendStack extends Stack {
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
+        const isProd =
+            process.env.STACK_BUILD_TARGET_ACCOUNT === "prod" ? true : false;
 
         const siteBucket = new Bucket(this, "StaticFilesBucket", {
             blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
@@ -41,7 +43,7 @@ export class BackendStack extends Stack {
         );
         siteBucket.grantRead(originAccessIdentity);
 
-        if (process.env.STACK_BUILD_TARGET_ACCOUNT === "prod") {
+        if (isProd) {
             this.zone = new HostedZone(this, "HostedZone", {
                 zoneName: "www.startserverless.dev",
             });
@@ -96,7 +98,7 @@ export class BackendStack extends Stack {
             }
         );
 
-        if (process.env.STACK_BUILD_TARGET_ACCOUNT === "prod") {
+        if (isProd) {
             new ARecord(this, "AliasRecord", {
                 zone: this.zone,
                 target: RecordTarget.fromAlias(
