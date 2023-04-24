@@ -11,10 +11,15 @@ import * as path from "path";
 import { Certificate, CertificateValidation} from "aws-cdk-lib/aws-certificatemanager";
 import { HostedZone, ARecord, RecordTarget} from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
+import { AstroAWSCloudfrontDistribution } from "@astro-aws/constructs/dist/constructs/astro-aws-cloudfront-distribution";
 
 export class BackendStack extends Stack {
+	zone: HostedZone;
+	certificate: Certificate;
+
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
+		const isProd = "871600132779" === this.account ? true : false
 
 		const siteBucket = new Bucket(this, "StaticFilesBucket", {
 			blockPublicAccess:  BlockPublicAccess.BLOCK_ALL,
@@ -28,22 +33,25 @@ export class BackendStack extends Stack {
 			handler: "entry.handler"
 		})
 
+
 		const originAccessIdentity =  new cloudfront.OriginAccessIdentity(this, "SSR-OIA")
 		siteBucket.grantRead(originAccessIdentity)
 
-		const zone = new HostedZone(this, "HostedZone", {
-			zoneName: "www.startserverless.dev"
-		})
+		if (isProd) {
+			this.zone = new HostedZone(this, "HostedZone", {
+				zoneName: "www.startserverless.dev"
+			})
 
-		const certificate = new Certificate(this, "StartServerlessCert", {
-			domainName: "*.startserverless.dev",
-			subjectAlternativeNames: ["www.startserverless.dev"],
-			validation: CertificateValidation.fromDns()
-		})
+			this.certificate = new Certificate(this, "StartServerlessCert", {
+				domainName: "*.startserverless.dev",
+				subjectAlternativeNames: ["www.startserverless.dev"],
+				validation: CertificateValidation.fromDns()
+			})
+		}	
 
 		const astroDistribution = new cloudfront.Distribution(this, "Distribution", {
-			domainNames: ["www.startserverless.dev"],
-			certificate: certificate,
+			domainNames: isProd ? ["www.startserverless.dev"] : undefined,
+			certificate: isProd ? this.certificate : undefined,
 			defaultBehavior: {
 				cachePolicy: new cloudfront.CachePolicy(this, 'Cache',  {
 					defaultTtl: Duration.hours(12)
@@ -73,10 +81,12 @@ export class BackendStack extends Stack {
 			],
 		})
 
-		new ARecord(this, "AliasRecord", {
-			zone,
-			target: RecordTarget.fromAlias(new CloudFrontTarget(astroDistribution))
-		})
+		if (isProd) {
+			new ARecord(this, "AliasRecord", {
+				zone: this.zone,
+				target: RecordTarget.fromAlias(new CloudFrontTarget(astroDistribution))
+			})
+		}
 
 		const deployment = new BucketDeployment(this, "AstroDeployment", {
 			sources: [Source.asset('../frontend/dist/client/')],
