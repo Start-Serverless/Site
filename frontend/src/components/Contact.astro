@@ -1,5 +1,5 @@
 ---
-import { Amplify, API, withSSRContext } from "aws-amplify";
+import { Amplify, withSSRContext } from "aws-amplify";
 import config from "../aws-exports";
 import { submitContact } from "../graphql/mutations";
 
@@ -12,6 +12,7 @@ enum FormStateType {
 }
 
 let formState: FormStateType = FormStateType.start;
+let formError: string;
 if (Astro.request.method === "POST") {
     let response = null;
     try {
@@ -30,7 +31,7 @@ if (Astro.request.method === "POST") {
         formState = FormStateType.success;
     } catch (error) {
         formState = FormStateType.fail;
-        console.log(error);
+        console.log(JSON.stringify(error));
     }
 }
 ---
@@ -40,24 +41,29 @@ if (Astro.request.method === "POST") {
         <div class="frame-2">
             <div class="text-6">LET&#x27;S TALK!</div>
         </div>
+
         {
-            formState === FormStateType.success ? (
-                <div class="success-message w-form-done">
-                    <div class="text-block">
-                        Thank you! We&#x27;ll be in touch soon.
-                    </div>
-                </div>
-            ) : formState === FormStateType.fail ? (
-                <div class="error-message w-form-fail">
+            formState === FormStateType.fail ? (
+                <div class="w-form-fail">
                     <div class="text-block-2">
                         Oops! Something went wrong while submitting the form.
                         Please try again.
+                    </div>
+                </div>
+            ) : null
+        }
+        {
+            formState === FormStateType.success ? (
+                <div class="w-form-done">
+                    <div class="text-block">
+                        Thank you! We&#x27;ll be in touch soon.
                     </div>
                 </div>
             ) : (
                 <div class="w-form">
                     <form method="POST" class="form">
                         <label for="name" class="field-label">
+                            {" "}
                             Name
                         </label>
                         <input
@@ -70,6 +76,7 @@ if (Astro.request.method === "POST") {
                             required
                         />
                         <label for="email" class="field-label">
+                            {" "}
                             Email address
                         </label>
                         <input
@@ -81,7 +88,7 @@ if (Astro.request.method === "POST") {
                             id="email"
                             required
                         />
-                        <label for="Phone-number" class="field-label">
+                        <label for="phone" class="field-label">
                             Phone number
                         </label>
                         <input
@@ -90,7 +97,7 @@ if (Astro.request.method === "POST") {
                             maxlength="10"
                             name="phone"
                             placeholder="Enter your phone number"
-                            id="Phone-number"
+                            id="phone"
                             required
                         />
                         <input
@@ -132,10 +139,8 @@ if (Astro.request.method === "POST") {
         grid-row-gap: 0px;
         background-image: linear-gradient(301deg, #303030, #181818);
     }
+
     .contact-form {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         width: 100%;
         padding-top: 72px;
@@ -200,17 +205,15 @@ if (Astro.request.method === "POST") {
         border: 1px solid #00e399;
         color: #fff;
     }
+
     .w-form-fail {
-        display: none;
-        margin-top: 10px;
+        border-left: 5px solid #db0303;
+        display: flex;
         padding: 10px;
-        background-color: #ffdede;
+        background-color: #e6e6e6;
     }
 
     .form {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         width: 100%;
         -webkit-box-orient: vertical;
