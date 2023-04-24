@@ -5,7 +5,13 @@ import { submitContact } from "../graphql/mutations";
 
 Amplify.configure({ ...config });
 
-let formState = "start";
+enum FormStateType {
+    start = "START",
+    success = "SUCCESS",
+    fail = "FAIL",
+}
+
+let formState: FormStateType = FormStateType.start;
 if (Astro.request.method === "POST") {
     let response = null;
     try {
@@ -21,8 +27,9 @@ if (Astro.request.method === "POST") {
                 },
             },
         });
-        formState = "success";
+        formState = FormStateType.success;
     } catch (error) {
+        formState = FormStateType.fail;
         console.log(error);
     }
 }
@@ -34,13 +41,13 @@ if (Astro.request.method === "POST") {
             <div class="text-6">LET&#x27;S TALK!</div>
         </div>
         {
-            formState === "success" ? (
+            formState === FormStateType.success ? (
                 <div class="success-message w-form-done">
                     <div class="text-block">
                         Thank you! We&#x27;ll be in touch soon.
                     </div>
                 </div>
-            ) : formState == "failed" ? (
+            ) : formState === FormStateType.fail ? (
                 <div class="error-message w-form-fail">
                     <div class="text-block-2">
                         Oops! Something went wrong while submitting the form.
