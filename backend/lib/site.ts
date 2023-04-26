@@ -9,17 +9,22 @@ import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import * as path from "path";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
+import { Bucket, BlockPublicAccess } from "aws-cdk-lib/aws-s3";
 
 export interface SiteStackProps extends StackProps{
-    bucket: IBucket
-    certificate: ICertificate
-    zone: IHostedZone
+    certificate?: ICertificate
+    zone?: IHostedZone
     isProd: boolean
 }
 
 export class SiteStack extends Stack {
     constructor(scope: Construct, id: string, props: SiteStackProps)  {
         super(scope, id, props);
+
+        const bucket = new Bucket(this, "FrontEndBucket", {
+            blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+            enforceSSL: true,
+        });
 
         const server = new Function(this, "SSRFunction", {
             memorySize: 512,
@@ -32,19 +37,19 @@ export class SiteStack extends Stack {
             this,
             "SSR-OIA"
         );
-        props.bucket.grantRead(originAccessIdentity);
+        bucket.grantRead(originAccessIdentity);
 
         const astroDistribution = new cloudfront.Distribution(
             this,
             "Distribution",
             {
                 domainNames: props.isProd ? ["www.startserverless.dev"] : undefined,
-                certificate: props.certificate,
+                certificate: props?.certificate,
                 defaultBehavior: {
                     cachePolicy: new cloudfront.CachePolicy(this, "Cache", {
                         defaultTtl: Duration.hours(12),
                     }),
-                    origin: new S3Origin(props.bucket, {
+                    origin: new S3Origin(bucket, {
                         originAccessIdentity: originAccessIdentity,
                     }),
                     responseHeadersPolicy:
@@ -79,13 +84,13 @@ export class SiteStack extends Stack {
 
         const deployment = new BucketDeployment(this, "AstroDeployment", {
             sources: [Source.asset("../frontend/dist/client/")],
-            destinationBucket: props.bucket,
+            destinationBucket: bucket,
             distribution: astroDistribution,
         });
 
         if (props.isProd) {
             new ARecord(this, "AliasRecord", {
-                zone: props.zone,
+                zone: props.zone!,
                 target: RecordTarget.fromAlias(
                     new CloudFrontTarget(astroDistribution)
                 ),
