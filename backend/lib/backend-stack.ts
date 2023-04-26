@@ -14,7 +14,7 @@ import {
 } from "aws-cdk-lib/aws-certificatemanager";
 import { HostedZone, ARecord, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
-import { AstroAWSCloudfrontDistribution } from "@astro-aws/constructs/dist/constructs/astro-aws-cloudfront-distribution";
+import { EmailIdentity, Identity } from "aws-cdk-lib/aws-ses";
 
 export class BackendStack extends Stack {
     zone: HostedZone;
@@ -147,5 +147,9 @@ export class BackendStack extends Stack {
             responseMappingTemplate:
                 appsync.MappingTemplate.dynamoDbResultItem(),
         });
+
+        const emailIdentity = new EmailIdentity(this, 'Identity', {
+            identity: Identity.publicHostedZone(this.zone)
+        })
     }
 }
