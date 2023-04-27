@@ -12,6 +12,7 @@ let domain;
 if (isProd) {
     domain = new DomainStack(app, "Domain", {})
 }
+
 const storage = new StorageStack(app, "Storage", {})
 const appsync = new AppsyncStack(app, "Appsync", {table: storage.table})
 const site = new SiteStack(app, "Site", {

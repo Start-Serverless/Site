@@ -4,21 +4,20 @@ import { Code, Function, Runtime } from "aws-cdk-lib/aws-lambda";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
-import { ARecord, IHostedZone, RecordTarget } from "aws-cdk-lib/aws-route53"
+import { ARecord, IHostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import * as path from "path";
-import { IBucket } from "aws-cdk-lib/aws-s3";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
 import { Bucket, BlockPublicAccess } from "aws-cdk-lib/aws-s3";
 
-export interface SiteStackProps extends StackProps{
-    certificate?: ICertificate
-    zone?: IHostedZone
-    isProd: boolean
+export interface SiteStackProps extends StackProps {
+    certificate?: ICertificate;
+    zone?: IHostedZone;
+    isProd: boolean;
 }
 
 export class SiteStack extends Stack {
-    constructor(scope: Construct, id: string, props: SiteStackProps)  {
+    constructor(scope: Construct, id: string, props: SiteStackProps) {
         super(scope, id, props);
 
         const bucket = new Bucket(this, "FrontEndBucket", {
@@ -43,7 +42,9 @@ export class SiteStack extends Stack {
             this,
             "Distribution",
             {
-                domainNames: props.isProd ? ["www.startserverless.dev"] : undefined,
+                domainNames: props.isProd
+                    ? ["www.startserverless.dev"]
+                    : undefined,
                 certificate: props?.certificate,
                 defaultBehavior: {
                     cachePolicy: new cloudfront.CachePolicy(this, "Cache", {
