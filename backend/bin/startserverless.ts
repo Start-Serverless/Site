@@ -4,7 +4,6 @@ import { DomainStack } from "../lib/domain";
 import { StorageStack } from "../lib/storage";
 import { AppsyncStack } from "../lib/appsync";
 import { SiteStack } from "../lib/site";
-import { ComputePlatform } from "aws-cdk-lib/aws-codeguruprofiler";
 import { ComputeStack } from "../lib/compute";
 
 const app = new App();

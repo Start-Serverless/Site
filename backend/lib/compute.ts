@@ -37,7 +37,7 @@ export class ComputeStack extends Stack {
         const emailNewLeads = new Function(this, "EmailNewLeadsFunction", {
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
-            code: Code.fromAsset(path.resolve("../src/emailNewLeads.ts")),
+            code: Code.fromAsset(path.resolve("/src/emailNewLeads.ts")),
             handler: "entry.handler",
         });
 
