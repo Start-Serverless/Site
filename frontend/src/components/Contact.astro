@@ -1,9 +1,13 @@
 ---
 import { Amplify, withSSRContext } from "aws-amplify";
-import config from "../aws-exports";
 import { submitContact } from "../graphql/mutations";
 
-Amplify.configure({ ...config });
+
+Amplify.configure({
+	"aws_appsync_graphqlEndpoint": import.meta.env.API,
+	"aws_appsync_region": "us-east-1",
+	"aws_appsync_authenticationType": "AWS_IAM",
+});
 
 enum FormStateType {
     start = "START",

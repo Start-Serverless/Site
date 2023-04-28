@@ -1,19 +1,26 @@
 import * as path from "path";
 import { Construct } from "constructs";
-import {  Stack, StackProps } from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 
 export interface AppsyncStackProps extends StackProps {
-    table: ITable
+    table: ITable;
 }
 
 export class AppsyncStack extends Stack {
+    graphql: appsync.GraphqlApi;
+
     constructor(scope: Construct, id: string, props: AppsyncStackProps) {
         super(scope, id, props);
 
         const api = new appsync.GraphqlApi(this, "WebsiteAPI", {
             name: "WebsiteApi",
+            authorizationConfig: {
+                defaultAuthorization: {
+                    authorizationType: appsync.AuthorizationType.IAM,
+                },
+            },
             schema: appsync.SchemaFile.fromAsset(
                 path.join(__dirname, "graphql/schema.graphql")
             ),

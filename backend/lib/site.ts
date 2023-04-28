@@ -9,10 +9,12 @@ import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import * as path from "path";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
 import { Bucket, BlockPublicAccess } from "aws-cdk-lib/aws-s3";
+import { GraphqlApi } from "aws-cdk-lib/aws-appsync";
 
 export interface SiteStackProps extends StackProps {
     certificate?: ICertificate;
     zone?: IHostedZone;
+    graphql: GraphqlApi;
     isProd: boolean;
 }
 
@@ -30,7 +32,12 @@ export class SiteStack extends Stack {
             runtime: Runtime.NODEJS_18_X,
             code: Code.fromAsset(path.resolve("../frontend/dist/lambda/")),
             handler: "entry.handler",
+            environment: {
+                API: props.graphql.graphqlUrl,
+            },
         });
+
+        props.graphql.grantMutation(server.role!);
 
         const originAccessIdentity = new cloudfront.OriginAccessIdentity(
             this,
