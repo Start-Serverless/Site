@@ -16,7 +16,6 @@ enum FormStateType {
 }
 
 let formState: FormStateType = FormStateType.start;
-let formError: string;
 if (Astro.request.method === "POST") {
     let response = null;
     try {

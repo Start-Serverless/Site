@@ -32,9 +32,6 @@ export class SiteStack extends Stack {
             runtime: Runtime.NODEJS_18_X,
             code: Code.fromAsset(path.resolve("../frontend/dist/lambda/")),
             handler: "entry.handler",
-            environment: {
-                API: props.graphql.graphqlUrl,
-            },
         });
 
         props.graphql.grantMutation(server.role!);

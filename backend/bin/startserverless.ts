@@ -14,10 +14,15 @@ if (isProd) {
 }
 
 const storage = new StorageStack(app, "Storage", {});
-const appsync = new AppsyncStack(app, "Appsync", { table: storage.table });
+const appsync = new AppsyncStack(app, "Appsync", {
+    table: storage.table,
+    certificate: domain?.certificate,
+    isProd: isProd,
+});
 const site = new SiteStack(app, "Site", {
     certificate: domain?.certificate,
     zone: domain?.zone,
+    graphql: appsync.graphql,
     isProd: isProd,
 });
 

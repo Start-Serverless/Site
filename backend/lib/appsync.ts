@@ -3,9 +3,12 @@ import { Construct } from "constructs";
 import { Stack, StackProps } from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import * as appsync from "aws-cdk-lib/aws-appsync";
+import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
 
 export interface AppsyncStackProps extends StackProps {
     table: ITable;
+    certificate?: ICertificate;
+    isProd: boolean;
 }
 
 export class AppsyncStack extends Stack {
@@ -14,7 +17,7 @@ export class AppsyncStack extends Stack {
     constructor(scope: Construct, id: string, props: AppsyncStackProps) {
         super(scope, id, props);
 
-        const api = new appsync.GraphqlApi(this, "WebsiteAPI", {
+        this.graphql = new appsync.GraphqlApi(this, "WebsiteAPI", {
             name: "WebsiteApi",
             authorizationConfig: {
                 defaultAuthorization: {
@@ -24,12 +27,18 @@ export class AppsyncStack extends Stack {
             schema: appsync.SchemaFile.fromAsset(
                 path.join(__dirname, "graphql/schema.graphql")
             ),
+            domainName: props.isProd
+                ? {
+                      certificate: props.certificate!,
+                      domainName: "api.startserverless.dev/",
+                  }
+                : undefined,
             logConfig: {
                 fieldLogLevel: appsync.FieldLogLevel.ALL,
             },
         });
 
-        const tableDataSource = api.addDynamoDbDataSource(
+        const tableDataSource = this.graphql.addDynamoDbDataSource(
             "contactTable",
             props.table
         );
