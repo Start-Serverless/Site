@@ -32,6 +32,10 @@ export class ComputeStack extends Stack {
 
         const rule = new Rule(this, "NewLeadRule", {
             eventBus: bus,
+            eventPattern: {
+                source: [],
+                detail: [],
+            },
         });
 
         const emailNewLeads = new Function(this, "EmailNewLeadsFunction", {
