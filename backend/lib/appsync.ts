@@ -30,7 +30,7 @@ export class AppsyncStack extends Stack {
             domainName: props.isProd
                 ? {
                       certificate: props.certificate!,
-                      domainName: "api.startserverless.dev/",
+                      domainName: "api.startserverless.dev",
                   }
                 : undefined,
             logConfig: {
