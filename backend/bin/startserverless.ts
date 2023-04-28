@@ -21,8 +21,8 @@ const site = new SiteStack(app, "Site", {
     isProd: isProd,
 });
 
-if (isProd) {
-    const compute = new ComputeStack(app, "Compute", {
-        table: storage.table,
-    });
-}
+// if (isProd) {
+//     const compute = new ComputeStack(app, "Compute", {
+//         table: storage.table,
+//     });
+// }
