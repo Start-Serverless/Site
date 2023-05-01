@@ -4,7 +4,7 @@ import { submitContact } from "../graphql/mutations";
 
 
 Amplify.configure({
-	"aws_appsync_graphqlEndpoint": import.meta.env.API,
+	"aws_appsync_graphqlEndpoint": "https://api.startserverless.dev/graphql",
 	"aws_appsync_region": "us-east-1",
 	"aws_appsync_authenticationType": "AWS_IAM",
 });
@@ -17,11 +17,10 @@ enum FormStateType {
 
 let formState: FormStateType = FormStateType.start;
 if (Astro.request.method === "POST") {
-    let response = null;
     try {
         const SSR = withSSRContext();
         const data = await Astro.request.formData();
-        response = await SSR.API.graphql({
+        const response = await SSR.API.graphql({
             query: submitContact,
             variables: {
                 input: {

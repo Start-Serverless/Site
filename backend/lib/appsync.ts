@@ -7,8 +7,7 @@ import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
 
 export interface AppsyncStackProps extends StackProps {
     table: ITable;
-    certificate?: ICertificate;
-    isProd: boolean;
+    certificate: ICertificate;
 }
 
 export class AppsyncStack extends Stack {
@@ -27,12 +26,10 @@ export class AppsyncStack extends Stack {
             schema: appsync.SchemaFile.fromAsset(
                 path.join(__dirname, "graphql/schema.graphql")
             ),
-            domainName: props.isProd
-                ? {
-                      certificate: props.certificate!,
-                      domainName: "api.startserverless.dev",
-                  }
-                : undefined,
+            domainName: {
+                certificate: props.certificate!,
+                domainName: "api.startserverless.dev",
+            },
             logConfig: {
                 fieldLogLevel: appsync.FieldLogLevel.ALL,
             },

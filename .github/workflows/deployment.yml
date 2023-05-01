@@ -13,64 +13,64 @@ jobs:
       - run: |
           # trigger the tests here
 
-  deploy-to-dev:
-    if: github.ref == 'refs/heads/main'
-    needs: [test]
-    name: Deploy CDK stacks to dev
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: read
-      id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  # deploy-to-dev:
+  #   if: github.ref == 'refs/heads/main'
+  #   needs: [test]
+  #   name: Deploy CDK stacks to dev
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     actions: write
+  #     contents: read
+  #     id-token: write
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: arn:aws:iam::246683029984:role/DevopsStack-DeploymentRoleC7BBCF2C-15UV1X10KCMQR
-          aws-region: us-east-1
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v2
+  #       with:
+  #         role-to-assume: arn:aws:iam::246683029984:role/DevopsStack-DeploymentRoleC7BBCF2C-15UV1X10KCMQR
+  #         aws-region: us-east-1
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "16"
 
-      - name: Install Node Packages
-        run: npm i
-        working-directory: ./frontend
+  #     - name: Install Node Packages
+  #       run: npm i
+  #       working-directory: ./frontend
 
-      - name: Build Astro Site
-        run: npm run build
-        working-directory: ./frontend
+  #     - name: Build Astro Site
+  #       run: npm run build
+  #       working-directory: ./frontend
 
-      - name: Install Node Packages
-        run: npm i
-        working-directory: ./backend
+  #     - name: Install Node Packages
+  #       run: npm i
+  #       working-directory: ./backend
 
-      - name: CDK Synth
-        uses: youyo/aws-cdk-github-actions@v2
-        with:
-          cdk_subcommand: "synth"
-          cdk_stack: "*"
-          cdk_args: "--require-approval never --verbose"
-          actions_comment: false
-          debug_log: true
-          working_dir: "backend"
-        env:
-          STACK_BUILD_TARGET_ACCOUNT: dev
+  #     - name: CDK Synth
+  #       uses: youyo/aws-cdk-github-actions@v2
+  #       with:
+  #         cdk_subcommand: "synth"
+  #         cdk_stack: "*"
+  #         cdk_args: "--require-approval never --verbose"
+  #         actions_comment: false
+  #         debug_log: true
+  #         working_dir: "backend"
+  #       env:
+  #         STACK_BUILD_TARGET_ACCOUNT: dev
 
-      - name: CDK Deploy
-        uses: youyo/aws-cdk-github-actions@v2
-        with:
-          cdk_subcommand: "deploy"
-          cdk_stack: "*"
-          cdk_args: "--require-approval never --verbose"
-          actions_comment: false
-          debug_log: true
-          working_dir: "backend"
-        env:
-          STACK_BUILD_TARGET_ACCOUNT: dev
+  #     - name: CDK Deploy
+  #       uses: youyo/aws-cdk-github-actions@v2
+  #       with:
+  #         cdk_subcommand: "deploy"
+  #         cdk_stack: "*"
+  #         cdk_args: "--require-approval never --verbose"
+  #         actions_comment: false
+  #         debug_log: true
+  #         working_dir: "backend"
+  #       env:
+  #         STACK_BUILD_TARGET_ACCOUNT: dev
 
   deploy-to-prod:
     if: github.ref == 'refs/heads/main'

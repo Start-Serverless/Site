@@ -13,9 +13,8 @@ import { GraphqlApi } from "aws-cdk-lib/aws-appsync";
 
 export interface SiteStackProps extends StackProps {
     certificate?: ICertificate;
-    zone?: IHostedZone;
+    zone: IHostedZone;
     graphql: GraphqlApi;
-    isProd: boolean;
 }
 
 export class SiteStack extends Stack {
@@ -46,9 +45,7 @@ export class SiteStack extends Stack {
             this,
             "Distribution",
             {
-                domainNames: props.isProd
-                    ? ["www.startserverless.dev"]
-                    : undefined,
+                domainNames: ["www.startserverless.dev"],
                 certificate: props?.certificate,
                 defaultBehavior: {
                     cachePolicy: new cloudfront.CachePolicy(this, "Cache", {
@@ -93,13 +90,11 @@ export class SiteStack extends Stack {
             distribution: astroDistribution,
         });
 
-        if (props.isProd) {
-            new ARecord(this, "AliasRecord", {
-                zone: props.zone!,
-                target: RecordTarget.fromAlias(
-                    new CloudFrontTarget(astroDistribution)
-                ),
-            });
-        }
+        new ARecord(this, "AliasRecord", {
+            zone: props.zone!,
+            target: RecordTarget.fromAlias(
+                new CloudFrontTarget(astroDistribution)
+            ),
+        });
     }
 }
