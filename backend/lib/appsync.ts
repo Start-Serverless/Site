@@ -1,6 +1,12 @@
 import * as path from "path";
 import { Construct } from "constructs";
-import { CfnOutput, Duration, Expiration, Stack, StackProps } from "aws-cdk-lib";
+import {
+    CfnOutput,
+    Duration,
+    Expiration,
+    Stack,
+    StackProps,
+} from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
@@ -57,16 +63,16 @@ export class AppsyncStack extends Stack {
                 appsync.MappingTemplate.dynamoDbResultItem(),
         });
 
-        new CfnOutput(this, 'GraphQLAPIID', {
+        new CfnOutput(this, "GraphQLAPIID", {
             value: this.graphql.apiId,
-        })
+        });
 
-        new CfnOutput(this, 'GraphQLURL', {
+        new CfnOutput(this, "GraphQLURL", {
             value: this.graphql.graphqlUrl,
-        })
+        });
 
-        new CfnOutput(this, 'GraphQLAPIKey' {
-            value: this.graphql.apiKey || ''
-        })
+        new CfnOutput(this, "GraphQLAPIKey", {
+            value: this.graphql.apiKey || "",
+        });
     }
 }
