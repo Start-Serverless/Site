@@ -1,6 +1,6 @@
 import * as path from "path";
 import { Construct } from "constructs";
-import { Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Duration, Expiration, Stack, StackProps } from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import * as appsync from "aws-cdk-lib/aws-appsync";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
@@ -20,7 +20,10 @@ export class AppsyncStack extends Stack {
             name: "WebsiteApi",
             authorizationConfig: {
                 defaultAuthorization: {
-                    authorizationType: appsync.AuthorizationType.IAM,
+                    authorizationType: appsync.AuthorizationType.API_KEY,
+                    apiKeyConfig: {
+                        expires: Expiration.after(Duration.days(365)),
+                    },
                 },
             },
             schema: appsync.SchemaFile.fromAsset(
@@ -53,5 +56,17 @@ export class AppsyncStack extends Stack {
             responseMappingTemplate:
                 appsync.MappingTemplate.dynamoDbResultItem(),
         });
+
+        new CfnOutput(this, 'GraphQLAPIID', {
+            value: this.graphql.apiId,
+        })
+
+        new CfnOutput(this, 'GraphQLURL', {
+            value: this.graphql.graphqlUrl,
+        })
+
+        new CfnOutput(this, 'GraphQLAPIKey' {
+            value: this.graphql.apiKey || ''
+        })
     }
 }
