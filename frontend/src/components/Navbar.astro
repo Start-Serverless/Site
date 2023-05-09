@@ -1,4 +1,5 @@
 ---
+import logo from "../images/logo.svg";
 export interface Props {}
 
 const {} = Astro.props;
@@ -8,12 +9,13 @@ const {} = Astro.props;
     <div class="navbar-container">
         <div class="navbar-content">
             <div class="navbar-brand">
-                <a href="/" class="w-inline-block w--current">
+                <a href="/" class="w-inline-block w--current" aria-label="home">
                     <img
-                        src="/assets/Start-serverless-logo-green.svg"
-                        loading="lazy"
+                        src={logo.src}
+                        width="300"
+                        height="44"
                         alt=""
-                        class="vectors-wrapper"
+                        class="logo"
                     />
                 </a>
             </div>
@@ -112,14 +114,9 @@ const {} = Astro.props;
         grid-row-gap: 0px;
     }
 
-    .vectors-wrapper {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
+    .logo {
         display: flex;
-        height: 43.41328811645508px;
         -webkit-box-pack: center;
-        -webkit-justify-content: center;
         -ms-flex-pack: center;
         justify-content: center;
         -webkit-box-align: center;
@@ -274,8 +271,9 @@ const {} = Astro.props;
     }
 
     @media screen and (max-width: 991px) {
-        .vectors-wrapper {
+        .logo {
             height: 37px;
+            width: 252px;
         }
 
         .navbar-logo {

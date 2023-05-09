@@ -2,20 +2,20 @@
 // export const prerender = true;
 
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import Contact from "../components/Contact.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import consulting from "../images/consulting.svg";
+import development from "../images/development.svg";
+import training from "../images/training.svg";
+import footerLogo from "../images/footer-logo.svg";
 ---
 
 <Layout title="START / SERVERLESS">
     <main>
         <div class="homepage">
             <Navbar />
-            <Hero
-                img1="assets/Vectors-Wrapper_4.svg"
-                img2="/assets/Group-25-1.svg"
-            >
+            <Hero>
                 <h1 class="title" slot="header">
                     Business Evolved <br /> Start Serverless
                 </h1>
@@ -37,7 +37,9 @@ import Hero from "../components/Hero.astro";
                             <div class="image-wrapper-2">
                                 <div class="image-wrapper-2">
                                     <img
-                                        src="assets/Vectors-Wrapper.svg"
+                                        src={consulting.src}
+                                        width="240"
+                                        height="241"
                                         loading="lazy"
                                         alt=""
                                         class="graphic"
@@ -62,8 +64,10 @@ import Hero from "../components/Hero.astro";
                                 <div class="image-2">
                                     <div class="image-2">
                                         <img
-                                            src="assets/Vectors-Wrapper_2.svg"
+                                            src={development.src}
                                             loading="lazy"
+                                            width="240"
+                                            height="241"
                                             alt=""
                                             class="graphic"
                                         />
@@ -86,7 +90,9 @@ import Hero from "../components/Hero.astro";
                         <div class="card">
                             <div class="image-wrapper-2">
                                 <img
-                                    src="assets/Vectors-Wrapper_1.svg"
+                                    src={training.src}
+                                    width="240"
+                                    height="241"
                                     loading="lazy"
                                     alt=""
                                     class="graphic"
@@ -108,7 +114,7 @@ import Hero from "../components/Hero.astro";
                     </div>
                 </div>
             </div>
-            <div class="certification-section">
+            <!-- <div class="certification-section">
                 <div
                     data-w-id="a6cf9e36-c6d2-81c8-38a1-ab8979f6a272"
                     style="opacity:0"
@@ -123,13 +129,13 @@ import Hero from "../components/Hero.astro";
                         class="certification"
                     />
                 </div>
-            </div>
+            </div> -->
             <Contact />
             <div class="footer-dark">
                 <div class="columns-2 hero-content">
                     <div class="column-3">
                         <img
-                            src="assets/Vectors-Wrapper_3.svg"
+                            src={footerLogo.src}
                             loading="lazy"
                             alt=""
                             class="vectors-wrapper"
