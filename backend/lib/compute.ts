@@ -17,6 +17,7 @@ export class ComputeStack extends Stack {
         const streamPipeRole = new iam.Role(this, "StreamPipeRole", {
             assumedBy: new iam.ServicePrincipal("pipes.amazonaws.com"),
         });
+        props.table.grantStreamRead(streamPipeRole);
 
         const topic = new Topic(this, "Topic");
         topic.grantPublish(streamPipeRole);

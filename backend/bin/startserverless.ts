@@ -14,6 +14,7 @@ const appsync = new AppsyncStack(app, "Appsync", {
     table: storage.table,
     certificate: domain.certificate,
 });
+
 const site = new SiteStack(app, "Site", {
     certificate: domain.certificate,
     zone: domain.zone,
