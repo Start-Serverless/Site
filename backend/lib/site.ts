@@ -49,7 +49,7 @@ export class SiteStack extends Stack {
                 certificate: props?.certificate,
                 defaultBehavior: {
                     cachePolicy: new cloudfront.CachePolicy(this, "Cache", {
-                        defaultTtl: Duration.hours(12),
+                        defaultTtl: Duration.days(365),
                     }),
                     origin: new S3Origin(bucket, {
                         originAccessIdentity: originAccessIdentity,
