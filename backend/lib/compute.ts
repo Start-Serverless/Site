@@ -2,12 +2,9 @@ import { Construct } from "constructs";
 import { Stack, StackProps } from "aws-cdk-lib";
 import { Table } from "aws-cdk-lib/aws-dynamodb";
 import { CfnPipe } from "aws-cdk-lib/aws-pipes";
-import { EventBus, Rule } from "aws-cdk-lib/aws-events";
-import { Queue } from "aws-cdk-lib/aws-sqs";
-import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
 import * as iam from "aws-cdk-lib/aws-iam";
-import { Function, Runtime, Code } from "aws-cdk-lib/aws-lambda";
-import * as path from "path";
+import { Topic } from "aws-cdk-lib/aws-sns";
+import { EmailSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
 
 export interface ComputeStackProps extends StackProps {
     table: Table;
@@ -21,37 +18,17 @@ export class ComputeStack extends Stack {
             assumedBy: new iam.ServicePrincipal("pipes.amazonaws.com"),
         });
 
-        const bus = new EventBus(this, "Bus", {});
-        bus.grantPutEventsTo(streamPipeRole);
+        const topic = new Topic(this, "Topic");
+        topic.grantPublish(streamPipeRole);
 
         const streamPipe = new CfnPipe(this, "StreamPipe", {
             roleArn: streamPipeRole.roleArn,
             source: props.table.tableStreamArn!,
-            target: bus.eventBusArn,
+            target: topic.topicArn,
         });
 
-        const rule = new Rule(this, "NewLeadRule", {
-            eventBus: bus,
-            eventPattern: {
-                source: [],
-                detail: [],
-            },
-        });
-
-        const emailNewLeads = new Function(this, "EmailNewLeadsFunction", {
-            memorySize: 512,
-            runtime: Runtime.NODEJS_18_X,
-            code: Code.fromAsset(path.resolve("./src/emailNewLeads.ts")),
-            handler: "entry.handler",
-        });
-
-        const dlq = new Queue(this, "DLQ");
-
-        rule.addTarget(
-            new LambdaFunction(emailNewLeads, {
-                deadLetterQueue: dlq,
-                retryAttempts: 2,
-            })
+        topic.addSubscription(
+            new EmailSubscription("management-aws@startserverless.dev")
         );
     }
 }

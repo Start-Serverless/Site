@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import {  Stack, StackProps } from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import {
     Certificate,
     CertificateValidation,
@@ -9,7 +9,7 @@ import { EmailIdentity, Identity } from "aws-cdk-lib/aws-ses";
 
 export class DomainStack extends Stack {
     zone: HostedZone;
-    certificate: Certificate
+    certificate: Certificate;
 
     constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props);
@@ -23,9 +23,5 @@ export class DomainStack extends Stack {
             subjectAlternativeNames: ["www.startserverless.dev"],
             validation: CertificateValidation.fromDns(),
         });
-
-        const emailIdentity = new EmailIdentity(this, 'Identity', {
-            identity: Identity.publicHostedZone(this.zone)
-        })
     }
 }
