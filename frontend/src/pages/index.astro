@@ -5,6 +5,8 @@ import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import arrow from "../images/arrow.svg";
+import atom from "../images/atom.svg";
 import consulting from "../images/consulting.svg";
 import development from "../images/development.svg";
 import training from "../images/training.svg";
@@ -15,16 +17,14 @@ import footerLogo from "../images/footer-logo.svg";
     <main>
         <div class="homepage">
             <Navbar />
-            <Hero>
+            <Hero mainImg={atom.src} backgroundImg={arrow.src}>
                 <h1 class="title" slot="header">
                     Business Evolved <br /> Start Serverless
                 </h1>
-                <p class="paragraph-wrap" slot="subline">
-                    <span class="hero-subline"
-                        >Outpace your competitors with infinitely scalable,
-                        cost-effective and fast-to-market technology.
-                    </span>
-                </p>
+                <span class="hero-subline" slot="subline">
+                    Outpace your competitors with infinitely scalable,
+                    cost-effective and fast-to-market technology.
+                </span>
             </Hero>
             <!--  		#TODO MAKE SERVICE LIST INTO COMPONENTS-->
             <div class="team-circles">
@@ -198,13 +198,6 @@ import footerLogo from "../images/footer-logo.svg";
         font-size: 51px;
         line-height: 120.00000476837158%;
         font-weight: 400;
-        letter-spacing: 0em;
-    }
-
-    .paragraph-wrap {
-        color: #fff;
-        font-size: 24px;
-        line-height: 150%;
         letter-spacing: 0em;
     }
 
@@ -1211,10 +1204,6 @@ import footerLogo from "../images/footer-logo.svg";
     @media screen and (max-width: 479px) {
         .hero-subline {
             font-size: 20px;
-            text-align: center;
-        }
-
-        .paragraph-wrap {
             text-align: center;
         }
 

@@ -2,6 +2,12 @@
 import { Amplify, withSSRContext } from "aws-amplify";
 import { submitContact } from "../graphql/mutations";
 
+interface Props {
+    className: string;
+}
+
+const { className } = Astro.props;
+
 Amplify.configure({
     aws_appsync_graphqlEndpoint:
         "https://codezy6gsncqjpt5o3hv6n6nyi.appsync-api.us-east-1.amazonaws.com/graphql",
@@ -39,11 +45,9 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<div class="section">
+<div class:list={["section", className]}>
     <div id="contact-form" class="contact-form">
-        <div class="frame-2">
-            <div class="text-6">LET&#x27;S TALK!</div>
-        </div>
+        <div class="title">LET&#x27;S TALK!</div>
 
         {
             formState === FormStateType.fail ? (
@@ -117,29 +121,24 @@ if (Astro.request.method === "POST") {
 
 <style>
     .section {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         width: 100%;
         padding-top: 64px;
         padding-bottom: 64px;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
         flex-direction: column;
         -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
         -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
         align-items: center;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
         background-image: linear-gradient(301deg, #303030, #181818);
+    }
+
+    .section.black {
+        background-image: none;
     }
 
     .contact-form {
@@ -149,43 +148,25 @@ if (Astro.request.method === "POST") {
         padding-bottom: 24px;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
         flex-direction: column;
         -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
         justify-content: center;
         -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
         align-items: center;
         grid-column-gap: 32px;
         grid-row-gap: 32px;
     }
 
-    .frame-2 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
+    .title {
         display: flex;
         -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
         -webkit-box-align: start;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
         align-items: flex-start;
         -webkit-box-flex: 0;
-        -webkit-flex: 0 auto;
-        -ms-flex: 0 auto;
         flex: 0 auto;
         grid-column-gap: 16px;
         grid-row-gap: 16px;
-    }
-
-    .text-6 {
         font-family: Electrolize, sans-serif;
         color: #fff;
         font-size: 32px;
@@ -250,10 +231,6 @@ if (Astro.request.method === "POST") {
         margin-bottom: 24px;
         flex-direction: column;
     }
-
-    /* .text-field-3 {
-        margin-bottom: 24px;
-    } */
 
     .button:hover {
         background-color: #00e399;
