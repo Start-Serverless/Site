@@ -26,6 +26,11 @@ export class ComputeStack extends Stack {
             roleArn: streamPipeRole.roleArn,
             source: props.table.tableStreamArn!,
             target: topic.topicArn,
+            sourceParameters: {
+                dynamoDbStreamParameters: {
+                    startingPosition: "LATEST",
+                },
+            },
         });
 
         topic.addSubscription(
