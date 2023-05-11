@@ -1,8 +1,12 @@
 ---
-import arrow from "../images/arrow.svg";
-import atom from "../images/atom.svg";
+interface Props {
+    mainImg: string;
+    backgroundImg: string;
+}
 
-const arrowSrc = `url(${arrow.src})`;
+const { mainImg, backgroundImg } = Astro.props;
+
+const backgroundSrc = `url(${backgroundImg})`;
 ---
 
 <div class="hero-heading-left">
@@ -10,7 +14,10 @@ const arrowSrc = `url(${arrow.src})`;
         <div class="hero-text-column">
             <div class="hero-text-column">
                 <slot name="header" />
-                <slot name="subline" />
+                <p class="paragraph-wrap">
+                    <slot name="subline" />
+                    <slot />
+                </p>
             </div>
             <div class="actions">
                 <a href="#contact-form" class="button-2">
@@ -18,9 +25,9 @@ const arrowSrc = `url(${arrow.src})`;
                 </a>
             </div>
         </div>
-        <div class="bg-arrow" style={{ "background-image": arrowSrc }}>
+        <div class="bg-arrow" style={{ "background-image": backgroundSrc }}>
             <img
-                src={atom.src}
+                src={mainImg}
                 alt=""
                 class="hero-img"
                 width="560"
@@ -148,6 +155,13 @@ const arrowSrc = `url(${arrow.src})`;
         flex: 0 auto;
         grid-column-gap: 16px;
         grid-row-gap: 16px;
+    }
+
+    .paragraph-wrap {
+        color: #fff;
+        font-size: 24px;
+        line-height: 150%;
+        letter-spacing: 0em;
     }
 
     .button-2 {
@@ -351,10 +365,8 @@ const arrowSrc = `url(${arrow.src})`;
             justify-content: center;
         }
 
-        .title {
-            font-size: 32px;
+        .paragraph-wrap {
             text-align: center;
-            width: 100%;
         }
     }
 </style>
