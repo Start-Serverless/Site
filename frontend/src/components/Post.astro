@@ -1,24 +1,26 @@
 ---
-import splash from "../images/christopher-gower-m_HRfLhgABo-unsplash-p-500.jpg";
+import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-    url: string;
-    title: string;
+    post: CollectionEntry<"blog">;
 }
 
-const { url, title } = Astro.props;
+const { post } = Astro.props;
 ---
 
 <li>
-    <a href={url} class="post">
-        <img src={splash.src} alt="" width="390" height="260" class="splash" />
+    <a href={`blog/${post.slug}`} class="post">
+        <img
+            src={post.data.image}
+            alt=""
+            width="390"
+            height="260"
+            class="splash"
+        />
         <div class="post-content">
-            <h2 class="heading">{title}</h2>
+            <h2 class="heading">{post.data.title}</h2>
             <p class="preview">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Suscipit eaque omnis alias molestiae numquam facilis cupiditate
-                dolores doloribus, tenetur ex iusto, quod ratione recusandae ut
-                quam. Magnam sint aspernatur commodi!
+                {post.body}
             </p>
             <span class="read-more">// READ MORE</span>
         </div>

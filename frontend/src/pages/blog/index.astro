@@ -1,8 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Post from "../components/Post.astro";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Post from "../../components/Post.astro";
 
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allBlogPosts = await getCollection("blog");
 ---
 
 <Layout title="Blog">
@@ -12,11 +13,7 @@ const allPosts = await Astro.glob("../pages/posts/*.md");
         </div>
         <div class="content">
             <ul class="post-archive">
-                {
-                    allPosts.map((post) => (
-                        <Post url={post.url!} title={post.frontmatter.title} />
-                    ))
-                }
+                {allBlogPosts.map((post) => <Post post={post} />)}
             </ul>
         </div>
     </body>
