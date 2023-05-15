@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import { getCollection, getEntryBySlug } from "astro:content";
+
+const allBlogPosts = await getCollection("blog");
+
+const uniqueTags = [
+    ...new Set(allBlogPosts.map((post) => post.data.tags).flat()),
+];
+
+const filteredPosts = uniqueTags.map((tag) => {
+    return allBlogPosts.filter((post) => post.data.tags.includes(tag));
+});
+---
+
+<BlogPostLayout frontmatter={entry}>
+    <Content />
+</BlogPostLayout>

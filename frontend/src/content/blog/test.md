@@ -16,5 +16,10 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima animi, doloremq
 
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima animi, doloremque quas corporis dolore blanditiis aut veritatis quidem laborum culpa sapiente officiis repudiandae quasi perferendis maxime modi dolor reprehenderit explicabo!
 
+```json
+{
+	"firstName": "Trevor"
+}
+```
 
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima animi, doloremque quas corporis dolore blanditiis aut veritatis quidem laborum culpa sapiente officiis repudiandae quasi perferendis maxime modi dolor reprehenderit explicabo!
