@@ -40,7 +40,7 @@ const backgroundImg = `background-image: url(${frontmatter.data.image})`;
                                         class="tags tag-link"
                                         href={`/blog/tags/${tag}`}
                                     >
-                                        {`${tag},`}
+                                        {`${tag}`}
                                     </a>
                                 </li>
                             );
@@ -144,6 +144,10 @@ const backgroundImg = `background-image: url(${frontmatter.data.image})`;
         font-size: 16px;
         font-family: "Titillium Web", sans-serif;
         font-size: 16px;
+    }
+
+    .tags + .tags::before {
+        content: ", ";
     }
 
     .tag-link:hover {
