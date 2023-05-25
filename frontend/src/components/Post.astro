@@ -9,7 +9,7 @@ const { post } = Astro.props;
 ---
 
 <li>
-    <a href={`blog/${post.slug}`} class="post">
+    <a href={`/blog/${post.slug}`} class="post">
         <img
             src={post.data.image}
             alt=""
@@ -19,9 +19,6 @@ const { post } = Astro.props;
         />
         <div class="post-content">
             <h2 class="heading">{post.data.title}</h2>
-            <p class="preview">
-                {post.body}
-            </p>
             <span class="read-more">// READ MORE</span>
         </div>
     </a>

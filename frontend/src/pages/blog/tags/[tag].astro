@@ -1,0 +1,55 @@
+---
+import Post from "../../../components/Post.astro";
+import { getCollection } from "astro:content";
+import BlogCollectionLayout from "../../../layouts/BlogCollectionLayout.astro";
+
+const allBlogPosts = await getCollection("blog");
+const { tag } = Astro.params;
+
+if (tag === undefined) {
+    throw new Error("Slug is required");
+}
+
+const filteredPosts = allBlogPosts.filter((post) =>
+    post.data.tags.includes(tag)
+);
+
+if (filteredPosts === undefined || filteredPosts.length == 0) {
+    return Astro.redirect("/404");
+}
+---
+
+<BlogCollectionLayout title={tag}>
+    <h1 class="tag">Tag: {tag}</h1>
+    <ul class="post-archive">
+        {filteredPosts.map((post) => <Post post={post} />)}
+    </ul>
+</BlogCollectionLayout>
+
+<style>
+    .tag {
+        text-transform: capitalize;
+        max-width: 1000px;
+        padding-top: 64px;
+        margin-left: auto;
+        font-family: Electrolize, sans-serif;
+        color: #333;
+        margin-right: auto;
+    }
+
+    .post-archive {
+        max-width: 1000px;
+        list-style-type: none;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media screen and (max-width: 991px) {
+        .post-archive {
+            margin-top: 0px;
+            padding-top: 64px;
+        }
+    }
+</style>

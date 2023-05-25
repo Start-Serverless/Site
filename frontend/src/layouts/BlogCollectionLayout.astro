@@ -1,26 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-
-const allBlogPosts = await getCollection("blog");
-const tags = [...new Set(allBlogPosts.map((post) => post.data.tags).flat())];
+import Layout from "./Layout.astro";
 ---
 
-<Layout title="Tag Index">
+<Layout title="Blog">
     <body>
         <div class="hero">
             <h1 class="heading">THINK / SERVERLESS</h1>
         </div>
         <div class="content">
-            <ul class="post-archive">
-                {
-                    tags.map((tag) => (
-                        <p class="tag">
-                            <a href={`/tags/${tag}`}>{tag}</a>
-                        </p>
-                    ))
-                }
-            </ul>
+            <slot />
         </div>
     </body>
 </Layout>
@@ -48,15 +36,6 @@ const tags = [...new Set(allBlogPosts.map((post) => post.data.tags).flat())];
         justify-content: flex-start;
         align-items: flex-start;
         background-color: #fff;
-    }
-
-    .post-archive {
-        max-width: 1000px;
-        list-style-type: none;
-        padding-top: 64px;
-        padding-bottom: 64px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     @media screen and (max-width: 991px) {
