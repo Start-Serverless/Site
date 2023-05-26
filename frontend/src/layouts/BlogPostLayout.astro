@@ -30,7 +30,7 @@ const backgroundImg = `background-image: url(${frontmatter.data.image})`;
         <div class="blog-body">
             <div class="background-image" style={backgroundImg}></div>
             <div class="metadata">
-                <div class="tag-label tags">TAGS/</div>
+                <div class="tags tag-label">TAGS/</div>
                 <ul class="tag-list">
                     {
                         frontmatter.data.tags.map((tag) => {
@@ -126,7 +126,6 @@ const backgroundImg = `background-image: url(${frontmatter.data.image})`;
         font-weight: 700;
         text-transform: uppercase;
         justify-items: left;
-        padding-left: 100px;
     }
 
     .tags ul,
@@ -137,8 +136,6 @@ const backgroundImg = `background-image: url(${frontmatter.data.image})`;
 
     .tags {
         text-decoration: none;
-        /* margin-right: auto;
-        margin-left: auto; */
         color: #303030;
         text-transform: capitalize;
         font-size: 16px;

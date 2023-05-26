@@ -20,25 +20,37 @@ if (filteredPosts === undefined || filteredPosts.length == 0) {
 ---
 
 <BlogCollectionLayout title={tag}>
-    <h1 class="tag">Tag: {tag}</h1>
-    <ul class="post-archive">
-        {filteredPosts.map((post) => <Post post={post} />)}
-    </ul>
+    <div class="content">
+        <h1 class="tag">Tag: {tag}</h1>
+        <ul class="post-archive">
+            {filteredPosts.map((post) => <Post post={post} />)}
+        </ul>
+    </div>
 </BlogCollectionLayout>
 
 <style>
-    .tag {
-        text-transform: capitalize;
-        max-width: 1000px;
+    .content {
+        /* max-width: 1000px; */
         padding-top: 64px;
+        margin-right: auto;
         margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    h1.tag {
+        text-transform: capitalize;
+        padding-left: 40px;
+        display: inline;
         font-family: Electrolize, sans-serif;
         color: #333;
-        margin-right: auto;
+        margin-left: auto; */
     }
 
     .post-archive {
-        max-width: 1000px;
+        align-self: center;
         list-style-type: none;
         padding-top: 64px;
         padding-bottom: 64px;
