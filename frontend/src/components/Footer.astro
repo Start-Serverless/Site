@@ -1,0 +1,127 @@
+---
+import footerLogo from "../images/footer-logo.svg";
+
+export interface Props {}
+
+const {} = Astro.props;
+---
+
+<div class="footer-dark">
+    <div class="columns-2 hero-content">
+        <div class="column-3">
+            <img
+                src={footerLogo.src}
+                width="300"
+                height="44"
+                loading="lazy"
+                alt=""
+                class="vectors-wrapper"
+            />
+            <div class="text-9">Copyright © 2023 START SERVERLESS</div>
+        </div>
+        <!-- <div class="small-columns f2wf-small-columns">
+                        <div class="column-4">
+                            <div class="content-3">
+                                <div class="text-10">RESOURCES</div>
+                                <div class="footer-links">
+                                    <div class="link">Why serverless?</div>
+                                    <div class="link">
+                                        How to scale infinitely
+                                    </div>
+                                    <div class="link">
+                                        The cost of serverless.
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+    </div>
+</div>
+
+<style>
+    .footer-dark {
+        display: flex;
+        width: 100%;
+        padding: 64px 24px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 40px;
+        grid-row-gap: 40px;
+        background-color: #181818;
+    }
+
+    .columns-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        max-width: 960px;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    .column-3 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        /* max-width: 320px; */
+        padding-top: 16px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        grid-column-gap: 47px;
+        grid-row-gap: 47px;
+    }
+
+    .text-9 {
+        font-family: "Titillium Web", sans-serif;
+        color: #fff;
+        font-size: 14px;
+        line-height: 150%;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 0em;
+    }
+
+    @media screen and (max-width: 991) {
+        .column-3 {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+    }
+</style>
