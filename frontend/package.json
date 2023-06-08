@@ -15,7 +15,7 @@
 		"@astrojs/image": "^0.16.7",
 		"@astrojs/vercel": "^3.2.1",
 		"@aws-amplify/api": "^5.0.19",
-		"astro": "^2.3.4",
+		"astro": "^2.6.1",
 		"aws-amplify": "^5.0.19"
 	},
 	"devDependencies": {

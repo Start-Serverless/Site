@@ -283,9 +283,6 @@ const {} = Astro.props;
             }
 
             .navbar-link {
-                -webkit-box-pack: center;
-                -webkit-justify-content: center;
-                -ms-flex-pack: center;
                 justify-content: center;
                 background-color: #181818;
                 max-width: inherit;
@@ -303,9 +300,6 @@ const {} = Astro.props;
             ul.navbar-menu {
                 display: none;
                 margin-top: 60px;
-                -webkit-box-pack: start;
-                -webkit-box-align: center;
-                -webkit-box-flex: 0;
                 background: #c8c8c8;
                 background-color: #181818;
                 position: absolute;
@@ -351,7 +345,7 @@ const {} = Astro.props;
 
             #menu-toggle:checked ~ label + ul.navbar-menu {
                 display: block !important;
-                /* transition: all 0.5s ease-in-out; */
+                transition: all 5s ease-in-out;
             }
         }
 
