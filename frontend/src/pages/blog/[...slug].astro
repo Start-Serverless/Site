@@ -1,16 +1,16 @@
 ---
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
-import { getEntryBySlug } from "astro:content";
+import { getCollection } from "astro:content";
 
-const { slug } = Astro.params;
-if (slug === undefined) {
-    throw new Error("Slug is required");
+export async function getStaticPaths() {
+    const blogEntries = await getCollection("blog");
+    return blogEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
 }
 
-const entry = await getEntryBySlug("blog", slug);
-if (entry === undefined) {
-    return Astro.redirect("/404");
-}
+const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
