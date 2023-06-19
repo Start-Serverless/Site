@@ -1,13 +1,14 @@
 import { defineConfig } from "astro/config";
-import aws from "astro-sst/edge"
-
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
 	output: "hybrid",
-	adapter: aws(),
+	adapter: node({
+		mode: "standalone"
+	}),
 	//   integrations: [image()]
 	experimental: {
-		assets: true,
-	},
+		assets: true
+	}
 });
