@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import aws from "astro-sst/lambda"
+import aws from "astro-sst/edge"
 
 
 // https://astro.build/config
