@@ -8,8 +8,9 @@ import { ARecord, IHostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import * as path from "path";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
-import { Bucket, BlockPublicAccess } from "aws-cdk-lib/aws-s3";
+import { Bucket, BlockPublicAccess, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { GraphqlApi } from "aws-cdk-lib/aws-appsync";
+import { S3 } from "aws-cdk-lib/aws-ses-actions";
 
 export interface SiteStackProps extends StackProps {
     certificate?: ICertificate;
@@ -76,6 +77,9 @@ export class SiteStack extends Stack {
                     ],
                 },
                 enableLogging: true,
+                logBucket: new Bucket(this, "LogBucket", {
+                    objectOwnership: ObjectOwnership.OBJECT_WRITER,
+                }),
                 errorResponses: [
                     {
                         httpStatus: 404,
