@@ -5,7 +5,6 @@ import {
     CertificateValidation,
 } from "aws-cdk-lib/aws-certificatemanager";
 import { HostedZone } from "aws-cdk-lib/aws-route53";
-import { EmailIdentity, Identity } from "aws-cdk-lib/aws-ses";
 
 export class DomainStack extends Stack {
     zone: HostedZone;

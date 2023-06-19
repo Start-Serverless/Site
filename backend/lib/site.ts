@@ -29,8 +29,8 @@ export class SiteStack extends Stack {
         const server = new Function(this, "SSRFunction", {
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
-            code: Code.fromAsset(path.resolve("../frontend/dist/lambda/")),
-            handler: "entry.handler",
+            code: Code.fromAsset(path.resolve("../frontend/dist/server/")),
+            handler: "entry.mjs",
         });
 
         props.graphql.grantMutation(server.role!);
