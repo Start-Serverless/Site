@@ -2,12 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
 import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
 import grid from "../images/grid.svg";
 import greenLogo from "../images/green-logo.svg";
 ---
 
 <Layout title="About">
     <main class="page">
+        <Navbar />
         <Hero mainImg={greenLogo.src} backgroundImg={grid.src}>
             <h1 class="title" slot="header">
                 Driving Your Success through Frictionless Solutions

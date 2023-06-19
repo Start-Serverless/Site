@@ -38,39 +38,6 @@ const backgroundSrc = `url(${backgroundImg})`;
 </div>
 
 <style>
-    @keyframes slideInFromLeft {
-        0% {
-            transform: translate3d(-200px, 0px, 0px) scale3d(1, 1, 1)
-                rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-            opacity: 0;
-        }
-        100% {
-            transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
-                rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-            opacity: 1;
-        }
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        60% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-    .hero-img {
-        transition: transform 1000ms ease, -webkit-transform 1000ms ease;
-        animation: 1.5s ease-in-out 0s 1 fadeIn;
-    }
-
-    .hero-img:hover {
-        transform: scale(1.04);
-    }
-
     .hero-heading-left {
         align-items: flex-start;
         box-sizing: border-box;
@@ -148,14 +115,24 @@ const backgroundSrc = `url(${backgroundImg})`;
     .bg-arrow {
         padding-top: 38px;
         padding-bottom: 38px;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
         background-position: 50% 50%;
         background-size: cover;
         background-attachment: scroll;
         background-clip: padding-box;
-        animation: 1s ease-out 0s 1 slideInFromLeft;
+        -webkit-text-fill-color: inherit;
+        /* transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+            rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); */
         transform-style: preserve-3d;
+        transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg)
+            rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     }
 
     .actions {
@@ -299,15 +276,35 @@ const backgroundSrc = `url(${backgroundImg})`;
 
         .hero-img {
             position: relative;
+            /* z-index: 1; */
             display: flex;
             width: 100%;
             height: auto;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
             justify-content: center;
+            -webkit-flex-wrap: nowrap;
+            -ms-flex-wrap: nowrap;
             flex-wrap: nowrap;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
             align-items: center;
             grid-column-gap: 0px;
             grid-row-gap: 0px;
+            -webkit-transition: -webkit-transform 1000ms ease;
+            transition: -webkit-transform 1000ms ease;
+            transition: transform 1000ms ease;
+            transition: transform 1000ms ease, -webkit-transform 1000ms ease;
+            -o-object-fit: cover;
             object-fit: cover;
+        }
+
+        .hero-img:hover {
+            -webkit-transform: scale(1.04);
+            -ms-transform: scale(1.04);
+            transform: scale(1.04);
         }
 
         .container {
