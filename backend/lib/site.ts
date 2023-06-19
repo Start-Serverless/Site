@@ -75,6 +75,7 @@ export class SiteStack extends Stack {
                         },
                     ],
                 },
+                enableLogging: true,
                 errorResponses: [
                     {
                         httpStatus: 404,
