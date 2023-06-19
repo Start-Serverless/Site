@@ -44,7 +44,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Install SSR modules
-        run: npm install --prefix ./dist/server
+        run: npm install --prefix ./dist/server ./
         working-directory: ./frontend
 
       - name: Install Node Packages
