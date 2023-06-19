@@ -30,7 +30,7 @@ export class SiteStack extends Stack {
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
             code: Code.fromAsset(path.resolve("../frontend/dist/server/")),
-            handler: "entry.mjs",
+            handler: "entry.handler",
         });
 
         props.graphql.grantMutation(server.role!);
