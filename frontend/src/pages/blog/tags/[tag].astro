@@ -1,38 +1,29 @@
 ---
 import Post from "../../../components/Post.astro";
-import { getCollection, CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import BlogCollectionLayout from "../../../layouts/BlogCollectionLayout.astro";
 
-interface Props {
-    posts: CollectionEntry<"blog">[];
-}
-
-export async function getStaticPaths() {
-    const allBlogPosts = await getCollection("blog");
-    const uniqueTags = [
-        ...new Set(allBlogPosts.map((post) => post.data.tags).flat()),
-    ];
-
-    return uniqueTags.map((tag) => {
-        const filteredPosts = allBlogPosts.filter((post) =>
-            post.data.tags.includes(tag)
-        );
-        return {
-            params: { tag },
-            props: { posts: filteredPosts },
-        };
-    });
-}
-
+const allBlogPosts = await getCollection("blog");
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+
+if (tag === undefined) {
+    throw new Error("Slug is required");
+}
+
+const filteredPosts = allBlogPosts.filter((post) =>
+    post.data.tags.includes(tag)
+);
+
+if (filteredPosts === undefined || filteredPosts.length == 0) {
+    return Astro.redirect("/404");
+}
 ---
 
 <BlogCollectionLayout title={tag}>
     <div class="content">
         <h1 class="tag">Tag: {tag}</h1>
         <ul class="post-archive">
-            {posts.map((post) => <Post post={post} />)}
+            {filteredPosts.map((post) => <Post post={post} />)}
         </ul>
     </div>
 </BlogCollectionLayout>
