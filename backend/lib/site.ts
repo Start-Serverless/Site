@@ -10,7 +10,6 @@ import * as path from "path";
 import { ICertificate } from "aws-cdk-lib/aws-certificatemanager";
 import { Bucket, BlockPublicAccess, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { GraphqlApi } from "aws-cdk-lib/aws-appsync";
-import { S3 } from "aws-cdk-lib/aws-ses-actions";
 
 export interface SiteStackProps extends StackProps {
     certificate?: ICertificate;
@@ -30,9 +29,7 @@ export class SiteStack extends Stack {
         const server = new Function(this, "SSRFunction", {
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
-            code: Code.fromAsset(
-                path.resolve("../frontend/dist/server/entry.mjs")
-            ),
+            code: Code.fromAsset(path.resolve("../frontend/dist/server/")),
             handler: "entry.handler",
         });
 
