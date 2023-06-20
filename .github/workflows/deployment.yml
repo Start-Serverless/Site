@@ -44,7 +44,9 @@ jobs:
         working-directory: ./frontend
 
       - name: Install SSR modules
-        run: cp -r ./node_modules/undici ./dist/server
+        run: mv ssrPackage.json ./dist/server/package.json
+        run: cd ./dist/server
+        run: npm i 
         working-directory: ./frontend
 
       - name: Install Node Packages
