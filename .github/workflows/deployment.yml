@@ -57,6 +57,7 @@ jobs:
                   cp -r node_modules/path-to-regexp  ./dist/server/node_modules
                   cp -r node_modules/string-width  ./dist/server/node_modules
                   cp -r node_modules/html-escaper  ./dist/server/node_modules
+                  cp -r node_modules/strip-ansi  ./dist/server/node_modules
               working-directory: ./frontend
 
             - name: Install Node Packages
