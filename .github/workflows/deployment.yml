@@ -45,9 +45,8 @@ jobs:
 
             - name: Install SSR modules
               run: |
-                  mv ssrPackage.json ./dist/server/package.json
-                  cd ./dist/server
-                  npm i
+                  mkdir ./dist/server/node_modules
+                  cp -r node_modules/undici  ./dist/server/node_modules
               working-directory: ./frontend
 
             - name: Install Node Packages
