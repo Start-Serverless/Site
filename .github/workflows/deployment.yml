@@ -48,6 +48,7 @@ jobs:
                   mkdir ./dist/server/node_modules
                   cp -r node_modules/undici  ./dist/server/node_modules
                   cp -r node_modules/send  ./dist/server/node_modules
+                  cp -r node_modules/server-destroy  ./dist/server/node_modules
               working-directory: ./frontend
 
             - name: Install Node Packages
