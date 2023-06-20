@@ -49,6 +49,13 @@ jobs:
                   cp -r node_modules/undici  ./dist/server/node_modules
                   cp -r node_modules/send  ./dist/server/node_modules
                   cp -r node_modules/server-destroy  ./dist/server/node_modules
+                  cp -r node_modules/mime  ./dist/server/node_modules
+                  cp -r node_modules/cookie  ./dist/server/node_modules
+                  cp -r node_modules/kleur  ./dist/server/node_modules
+                  cp -r node_modules/slash  ./dist/server/node_modules
+                  cp -r node_modules/path-to-regexp  ./dist/server/node_modules
+                  cp -r node_modules/tls  ./dist/server/node_modules
+                  cp -r node_modules/string-width  ./dist/server/node_modules
               working-directory: ./frontend
 
             - name: Install Node Packages
