@@ -44,9 +44,9 @@ jobs:
         working-directory: ./frontend
 
       - name: Install SSR modules
-        run: mv ssrPackage.json ./dist/server/package.json
-        run: cd ./dist/server
-        run: npm i 
+        - run: mv ssrPackage.json ./dist/server/package.json
+        - run: cd ./dist/server
+        - run: npm i 
         working-directory: ./frontend
 
       - name: Install Node Packages
