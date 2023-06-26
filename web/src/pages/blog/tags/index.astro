@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import BlogCollectionLayout from "../../../layouts/BlogCollectionLayout.astro";
+
+export const prerender = true;
+
+const allBlogPosts = await getCollection("blog");
+const tags = [...new Set(allBlogPosts.map((post) => post.data.tags).flat())];
+---
+
+<BlogCollectionLayout title="Tag Index">
+    <ul class="post-archive">
+        {
+            tags.map((tag) => (
+                <a class="tag-link" href={`/blog/tags/${tag}`}>
+                    <h2 class="tag">{tag}</h2>
+                </a>
+            ))
+        }
+    </ul>
+</BlogCollectionLayout>
+
+<style>
+    .post-archive {
+        max-width: 1000px;
+        list-style-type: none;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tag {
+        font-family: Electrolize, sans-serif;
+        color: #333;
+        text-transform: capitalize;
+    }
+
+    .tag-link {
+        text-decoration: none;
+    }
+
+    .tag:hover {
+        color: #00e399;
+    }
+</style>

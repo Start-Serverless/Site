@@ -37,53 +37,6 @@ jobs:
 
             - name: Install Node Packages
               run: npm i
-              working-directory: ./frontend
 
-            - name: Build Astro Site
-              run: npm run build
-              working-directory: ./frontend
-
-            - name: Install SSR modules
-              run: |
-                  mkdir ./dist/server/node_modules
-                  cp -r node_modules/undici  ./dist/server/node_modules
-                  cp -r node_modules/send  ./dist/server/node_modules
-                  cp -r node_modules/server-destroy  ./dist/server/node_modules
-                  cp -r node_modules/mime  ./dist/server/node_modules
-                  cp -r node_modules/cookie  ./dist/server/node_modules
-                  cp -r node_modules/kleur  ./dist/server/node_modules
-                  cp -r node_modules/@astrojs  ./dist/server/node_modules
-                  cp -r node_modules/slash  ./dist/server/node_modules
-                  cp -r node_modules/path-to-regexp  ./dist/server/node_modules
-                  cp -r node_modules/string-width  ./dist/server/node_modules
-                  cp -r node_modules/html-escaper  ./dist/server/node_modules
-                  cp -r node_modules/strip-ansi  ./dist/server/node_modules
-              working-directory: ./frontend
-
-            - name: Install Node Packages
-              run: npm i
-              working-directory: ./backend
-
-            - name: CDK Synth
-              uses: youyo/aws-cdk-github-actions@v2
-              with:
-                  cdk_subcommand: "synth"
-                  cdk_stack: "*"
-                  cdk_args: "--require-approval never --verbose"
-                  actions_comment: false
-                  debug_log: true
-                  working_dir: "backend"
-              env:
-                  STACK_BUILD_TARGET_ACCOUNT: prod
-
-            - name: CDK Deploy
-              uses: youyo/aws-cdk-github-actions@v2
-              with:
-                  cdk_subcommand: "deploy"
-                  cdk_stack: "*"
-                  cdk_args: "--require-approval never --verbose"
-                  actions_comment: false
-                  debug_log: true
-                  working_dir: "backend"
-              env:
-                  STACK_BUILD_TARGET_ACCOUNT: prod
+            - name: SST Deploy
+              run: npx sst deploy --stage prod

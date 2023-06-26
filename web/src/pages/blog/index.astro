@@ -1,0 +1,82 @@
+---
+
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Post from "../../components/Post.astro";
+
+export const prerender = true;
+const allBlogPosts = await getCollection("blog");
+---
+
+<Layout title="Blog">
+    <body>
+        <div class="hero">
+            <h1 class="heading">THINK / SERVERLESS</h1>
+        </div>
+        <div class="content">
+            <ul class="post-archive">
+                {allBlogPosts.map((post) => <Post post={post} />)}
+            </ul>
+        </div>
+    </body>
+</Layout>
+
+<style>
+    .hero {
+        display: flex;
+        padding-top: 110px;
+        padding-bottom: 110px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(45deg, #00d0b7, #00e399);
+    }
+
+    .heading {
+        font-family: Electrolize, sans-serif;
+        font-size: 54px;
+        text-align: center;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        background-color: #fff;
+    }
+
+    .post-archive {
+        max-width: 1000px;
+        list-style-type: none;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media screen and (max-width: 991px) {
+        .post-archive {
+            margin-top: 0px;
+            padding-top: 64px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .heading {
+            line-height: 70.2px;
+        }
+
+        .hero {
+            padding-left: 36px;
+            padding-right: 36px;
+        }
+    }
+
+    @media screen and (max-width: 479px) {
+        .heading {
+            font-size: 40px;
+            line-height: 52px;
+        }
+    }
+</style>
