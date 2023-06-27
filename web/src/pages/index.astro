@@ -1,0 +1,1126 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+import Hero from "../components/Hero.astro";
+import arrow from "../assets/arrow.svg";
+import atom from "../assets/atom.svg";
+import consulting from "../assets/consulting.svg";
+import development from "../assets/development.svg";
+import training from "../assets/training.svg";
+
+---
+
+<Layout title="START / SERVERLESS">
+    <main>
+        <div class="homepage">
+            <Hero mainImg={atom.src} backgroundImg={arrow.src}>
+                <h1 class="title" slot="header">
+                    Business Evolved <br /> Start Serverless
+                </h1>
+                <span class="hero-subline" slot="subline">
+                    Outpace your competitors with infinitely scalable,
+                    cost-effective and fast-to-market technology.
+                </span>
+            </Hero>
+            <!--  		#TODO MAKE SERVICE LIST INTO COMPONENTS-->
+            <div class="team-circles">
+                <div class="container-2">
+                    <div class="title-section">
+                        <div class="text-3">Services</div>
+                    </div>
+                    <div class="columns hero-content">
+                        <div class="card">
+                            <div class="image-wrapper-2">
+                                <div class="image-wrapper-2">
+                                    <img
+                                        src={consulting.src}
+                                        width="240"
+                                        height="241"
+                                        loading="lazy"
+                                        alt=""
+                                        class="graphic"
+                                    />
+                                </div>
+                            </div>
+                            <div class="content-2">
+                                <div class="info">
+                                    <div class="services-headings">
+                                        SERVERLESS CONSULTING
+                                    </div>
+                                </div>
+                                <div class="services-copy">
+                                    We specialize in business logic to maximize
+                                    your outcomes while transitioning to a
+                                    serverless environment.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper-2">
+                                <div class="image-2">
+                                    <div class="image-2">
+                                        <img
+                                            src={development.src}
+                                            loading="lazy"
+                                            width="240"
+                                            height="241"
+                                            alt=""
+                                            class="graphic"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-2">
+                                <div class="info">
+                                    <div class="services-headings">
+                                        DEVELOPMENT
+                                    </div>
+                                </div>
+                                <div class="services-copy">
+                                    We collaborate with your team to architect
+                                    the most effective framework using our
+                                    knowledge of best practices.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="image-wrapper-2">
+                                <img
+                                    src={training.src}
+                                    width="240"
+                                    height="241"
+                                    loading="lazy"
+                                    alt=""
+                                    class="graphic"
+                                />
+                            </div>
+                            <div class="content-2">
+                                <div class="info">
+                                    <div class="services-headings">
+                                        TRAINING
+                                    </div>
+                                </div>
+                                <div class="services-copy">
+                                    We provide continuing education
+                                    opportunities to expand the knowledge of
+                                    your development team.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="certification-section">
+                <div
+                    data-w-id="a6cf9e36-c6d2-81c8-38a1-ab8979f6a272"
+                    style="opacity:0"
+                    class="certification-wrapper"
+                >
+                    <img
+                        src="assets/5fd2f7751993484643b1f28f_aws-certified.png"
+                        loading="lazy"
+                        sizes="(max-width: 479px) 70vw, (max-width: 767px) 55vw, (max-width: 991px) 50vw, 20vw"
+                        srcset="assets/5fd2f7751993484643b1f28f_aws-certified-p-800.png 800w, assets/5fd2f7751993484643b1f28f_aws-certified.png 800w"
+                        alt=""
+                        class="certification"
+                    />
+                </div>
+            </div> -->
+            <Contact />
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .homepage {
+        display: flex;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        background-color: #181818;
+        -webkit-box-align: start;
+        -webkit-box-direction: normal;
+        -webkit-box-orient: vertical;
+        -webkit-box-pack: start;
+    }
+
+    .title {
+        margin: 0.67em 0;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        font-family: Electrolize, sans-serif;
+        color: #fff;
+        font-size: 51px;
+        line-height: 120.00000476837158%;
+        font-weight: 400;
+        letter-spacing: 0em;
+    }
+
+    .hero-subline {
+        font-family: Titillium Web, sans-serif;
+        color: #fff;
+        font-size: 24px;
+        line-height: 150%;
+        font-weight: 400;
+        letter-spacing: 0em;
+    }
+
+    .image-wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .image {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .team-circles {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        padding: 80px 24px 112px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 64px;
+        grid-row-gap: 64px;
+        background-color: #181818;
+    }
+
+    .container-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 64px;
+        grid-row-gap: 64px;
+    }
+
+    .title-section {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        max-width: 530px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .text-3 {
+        font-family: Electrolize, sans-serif;
+        color: #fff;
+        font-size: 32px;
+        line-height: 120.00000476837158%;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 0em;
+    }
+
+    .services-copy {
+        font-family: Titillium Web, sans-serif;
+        color: #fff;
+        font-size: 16px;
+        line-height: 150%;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 0em;
+    }
+
+    .columns {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 48px;
+        grid-row-gap: 48px;
+    }
+
+    .card {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+    }
+
+    .card.about {
+        grid-column-gap: 48px;
+        grid-row-gap: 48px;
+    }
+
+    .image-wrapper-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 270px;
+        max-width: none;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .content-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 70%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .content-2.about {
+        width: 80%;
+    }
+
+    .info {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .services-headings {
+        font-family: "Titillium Web", sans-serif;
+        color: #00e399;
+        font-size: 20px;
+        line-height: 150%;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 0em;
+    }
+
+    .description {
+        font-family: Titillium Web, sans-serif;
+        color: #00e399;
+        font-size: 18px;
+        line-height: 150%;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: undefinedundefined;
+    }
+
+    .image-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 220px;
+        max-width: undefined;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .frame-4 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        padding: 10px 150px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+
+    .frame-3 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+    }
+
+    .field {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+    }
+
+    .text-7 {
+        font-family: Titillium Web, sans-serif;
+        color: #fff;
+        font-size: 12px;
+        line-height: 139.9999976158142%;
+        font-weight: undefined;
+        letter-spacing: 0em;
+    }
+
+    .field-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        padding: 12px;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #303030;
+        background-color: #f5f7fa;
+    }
+
+    .text-8 {
+        font-family: Titillium Web, sans-serif;
+        color: #909090;
+        font-size: 18px;
+        line-height: 139.9999976158142%;
+        font-weight: undefined;
+        letter-spacing: 0em;
+    }
+
+    .actions-2 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding-top: 16px;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 auto;
+        -ms-flex: 0 auto;
+        flex: 0 auto;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .small-columns {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        padding-top: 16px;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 auto;
+        -ms-flex: 0 auto;
+        flex: 0 auto;
+        grid-column-gap: 64px;
+        grid-row-gap: 64px;
+    }
+
+    .column-4 {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+    }
+
+    .content-3 {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .text-10 {
+        font-family: Electrolize, sans-serif;
+        color: #fff;
+        font-size: 14px;
+        line-height: 150%;
+        font-weight: 400;
+        letter-spacing: 0em;
+    }
+
+    .footer-links {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+    }
+
+    .link {
+        font-family: "Titillium Web", sans-serif;
+        color: #b1b1b1;
+        font-size: 14px;
+        line-height: 150%;
+        font-weight: 400;
+        letter-spacing: 0em;
+        text-decoration: underline;
+    }
+
+    .content-4 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-suspendisse-varius-enim-in-eros-elementum-tristique-duis-cursus-mi-quis-viverra-ornare-eros-dolor-interdum-nulla-ut-commodo-diam-libero-vitae-erat-1 {
+        font-family: Titillium Web, sans-serif;
+        color: #fff;
+        font-size: 24px;
+        line-height: 150%;
+        font-weight: 700;
+        letter-spacing: 0em;
+    }
+
+    .body {
+        background-color: #181818;
+    }
+
+    .hero-img.about {
+        width: 66%;
+    }
+
+    .graphic {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 auto;
+        -ms-flex: 0 auto;
+        flex: 0 auto;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .text-block {
+        font-family: "Titillium Web", sans-serif;
+        color: #fff;
+    }
+
+    .success-message {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #00e399;
+        background-color: transparent;
+    }
+
+    .text-block-2 {
+        font-family: "Titillium Web", sans-serif;
+        text-align: center;
+    }
+
+    .error-message {
+        margin-top: 24px;
+        border-left: 5px solid #db0303;
+        background-color: #e6e6e6;
+    }
+
+    .certification-section {
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        margin-bottom: -30px;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 auto;
+        -ms-flex: 0 auto;
+        flex: 0 auto;
+    }
+
+    .certification-wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 20%;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 auto;
+        -ms-flex: 0 auto;
+        flex: 0 auto;
+        border-radius: 3px;
+        background-color: #00e399;
+        box-shadow: 0 20px 40px -20px #050505;
+    }
+
+    .div-block {
+        width: 40vw;
+        height: 120px;
+        background-color: #303030;
+        color: #b1b1b1;
+    }
+
+    .certification {
+        width: 100%;
+    }
+
+    .background-arrow {
+        position: absolute;
+        z-index: 0;
+        width: 33%;
+        max-height: none;
+        max-width: 100%;
+        margin-right: auto;
+        margin-left: 100px;
+    }
+
+    @media screen and (max-width: 991px) {
+        .team-circles {
+            padding-right: 88px;
+            padding-left: 88px;
+        }
+
+        .title-section {
+            width: 70%;
+        }
+
+        .content-2 {
+            width: 70%;
+        }
+
+        .content-2.about {
+            width: 80%;
+        }
+
+        .content-3 {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .footer-links {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .content-4 {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .hero-content {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            grid-column-gap: 56px;
+            grid-row-gap: 56px;
+        }
+
+        .hero-image-column {
+            width: 60%;
+        }
+
+        .hero-image-column.bg-arrow {
+            display: none;
+        }
+
+        .hero-image-column.bg-arrow.mobile {
+            display: flex;
+            -webkit-align-self: center;
+            -ms-flex-item-align: center;
+            align-self: center;
+            -webkit-box-flex: 0;
+            -webkit-flex: 0 auto;
+            -ms-flex: 0 auto;
+            flex: 0 auto;
+            /* background-image: url("/assets/Group-25-1.svg"); */
+        }
+
+        .hero-image-column.bg-arrow.mobile.about {
+            background-image: url("/assets/grid-bg.svg");
+        }
+
+        .hero-image-column.mobile {
+            display: block;
+            width: 70%;
+        }
+
+        .hero-img.about-mobile {
+            width: 70%;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .certification-section {
+            margin-bottom: -40px;
+        }
+
+        .certification-wrapper {
+            width: 50%;
+        }
+
+        .headshot-image {
+            max-width: none;
+        }
+
+        .icon {
+            color: #fff;
+        }
+
+        .blog-body {
+            margin-top: 0px;
+            padding-top: 64px;
+        }
+
+        .blog-body.post-page {
+            margin-top: -120px;
+            padding-top: 0px;
+        }
+
+        .blog-post {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: start;
+            -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            grid-column-gap: 20px;
+            grid-row-gap: 20px;
+        }
+
+        .keyword-tag-wrapper {
+            padding-left: 0px;
+        }
+
+        .blog-post-page-body {
+            padding-right: 72px;
+            padding-left: 72px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .team-circles {
+            padding: 85px 56px;
+        }
+
+        .content-2.about {
+            width: 90%;
+        }
+
+        .f2wf-small-columns {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .hero-image-column.bg-arrow.mobile {
+            width: 100%;
+            padding-right: 16px;
+            padding-left: 16px;
+            background-clip: padding-box;
+            -webkit-text-fill-color: inherit;
+        }
+
+        .form {
+            width: 100%;
+        }
+
+        .certification-section {
+            margin-bottom: -28px;
+        }
+
+        .certification-wrapper {
+            width: 55%;
+        }
+
+        .headshot-image {
+            max-width: none;
+        }
+
+        .blog-hero {
+            padding-right: 36px;
+            padding-left: 36px;
+        }
+
+        .heading {
+            line-height: 70.2px;
+        }
+
+        .blog-post-hdr-bg {
+            padding-right: 36px;
+            padding-left: 36px;
+        }
+
+        .blog-post-page-body {
+            margin-top: -180px;
+            padding-right: 48px;
+            padding-left: 48px;
+        }
+    }
+
+    @media screen and (max-width: 479px) {
+        .hero-subline {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 32px;
+            text-align: center;
+            width: 100%;
+            margin: 0;
+        }
+
+        .actions {
+            padding-top: 0px;
+        }
+
+        .team-circles {
+            padding-right: 16px;
+            padding-left: 16px;
+        }
+
+        .content-2.about {
+            width: 80%;
+        }
+
+        .hero-content.about {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+
+        .form {
+            width: 100%;
+        }
+
+        .certification-section {
+            margin-bottom: -22px;
+        }
+
+        .certification-wrapper {
+            width: 70%;
+        }
+
+        .headshot-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .heading {
+            font-size: 40px;
+            line-height: 52px;
+        }
+
+        .image-3 {
+            width: 90%;
+            height: auto;
+        }
+
+        .blog-post-page-body {
+            margin-top: -195px;
+            padding-right: 24px;
+            padding-left: 24px;
+        }
+    }
+</style>

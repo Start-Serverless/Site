@@ -1,0 +1,77 @@
+---
+import Post from "../../../components/Post.astro";
+import { getCollection, CollectionEntry } from "astro:content";
+import BlogCollectionLayout from "../../../layouts/BlogCollectionLayout.astro";
+
+export const prerender = true;
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+export async function getStaticPaths() {
+    const allBlogPosts = await getCollection("blog");
+    const uniqueAuthors = [
+        ...new Set(allBlogPosts.map((post) => post.data.authors).flat()),
+    ];
+
+    return uniqueAuthors.map((author) => {
+        const filteredPosts = allBlogPosts.filter((post) =>
+            post.data.authors.includes(author)
+        );
+        return {
+            params: { author },
+            props: { posts: filteredPosts },
+        };
+    });
+}
+
+const { author } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BlogCollectionLayout title={author}>
+    <div class="content">
+        <h1 class="tag">Author: {author}</h1>
+        <ul class="post-archive">
+            {posts.map((post) => <Post post={post} />)}
+        </ul>
+    </div>
+</BlogCollectionLayout>
+
+<style>
+    .content {
+        /* max-width: 1000px; */
+        padding-top: 64px;
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    h1.tag {
+        text-transform: capitalize;
+        padding-left: 40px;
+        display: inline;
+        font-family: Electrolize, sans-serif;
+        color: #333;
+    }
+
+    .post-archive {
+        align-self: center;
+        list-style-type: none;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media screen and (max-width: 991px) {
+        .post-archive {
+            margin-top: 0px;
+            padding-top: 64px;
+        }
+    }
+</style>

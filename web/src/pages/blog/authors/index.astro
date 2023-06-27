@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import BlogCollectionLayout from "../../../layouts/BlogCollectionLayout.astro";
+
+
+export const prerender = true;
+
+const allBlogPosts = await getCollection("blog");
+const authors = [...new Set(allBlogPosts.map((post) => post.data.authors).flat())];
+---
+
+<BlogCollectionLayout title="author Index">
+	<h3 class="">Authors</h3>
+    <ul class="post-archive">
+        {
+            authors.map((author) => (
+                <a class="tag-link" href={`/blog/authors/${author}`}>
+                    <h2 class="tag">{author}</h2>
+                </a>
+            ))
+        }
+    </ul>
+</BlogCollectionLayout>
+
+<style>
+    .post-archive {
+        max-width: 1000px;
+        list-style-type: none;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tag {
+        font-family: Electrolize, sans-serif;
+        color: #333;
+        text-transform: capitalize;
+    }
+
+    .tag-link {
+        text-decoration: none;
+    }
+
+    .tag:hover {
+        color: #00e399;
+    }
+</style>
