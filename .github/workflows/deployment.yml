@@ -37,6 +37,10 @@ jobs:
 
             - name: Install Node Packages
               run: npm i
+            - name: Install Astro Node Packages
+              run: |
+                  cd web/ && npm i \
+                  cd ..
 
             - name: SST Deploy
               run: npx sst deploy --stage prod
