@@ -10,7 +10,7 @@ export default {
         return {
             name: "start-serverless",
             region: "us-east-1",
-            profile: "prod",
+            profile: "dev",
         };
     },
     stacks(app) {

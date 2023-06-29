@@ -5,7 +5,7 @@ import {
     Values,
     AuthorizationType,
 } from "aws-cdk-lib/aws-appsync";
-import { Expiration, Duration } from "aws-cdk-lib/core";
+import { Expiration, Duration, Stage } from "aws-cdk-lib/core";
 import { StackContext, AppSyncApi, use } from "sst/constructs";
 import { StorageStack } from "./storage";
 import { DomainStack } from "./domain";
