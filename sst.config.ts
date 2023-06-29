@@ -10,11 +10,14 @@ export default {
         return {
             name: "start-serverless",
             region: "us-east-1",
+            profile: "dev",
         };
     },
     stacks(app) {
-        app.stack(DomainStack)
-            .stack(StorageStack)
+        if (app.stage == "prod") {
+            app.stack(DomainStack);
+        }
+        app.stack(StorageStack)
             .stack(AppsyncStack)
             .stack(SiteStack)
             .stack(ComputeStack);

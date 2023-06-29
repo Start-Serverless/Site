@@ -1,120 +1,96 @@
 ---
-import { Amplify, withSSRContext } from "aws-amplify";
-import { submitContact } from "../graphql/mutations";
-
-interface Props {
-    className?: string;
-}
-
-const { className } = Astro.props;
-
-Amplify.configure({
-    aws_appsync_graphqlEndpoint: "https://5y5iospmjrfyncachnrgvt2kqq.appsync-api.us-east-1.amazonaws.com/graphql",
-    aws_appsync_region: "us-east-1",
-    aws_appsync_apiKey: "da2-pymoy5krk5bv3m5zigrg76q6b4",
-    aws_appsync_authenticationType: "API_KEY",
-});
-
-enum FormStateType {
-    start = "START",
-    success = "SUCCESS",
-    fail = "FAIL",
-}
-
-let formState: FormStateType = FormStateType.start;
-if (Astro.request.method === "POST") {
-    try {
-        const SSR = withSSRContext();
-        const data = await Astro.request.formData();
-        const response = await SSR.API.graphql({
-            query: submitContact,
-            variables: {
-                input: {
-                    name: data.get("name"),
-                    phone: data.get("phone"),
-                    email: data.get("email"),
-                },
-            },
-        });
-        formState = FormStateType.success;
-    } catch (error) {
-        formState = FormStateType.fail;
-        console.log(JSON.stringify(error));
-    }
-}
 ---
 
-<div class:list={["section", className]}>
+<script>
+    function getQueryVariable(variable: string) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            console.log(pair);
+            if (decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return "start";
+    }
+
+    function setFormState(state: string) {
+        const form = document.querySelector(".w-form") as HTMLElement;
+        form.style.display = "none";
+        if (state == "success") {
+            const success = document.querySelector(".form-done") as HTMLElement;
+            console.log(success);
+            success.style.display = "flex";
+        } else if (state == "error") {
+            const error = document.querySelector(".form-fail") as HTMLElement;
+            console.log(error);
+            error.style.display = "flex";
+        }
+    }
+
+    window.onload = () => {
+        const state = getQueryVariable("state");
+        if (state == "start") {
+            return;
+        }
+        setFormState(state);
+        console.log(state);
+    };
+</script>
+<div class="section">
     <div id="contact-form" class="contact-form">
         <div class="title">LET&#x27;S TALK!</div>
-
-        {
-            formState === FormStateType.fail ? (
-                <div class="w-form-fail">
-                    <div class="text-block-2">
-                        Oops! Something went wrong while submitting the form.
-                        Please try again.
-                    </div>
-                </div>
-            ) : null
-        }
-        {
-            formState === FormStateType.success ? (
-                <div class="w-form-done">
-                    <div class="text-block">
-                        Thank you! We&#x27;ll be in touch soon.
-                    </div>
-                </div>
-            ) : (
-                <div class="w-form">
-                    <form method="POST" class="form">
-                        <label for="name" class="field-label">
-                            {" "}
-                            Name
-                        </label>
-                        <input
-                            type="text"
-                            class="text-field name w-input"
-                            maxlength="20"
-                            name="name"
-                            placeholder="Enter your full name"
-                            id="name"
-                            required
-                        />
-                        <label for="email" class="field-label">
-                            {" "}
-                            Email address
-                        </label>
-                        <input
-                            type="email"
-                            class="text-field email w-input"
-                            name="email"
-                            placeholder="Enter your email address"
-                            id="email"
-                            required
-                        />
-                        <label for="phone" class="field-label">
-                            Phone number
-                        </label>
-                        <input
-                            type="tel"
-                            class="text-field phone w-input"
-                            maxlength="10"
-                            name="phone"
-                            placeholder="Enter your phone number"
-                            id="phone"
-                            required
-                        />
-                        <input
-                            type="submit"
-                            value="// REACH OUT"
-                            data-wait="Please wait..."
-                            class="button reach-out w-button"
-                        />
-                    </form>
-                </div>
-            )
-        }
+        <div class="form-fail">
+            <div class="text-block-2">
+                Oops! Something went wrong while submitting the form. Please try
+                again.
+            </div>
+        </div>
+        <div class="form-done">
+            <div class="text-block">
+                Thank you! We&#x27;ll be in touch soon.
+            </div>
+        </div>
+        <div class="w-form">
+            <form action="/api/submitContact" method="POST" class="form">
+                <label for="name" class="field-label"> Name</label>
+                <input
+                    type="text"
+                    class="text-field name w-input"
+                    maxlength="20"
+                    name="name"
+                    placeholder="Enter your full name"
+                    id="name"
+                    required
+                />
+                <label for="email" class="field-label"> Email address</label>
+                <input
+                    type="email"
+                    class="text-field email w-input"
+                    name="email"
+                    placeholder="Enter your email address"
+                    id="email"
+                    required
+                />
+                <label for="phone" class="field-label"> Phone number</label>
+                <input
+                    type="tel"
+                    class="text-field phone w-input"
+                    maxlength="10"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    id="phone"
+                    required
+                />
+                <input
+                    type="submit"
+                    value="// REACH OUT"
+                    data-wait="Please wait..."
+                    class="button reach-out w-button"
+                />
+            </form>
+        </div>
     </div>
 </div>
 
@@ -180,17 +156,19 @@ if (Astro.request.method === "POST") {
         width: 85%;
     }
 
-    .w-form-done {
-        display: flex;
+    .form-done {
+        /* display: flex; */
+        display: none;
         padding: 20px;
         text-align: center;
         border: 1px solid #00e399;
         color: #fff;
     }
 
-    .w-form-fail {
+    .form-fail {
+        /* display: flex; */
+        display: none;
         border-left: 5px solid #db0303;
-        display: flex;
         padding: 10px;
         background-color: #e6e6e6;
     }
