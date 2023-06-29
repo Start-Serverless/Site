@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import aws from "astro-sst/lambda"
 
 export default defineConfig({
-	output: "server",
+	output: "hybrid",
 	adapter: aws(),
 	experimental: {
 		assets: true

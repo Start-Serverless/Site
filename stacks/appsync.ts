@@ -10,9 +10,10 @@ import { StackContext, AppSyncApi, use } from "sst/constructs";
 import { StorageStack } from "./storage";
 import { DomainStack } from "./domain";
 
-export function AppsyncStack({ stack }: StackContext) {
+export function AppsyncStack({ app, stack }: StackContext) {
     const table = use(StorageStack);
-    const { certificate } = use(DomainStack);
+    const { certificate } =
+        app.stage == "prod" ? use(DomainStack) : { certificate: undefined };
 
     const api = new AppSyncApi(stack, "WebsiteAPI", {
         schema: "packages/functions/src/graphql/schema.graphql",
@@ -26,10 +27,13 @@ export function AppsyncStack({ stack }: StackContext) {
                         },
                     },
                 },
-                domainName: {
-                    certificate: certificate,
-                    domainName: "api.startserverless.dev",
-                },
+                domainName:
+                    stack.stage == "prod"
+                        ? {
+                              certificate: certificate!,
+                              domainName: "api.startserverless.dev",
+                          }
+                        : undefined,
             },
         },
         dataSources: {
