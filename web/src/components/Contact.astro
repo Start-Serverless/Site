@@ -16,9 +16,9 @@
     }
 
     function setFormState(state: string) {
-        const form = document.querySelector(".w-form") as HTMLElement;
-        form.style.display = "none";
         if (state == "success") {
+            const form = document.querySelector(".w-form") as HTMLElement;
+            form.style.display = "none";
             const success = document.querySelector(".form-done") as HTMLElement;
             console.log(success);
             success.style.display = "flex";
