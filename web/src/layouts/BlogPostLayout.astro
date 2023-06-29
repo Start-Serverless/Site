@@ -11,6 +11,7 @@ interface Props {
 const { frontmatter } = Astro.props;
 const { tags } = frontmatter.data;
 const { authors } = frontmatter.data;
+const { publishDate } = frontmatter.data;
 const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
 ---
 
@@ -33,44 +34,57 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
             <div class="background-image" style={backgroundImg}></div>
             <h1 class="title">{frontmatter.data.title}</h1>
             <div class="metadata">
-                <div class="author label">AUTHOR/</div>
-                <ul class="tag-list">
-                    {
-                        authors.map((author) => {
-                            return (
-                                <li class="author">
-                                    <a
-                                        class="author author-link"
-                                        href={`/blog/authors/${author}/index.html`}
-                                    >
-                                        {authors[authors.length - 1] == author
-                                            ? `${author}`
-                                            : `${author},`}
-                                    </a>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-                <div class="tags label">TAGS/</div>
-                <ul class="tag-list">
-                    {
-                        tags.map((tag) => {
-                            return (
-                                <li class="tags">
-                                    <a
-                                        class="tags tag-link"
-                                        href={`/blog/tags/${tag}/index.html`}
-                                    >
-                                        {tags[tags.length - 1] == tag
-                                            ? `${tag}`
-                                            : ` ${tag},`}
-                                    </a>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
+                <div class="row">
+                    <div class="col">
+                        <div class="author label">AUTHOR/</div>
+                        <ul class="tag-list">
+                            {
+                                authors.map((author) => {
+                                    return (
+                                        <li class="author">
+                                            <a
+                                                class="author author-link"
+                                                href={`/blog/authors/${author}/index.html`}
+                                            >
+                                                {authors[authors.length - 1] ==
+                                                author
+                                                    ? `${author}`
+                                                    : `${author},`}
+                                            </a>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="tags label">DATE/</div>
+                        <ul class="tag-list">
+                            {publishDate.toDateString()}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tags label">TAGS/</div>
+                    <ul class="tag-list">
+                        {
+                            tags.map((tag) => {
+                                return (
+                                    <li class="tags">
+                                        <a
+                                            class="tags tag-link"
+                                            href={`/blog/tags/${tag}/index.html`}
+                                        >
+                                            {tags[tags.length - 1] == tag
+                                                ? `${tag}`
+                                                : ` ${tag},`}
+                                        </a>
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="content">
@@ -132,10 +146,10 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         margin-top: 0px;
         margin-right: auto;
         margin-left: auto;
-        flex-direction: row;
-        align-items: center;
+        flex-direction: column;
+        /* align-items: center; */
         grid-column-gap: 24px;
-        grid-row-gap: 24px;
+        grid-row-gap: 4px;
         border-bottom: 1px solid #e0e0e0;
     }
 
@@ -143,6 +157,7 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         list-style: none;
         display: flex;
         padding: 0;
+        margin-top: 0;
     }
 
     .label {
@@ -152,9 +167,18 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         justify-items: left;
     }
 
+    .col {
+        flex: 1;
+        display: flex;
+        column-gap: 5px;
+    }
+
+    .row {
+        display: flex;
+    }
+
     .tags ul,
     .tags li {
-        margin: 0;
         padding: 0;
     }
 
@@ -244,13 +268,6 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
     }
 
     @media screen and (max-width: 967px) {
-        .metadata {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            grid-row-gap: 4px;
-        }
-
         .content {
             padding-left: 24px;
             padding-right: 24px;

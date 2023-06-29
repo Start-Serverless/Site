@@ -19,16 +19,20 @@ export async function getStaticPaths() {
         const filteredPosts = allBlogPosts.filter((post) =>
             post.data.tags.includes(tag)
         );
+
+        const sortedPosts = filteredPosts.sort((a, b) => {
+            return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+        });
+
         return {
             params: { tag },
-            props: { posts: filteredPosts },
+            props: { posts: sortedPosts },
         };
     });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-
 ---
 
 <BlogCollectionLayout title={tag}>

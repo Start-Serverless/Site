@@ -5,7 +5,7 @@ description: Learn how to build static Astro sties with SST on AWS
 tags: [Astro, AWS, SST, Typescript, Web Development, Front End]
 publishDate: 2023-06-28
 image: "/src/assets/static-astro-sst.jpg"
-draft: false
+draft: false 
 ---
 ### Overview
 

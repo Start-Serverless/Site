@@ -19,6 +19,10 @@ export async function getStaticPaths() {
         const filteredPosts = allBlogPosts.filter((post) =>
             post.data.authors.includes(author)
         );
+
+        const sortedPosts = filteredPosts.sort((a, b) => {
+            return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+        });
         return {
             params: { author },
             props: { posts: filteredPosts },
