@@ -188,6 +188,16 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         font-weight: bold;
     }
 
+    a {
+        text-decoration: underline;
+        color: #333;
+    }
+
+    a:hover {
+        color: #00e399;
+        font-weight: bold;
+    }
+
     .content {
         font-family: "Titillium Web", sans-serif;
         max-width: 1000px;
@@ -198,6 +208,10 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
 
     .content > p {
         font-size: 16px;
+    }
+
+    .content > ul {
+        font-size: 15px;
     }
 
     h1.title {
@@ -224,7 +238,7 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         margin-top: 20px;
     }
 
-    @media screen and (max-width: 490px) {
+    @media screen and (max-width: 767px) {
         .metadata {
             display: flex;
             flex-direction: column;
