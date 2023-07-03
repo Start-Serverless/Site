@@ -13,14 +13,10 @@ Being able to jump-start your web development seems to be a core focus for the A
 
 In this post we are going to start with SST drop-in mode, and show how to modify for a static site.
 
-
-
+You can find the source code [here](https://github.com/Start-Serverless/AstroSST)
 ### Prerequisites
  
  Verify that you have these  prerequisites from the [SST docs for Astro](https://docs.sst.dev/start/astro#prerequisites) which require at least Node.js 16 and npm 7 and your AWS credentials configured locally.
-
-
-
  ### Setup
 
 First we are going to build our Astro project by using the `npx create-astro@latest` command.   
@@ -80,12 +76,7 @@ export default defineConfig({
 - adapter: aws(),
 })
 ```
-
-
-
-Now, in our `sst.config.ts` we are going change our AstroSite import to StaticSite, add our AWS profile which in this case is 'dev', and finally add props to our StaticSite construct which tell it where to find our website after it is built.  If for some reason your `astro.config.mjs` has a different build output specified you would need the StaticSite buildOutput to match that.
-
-Now we are going to switch the SST Constructions from AstroSite to StaticSite.  AstroSite is intended for server-side functionality. 
+Now we are going to switch the SST Constructions from AstroSite to StaticSite, and add our AWS profile 
 
 `sst.config.ts`
 ```diff
