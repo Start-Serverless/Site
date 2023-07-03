@@ -13,7 +13,7 @@ Being able to jump-start your web development seems to be a core focus for the A
 
 In this post we are going to start with SST drop-in mode, and show how to modify for a static site.
 
-You can find the source code [here](https://github.com/Start-Serverless/AstroSST)
+[Here is the source code ](https://github.com/Start-Serverless/AstroSST)
 ### Prerequisites
  
  Verify that you have these  prerequisites from the [SST docs for Astro](https://docs.sst.dev/start/astro#prerequisites) which require at least Node.js 16 and npm 7 and your AWS credentials configured locally.
