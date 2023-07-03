@@ -25,7 +25,7 @@ In this post we are going to start with SST drop-in mode, and show how to modify
 
 First we are going to build our Astro project by using the `npx create-astro@latest` command.   
 
-Follow the prompts with whaeve
+Pick your preferences on the cli prompts.  For this post our project is called "static-project".
 
 The fastest way to get started with SST is to use their [drop in mode](https://docs.sst.dev/what-is-sst#drop-in-mode).  This will allow SST to quickly detect that we have an Astro project, and setup initial configuration for us.  We can add SST by running `npx create-sst`
 
