@@ -1,17 +1,20 @@
 ---
-title: How to Build Static  Astro Sites with SST on AWS
+title: How to Build  Hybrid Astro Sites with SST on AWS
 authors: ["Trevor Cohen"]
-description: Learn how to build static Astro sties with SST on AWS
+description: Deploying websites and web applications to AWS can be challenging and SST helps with that.  
 tags: [Astro, AWS, SST, Typescript, Web Development, Front End]
 publishDate: 2023-06-28
-image: "/src/assets/static-astro-sst.jpg"
-draft: false
+image: "/src/assets/hybrid_astro_site_with_sst.jpg"
+draft: true
 ---
+
+### Introduction
+
 ### Overview
 
 Being able to jump-start your web development seems to be a core focus for the AWS framework SST allowing you to quickly build and deploy various web frameworks as well as the AWS infrastructure to support them.
 
-In this post we are going to start with SST drop-in mode, and show how to modify for a static site.
+In this post we are going to start with SST drop-in mode, and show how to modify for a hybrid site.
 
 [Here is the source code ](https://github.com/Start-Serverless/AstroSST)
 ### Prerequisites
@@ -21,7 +24,7 @@ In this post we are going to start with SST drop-in mode, and show how to modify
 
 First we are going to build our Astro project by using the `npx create-astro@latest` command.   
 
-Pick your preferences on the cli prompts.  For this post our project is called "static-project".
+Pick your preferences on the cli prompts.  For this post our project is called "hybrid-project".
 
 The fastest way to get started with SST is to use their [drop in mode](https://docs.sst.dev/what-is-sst#drop-in-mode).  This will allow SST to quickly detect that we have an Astro project, and setup initial configuration for us.  We can add SST by running `npx create-sst`
 
@@ -35,7 +38,7 @@ import { AstroSite } from "sst/constructs";
 export default {
   config(_input) {
     return {
-      name: "static-project",
+      name: "hbyrid-project",
       region: "us-east-1",
     };
   },
@@ -62,49 +65,55 @@ export default defineConfig({
 	adapter: aws(),
 })
 ```
-### Static Astro Site with SST
-Next, we are going to remove the server-side adapter to restore Astro to it's defaults static mode.  To switch our Astro project from  server mode to static mode we need to edit our `astro.config.mjs` file. 
 
 
-`astro.config.mjs`
-```diff
-import { defineConfig } from "astro/config";
-- import aws from "astro-sst/lambda";
+Now that we have our SST and Astro setup, we can now an HTML form in our `./src/pages/index.astro` we are going to have our from submit a POST request which will be received by our server
+```astro
+---
+import Layout from "../layouts/Layout.astro";
+---
 
-export default defineConfig({
-- output: "server",
-- adapter: aws(),
-})
+<Layout title="Welcome to Astro.">
+  <main>
+    <body>
+      <header>
+        <h1>Hybrid Sites with Astro and SST</h1>
+      </header>
+    </body>
+    <main>
+      <h2>Contact Us</h2>
+      <form method="POST">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your Name"
+          required
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Your Message"
+          required></textarea>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+
+    <footer>&copy; 2023 Your Blog Name. All rights reserved.</footer>
+  </main>
+</Layout>
 ```
-Now we are going to switch the SST Constructs from AstroSite to StaticSite, and add our AWS profile 
-
-`sst.config.ts`
-```diff
-import type { SSTConfig } from "sst";
-- import { AstroSite } from "sst/constructs";
-+ import { StaticSite } from "sst/constructs";
-
-export default {
-  config(_input) {
-    return {
-      name: "astro-static-sst",
-      region: "us-east-1",
-+     profile: "dev",
-    };
-  },
-  stacks(app) {
-    app.stack(function Site({ stack }) {
--   const site = new AstroSite(stack, "site");
-+   const site = new StaticSite(stack, "site", {
-+      buildOutput: "dist",
-+   });
-      stack.addOutputs({
-        url: site.url,
-      });
-    });
-  },
-} satisfies SSTConfig;
-```
-
-Just run `npx sst deploy --stage dev` to deploy this app to your AWS account, and now you have a static Astro site. 
-
