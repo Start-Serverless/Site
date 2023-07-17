@@ -9,7 +9,7 @@ draft: false
 ---
 ### Overview
 
-Being able to jump-start your web development seems to be a core focus for the AWS framework SST allowing you to quickly build and deploy various web frameworks as well as the AWS infrastructure to support them.
+Being able to jump-start your web development seems to be a core focus for the AWS framework SST, and allowing you to quickly build and deploy various web frameworks as well as the AWS infrastructure to support them.
 
 In this post we are going to start with SST drop-in mode, and show how to modify for a static site.
 
@@ -76,7 +76,7 @@ export default defineConfig({
 - adapter: aws(),
 })
 ```
-Now we are going to switch the SST Constructions from AstroSite to StaticSite, and add our AWS profile 
+Now we are going to switch the SST Constructs from AstroSite to StaticSite, and add our AWS profile 
 
 `sst.config.ts`
 ```diff
