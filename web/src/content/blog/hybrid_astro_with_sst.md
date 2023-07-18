@@ -3,38 +3,24 @@ title: How to Build  Hybrid Astro Sites with SST on AWS
 authors: ["Trevor Cohen"]
 description: Deploying websites and web applications to AWS can be challenging and SST helps with that.  
 tags: [Astro, AWS, SST, Typescript, Web Development, Front End]
-publishDate: 2023-06-28
+publishDate: 2023-07-18
 image: "/src/assets/hybrid_astro_site_with_sst.jpg"
-<<<<<<< HEAD
 draft: false
-=======
-draft: true
->>>>>>> 1ec8524aa66f0ede3edda69d797f1fb9e7e9a28c
 ---
 
 ### Introduction
 Astro recently released their [hybrid rendering](https://astro.build/blog/hybrid-rendering/) mode which will allow you to statically generate web-pages for fast-performance while also allowing you to opt-in to server-side functionality for server-side rendered pages, or server-side endpoints.  
 
-<<<<<<< HEAD
 [SST](https://docs.sst.dev/what-is-sst) is a framework for for building full-stack serverless applications on AWS
 
 ### Overview
 
 We are going to demonstrate from scratch how to create an Astro project, convert it to hybrid mode, and deploy it with SST.  We will have our 2 pages `/index` and `/contact` statically rendered while allowing a form submission on the `/contact` page to POST to a server-side endpoint with no client-side JavaScript.  Once the endpoint is called, the server will return a redirect back to our index page.
-=======
-### Overview
-
-We are going to demonstrate from scratch how to create an Astro project, convert it to hybrid mode, and deploy it with SST.  We will have our 2 pages `/index` and `/contact` statically rendered while allowing a form submission on the `/contact` page to POST to a server-side endpoint with no client-side JavaScript.  Once the endpoint is called the endpoint will return a redirect back to our index.
->>>>>>> 1ec8524aa66f0ede3edda69d797f1fb9e7e9a28c
 
 [Here is the source code ](https://github.com/Start-Serverless/AstroSST)
 ### Prerequisites
  
-<<<<<<< HEAD
  Before getting started, please verify that you have the following prerequisites from  [SST docs for Astro](https://docs.sst.dev/start/astro#prerequisites)
-=======
- Before getting started, plese verify that you have the following prerequisites from  [SST docs for Astro](https://docs.sst.dev/start/astro#prerequisites)
->>>>>>> 1ec8524aa66f0ede3edda69d797f1fb9e7e9a28c
 
  * Node.js 16 or higher
  * npm 7 or higher
@@ -44,11 +30,7 @@ We are going to demonstrate from scratch how to create an Astro project, convert
 
 First we are going to build our Astro project by using the `npx create-astro@latest` command.   
 
-<<<<<<< HEAD
 Pick your preferences on the cli prompts. We are using the layout template generated from the CLI.  For this post our project is called "hybrid-project".
-=======
-Pick your preferences on the cli prompts.  For this post our project is called "hybrid-project".
->>>>>>> 1ec8524aa66f0ede3edda69d797f1fb9e7e9a28c
 
 The fastest way to get started with SST is to use their [drop in mode](https://docs.sst.dev/what-is-sst#drop-in-mode).  This will allow SST to quickly detect that we have an Astro project, and setup initial configuration for us.  We can add SST by running `npx create-sst`
 
@@ -240,7 +222,6 @@ The `export const prerender = false;` line is critical since without it  this en
 
 ### Fix the Static Routes
 
-<<<<<<< HEAD
 Since SST doesn't currently support Astro's hybrid mode we need to make some brute force adjustments to fix our routing.  Cloudfront which is what SST is deploying our site to, does not support [multi-page routing](https://docs.astro.build/en/guides/deploy/aws/#cloudfront-functions-setup).  SST makes the Astro server function the default behavior for our Cloudfront routes which leaves us 3 options.
 
 - Make a cloudfront  index function the default behavior
@@ -252,19 +233,6 @@ We cannot do the first option as this would overwrite, and disconnect the SST x 
 So we are going to go with appending `index.html` to our routes in HTML since it's the simplest solution.
 
 `./src/pages/index.astro`
-=======
-Since SST doesn't currently support Astro's hybrid mode we need to make some brute force adjustments to fix our routing.  Cloudfront which is what SST is deploying our site to does not support [multi-page routing](https://docs.astro.build/en/guides/deploy/aws/#cloudfront-functions-setup).  SST makes the Astro server function the default behavior for our Cloudfront routes which leaves us 3 options.
-
-- Make our cloudfront  index function the default behavior
-- Add the index function as additional behavior for the specific routes
-- Edit our webpage routes to append `index.html`
-
-We cannot do the first option as this would overwrite the SST x Astro backend server that our endpoint would be on.  We can add an index function to each of the routes specifically through cloudfront additional behavior, but that seems like more effort than what it's worth.
-
-So we are going to go with appending `index.html` to our routes in HTML.
-
-`index.astro`
->>>>>>> 1ec8524aa66f0ede3edda69d797f1fb9e7e9a28c
 ```diff
 <Layout title="">
   <header>
