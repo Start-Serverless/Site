@@ -30,7 +30,9 @@ We are going to demonstrate from scratch how to create an Astro project, convert
 
 First we are going to build our Astro project by using the `npx create-astro@latest` command.   
 
+
 Pick your preferences on the cli prompts. We are using the layout template generated from the CLI.  For this post our project is called "hybrid-project".
+
 
 The fastest way to get started with SST is to use their [drop in mode](https://docs.sst.dev/what-is-sst#drop-in-mode).  This will allow SST to quickly detect that we have an Astro project, and setup initial configuration for us.  We can add SST by running `npx create-sst`
 
