@@ -295,14 +295,6 @@ export default {
     });
   },
 } satisfies SSTConfig;
-
-const site = new AstroSite(stack, "site", {
-        cdk: {
-          distribution: {
-            defaultRootObject: "index.html",
-          },
-        },
-      });
 ```
 
 
