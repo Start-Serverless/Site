@@ -5,7 +5,7 @@ description:  Learn how to deploy the HuggingFace Falco-07B model to AWS using S
 tags: [ AWS, CDK, Typescript, Sagemaker, Machine Learning, HuggingFace]
 publishDate: 2023-09-18
 image: "/src/assets/hybrid_astro_site_with_sst.jpg"
-draft: true
+draft: false
 ---
 
 ### Overview
