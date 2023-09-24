@@ -59,9 +59,9 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
                     </div>
                     <div class="col">
                         <div class="tags label">DATE/</div>
-                        <ul class="tag-list">
+                        <div class="tag-list author">
                             {publishDate.toDateString()}
-                        </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -142,12 +142,10 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
 
     .metadata {
         display: flex;
-        /* height: 72px; */
         margin-top: 0px;
         margin-right: auto;
         margin-left: auto;
         flex-direction: column;
-        /* align-items: center; */
         grid-column-gap: 24px;
         grid-row-gap: 4px;
         border-bottom: 1px solid #e0e0e0;
