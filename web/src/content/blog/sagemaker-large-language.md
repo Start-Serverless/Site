@@ -95,3 +95,24 @@ const model = new sagemaker.Model(this, "FalconModel", {
 ### Creating the Inference Endpoint
 
 
+```ts
+    const sagemakerEndpointConfig = new sagemaker.EndpointConfig(
+      this,
+      "Config",
+      {
+        instanceProductionVariants: [
+          {
+            model: model,
+            variantName: "main",
+            instanceType: new sagemaker.InstanceType("ml.g5.2xlarge"),
+            initialInstanceCount: 1,
+            initialVariantWeight: 1.0,
+          },
+        ],
+      }
+    );
+
+    const endpoint = new sagemaker.Endpoint(this, "MLFalconEndpoint", {
+      endpointConfig: sagemakerEndpointConfig,
+    });
+```
