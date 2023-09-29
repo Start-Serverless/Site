@@ -2,7 +2,7 @@
 title: How to Deploy Large Language Models on AWS Using TypeScript and CDK
 authors: ["Trevor Cohen"]
 description:  Learn how to deploy the HuggingFace Falco-07B model to AWS using Sagemaker, CDK, and Typescript 
-tags: [ AWS, CDK, Typescript, Sagemaker, Machine Learning, HuggingFace]
+tags: [ AWS, CDK, Typescript, Sagemaker, Machine Learning, HuggingFace, Bedrock]
 publishDate: 2023-09-18
 image: "/src/assets/sagemaker.jpg"
 draft: true
@@ -55,20 +55,23 @@ We can define our `./bin/sagemaker-stack.ts` file to look like this.
 ```ts
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
-import * as sagemaker from "@aws-cdk/aws-sagemaker-alpha";
+import {
+  ContainerImage,
+  Model,
+  EndpointConfig,
+  Endpoint,
+  InstanceType,
+} from "@aws-cdk/aws-sagemaker-alpha";
 
 export class SagemakerStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-   const tgiVersion = "1.0.3";
-   const pytorchVersion = "2.0.1";
-   const repositoryName = "huggingface-pytorch-tgi-inference";
-   const tag = `${pytorchVersion}-tgi${tgiVersion}-gpu-py39-cu118-ubuntu20.04`;
-   const containerImage = sagemaker.ContainerImage.fromDlc(
-     repositoryName,
-     tag
-    );
+    const tgiVersion = "1.0.3";
+    const pytorchVersion = "2.0.1";
+    const repositoryName = "huggingface-pytorch-tgi-inference";
+    const tag = `${pytorchVersion}-tgi${tgiVersion}-gpu-py39-cu118-ubuntu20.04`;
+    const containerImage = ContainerImage.fromDlc(repositoryName, tag);
   }
 }
 ```
@@ -78,41 +81,54 @@ export class SagemakerStack extends cdk.Stack {
 Now that we have a container we can define a Sagemaker model where we can specify our environment variables for the container which contain the name of the HuggingFace model, and the number of GPUs we we are dedicating to the model.
 
 ```ts
-const model = new sagemaker.Model(this, "FalconModel", {
-	containers: [
-		{
-			image: containerImage,
-			environment: {
-				HF_MODEL_ID: "tiiuae/falcon-7b",
-				SM_NUM_GPUS: "1",
-			},
-		},
-	],
-	modelName: "FalconMLSummary",
-});
+    const model = new Model(this, "FalconModel", {
+      containers: [
+        {
+          image: containerImage,
+          environment: {
+            HF_MODEL_ID: "tiiuae/falcon-7b-instruct",
+            SM_NUM_GPUS: "1",
+          },
+        },
+      ],
+    });
 ```
 
 ### Creating the Inference Endpoint
 
+To define our inference endpoint we will need to specify a [production variant](https://docs.aws.amazon.com/cdk/api/v2/docs/@aws-cdk_aws-sagemaker-alpha.InstanceProductionVariantProps.html) of our model.  Once we have the endpoint configured we can then create an output for the endpoint name. This will allow us to easily grab the name from our terminal after our deployment
 
 ```ts
-    const sagemakerEndpointConfig = new sagemaker.EndpointConfig(
-      this,
-      "Config",
-      {
-        instanceProductionVariants: [
-          {
-            model: model,
-            variantName: "main",
-            instanceType: new sagemaker.InstanceType("ml.g5.2xlarge"),
-            initialInstanceCount: 1,
-            initialVariantWeight: 1.0,
-          },
-        ],
-      }
-    );
-
-    const endpoint = new sagemaker.Endpoint(this, "MLFalconEndpoint", {
-      endpointConfig: sagemakerEndpointConfig,
+const sagemakerEndpointConfig = new EndpointConfig(this, "Config", {
+      instanceProductionVariants: [
+        {
+          model: model,
+          variantName: "main",
+          instanceType: new InstanceType("ml.g5.2xlarge"),
+          initialInstanceCount: 1,
+          initialVariantWeight: 1.0,
+        },
+      ],
     });
+
+    const endpoint = new Endpoint(this, "MLFalconEndpoint", {
+      endpointConfig: endpointConfig,
+    });
+
+    new CfnOutput(this, "Endpoint", {
+      value: endpoint.endpointName,
+    });
+```
+
+### Invoking the Endpoint
+
+
+```
+aws sagemaker-runtime invoke-endpoint \
+  --endpoint-name MLFalconEndpoint87C4931B-LEmUUa40DfPi \
+  --body fileb://input.json \
+  --content-type application/json \
+  --accept application/json \
+   --profile dev \
+ output.txt
 ```
