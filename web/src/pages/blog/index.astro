@@ -54,8 +54,7 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
     .post-archive {
         max-width: 1000px;
         list-style-type: none;
-        padding-top: 64px;
-        padding-bottom: 64px;
+        padding: 64px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -63,7 +62,6 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
     @media screen and (max-width: 991px) {
         .post-archive {
             margin-top: 0px;
-            padding-top: 64px;
         }
     }
 
@@ -79,9 +77,17 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
     }
 
     @media screen and (max-width: 479px) {
+        .hero {
+            padding-top: 55px;
+            padding-bottom: 55px;
+        }
+
         .heading {
             font-size: 40px;
             line-height: 52px;
+        }
+        .post-archive {
+            padding: 40px;
         }
     }
 </style>

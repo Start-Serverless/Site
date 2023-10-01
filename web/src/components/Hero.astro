@@ -63,7 +63,9 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
     }
     .hero-img {
-        transition: transform 1000ms ease, -webkit-transform 1000ms ease;
+        transition:
+            transform 1000ms ease,
+            -webkit-transform 1000ms ease;
         animation: 1.5s ease-in-out 0s 1 fadeIn;
     }
 
@@ -77,9 +79,7 @@ const backgroundSrc = `url(${backgroundImg})`;
         display: flex;
         width: 100%;
         padding: 124px 24px;
-        -webkit-box-pack: center;
         justify-content: center;
-        -webkit-box-align: start;
         grid-column-gap: 80px;
         grid-row-gap: 80px;
         background-image: linear-gradient(
@@ -103,10 +103,7 @@ const backgroundSrc = `url(${backgroundImg})`;
         display: flex;
         width: 100%;
         max-width: 1200px;
-        -webkit-box-pack: start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
-        -webkit-align-items: center;
         align-items: center;
         padding-right: 0px;
         padding-left: 0px;
@@ -117,29 +114,16 @@ const backgroundSrc = `url(${backgroundImg})`;
     .hero-text-column {
         display: flex;
         width: 100%;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
         flex-direction: column;
-        -webkit-box-pack: start;
         justify-content: flex-start;
-        -webkit-box-align: start;
         align-items: flex-start;
         grid-column-gap: 16px;
     }
 
     .hero-image-column {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         width: 100%;
-        -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
-        -webkit-box-align: start;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
         align-items: flex-start;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
@@ -159,22 +143,10 @@ const backgroundSrc = `url(${backgroundImg})`;
     }
 
     .actions {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         padding-top: 32px;
-        -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
         justify-content: flex-start;
-        -webkit-box-align: start;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
         align-items: flex-start;
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 auto;
-        -ms-flex: 0 auto;
         flex: 0 auto;
         grid-column-gap: 16px;
         grid-row-gap: 16px;
@@ -188,24 +160,11 @@ const backgroundSrc = `url(${backgroundImg})`;
     }
 
     .button-2 {
-        -webkit-transition: background-color 200ms ease;
         transition: background-color 200ms ease;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         padding: 0px;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
         justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
         align-items: center;
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 auto;
-        -ms-flex: 0 auto;
         flex: 0 auto;
         grid-column-gap: 8px;
         grid-row-gap: 8px;
@@ -252,6 +211,15 @@ const backgroundSrc = `url(${backgroundImg})`;
             padding-left: 88px;
         }
 
+        .paragraph-wrap {
+            text-align: center;
+        }
+
+        .actions {
+            width: 100%;
+            justify-content: center;
+        }
+
         .hero-content {
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
@@ -268,7 +236,7 @@ const backgroundSrc = `url(${backgroundImg})`;
 
         .hero-image-column {
             display: flex;
-            width: 100%;
+            /* width: 100%; */
             -webkit-box-pack: start;
             -webkit-justify-content: flex-start;
             -ms-flex-pack: start;
@@ -301,7 +269,6 @@ const backgroundSrc = `url(${backgroundImg})`;
             position: relative;
             display: flex;
             width: 100%;
-            height: auto;
             justify-content: center;
             flex-wrap: nowrap;
             align-items: center;
@@ -311,21 +278,9 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
 
         .container {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-pack: start;
-            -webkit-justify-content: flex-start;
-            -ms-flex-pack: start;
             justify-content: flex-start;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
             align-items: center;
-            -webkit-box-flex: 0;
-            -webkit-flex: 0 auto;
-            -ms-flex: 0 auto;
             flex: 0 auto;
             grid-column-gap: 80px;
             grid-row-gap: 80px;
@@ -338,20 +293,20 @@ const backgroundSrc = `url(${backgroundImg})`;
             padding-left: 60px;
             padding-right: 60px;
             background-clip: padding-box;
-            -webkit-text-fill-color: inherit;
         }
     }
 
     @media screen and (max-width: 479px) {
+        .hero-img {
+            height: 240px;
+            width: 280px;
+        }
+
         .hero-heading-left {
             padding-left: 24px;
             padding-right: 24px;
             padding-bottom: 64px;
             overflow-x: hidden;
-        }
-
-        .hero-img {
-            /* width: 100%; */
         }
 
         .bg-arrow {
@@ -360,15 +315,6 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
 
         .hero-text-column {
-            text-align: center;
-        }
-
-        .actions {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .paragraph-wrap {
             text-align: center;
         }
     }

@@ -4,8 +4,8 @@ import Contact from "../components/Contact.astro";
 import Hero from "../components/Hero.astro";
 import grid from "../assets/grid.svg";
 import greenLogo from "../assets/green-logo.svg";
-import trevor from "../assets/trevor.png"
-import marcus from "../assets/marcus.png"
+import trevor from "../assets/trevor.png";
+import marcus from "../assets/marcus.png";
 ---
 
 <Layout title="About">
@@ -21,19 +21,31 @@ import marcus from "../assets/marcus.png"
                 architectures tailored to your meet business goals.
             </span>
         </Hero>
-		<div class="team">
-			<h2 class="title">Founding Partners</h3>
-			<div class="bios">
-				<div class="bio">
-					<img class="portrait" src={trevor.src} alt="" width="385" height="360">
-					<h3 class="name">TREVOR COHEN</h3>
-				</div>
-				<div class="bio">
-					<img class="portrait" src={marcus.src} alt="" width="385" height="360">
-					<h3 class="name">MARCUS PECK</h3>
-				</div>
-			</div>
-		</div>
+        <div class="team">
+            <h2 class="title">Founding Partners</h2>
+            <div class="bios">
+                <div class="bio">
+                    <img
+                        class="portrait"
+                        src={trevor.src}
+                        alt=""
+                        width="385"
+                        height="360"
+                    />
+                    <h3 class="name">TREVOR COHEN</h3>
+                </div>
+                <div class="bio">
+                    <img
+                        class="portrait"
+                        src={marcus.src}
+                        alt=""
+                        width="385"
+                        height="360"
+                    />
+                    <h3 class="name">MARCUS PECK</h3>
+                </div>
+            </div>
+        </div>
         <Contact />
     </main>
 </Layout>
@@ -66,7 +78,9 @@ import marcus from "../assets/marcus.png"
     }
 
     .subline {
-        font-family: Titillium Web, sans-serif;
+        font-family:
+            Titillium Web,
+            sans-serif;
         color: #fff;
         font-size: 24px;
         line-height: 150%;
@@ -74,46 +88,48 @@ import marcus from "../assets/marcus.png"
         letter-spacing: 0em;
     }
 
-	.team {
-		display: flex;
-		background-color: #181818;
-		padding: 80px 24px 112px;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		row-gap: 64px;
-	}
+    .team {
+        display: flex;
+        background-color: #181818;
+        padding: 80px 24px 112px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        row-gap: 64px;
+    }
 
-	.founding {
-		font-size: 32px;
-	}
+    .founding {
+        font-size: 32px;
+    }
 
-	.bios {
-		display: flex;
-		justify-content: center;
-		column-gap: 48px;
-	}
+    .bios {
+        display: flex;
+        justify-content: center;
+        column-gap: 48px;
+    }
 
-	.name {
-		font-family: 'Titillium Web', sans-serif;
-		color: #00e399;
-		font-size: 20px;
-		line-height: 150%;
-		font-weight: 700;
-		text-align: center;
-		letter-spacing: 0em;
-	}
-	
-	.portrait {
-		
-	}
+    .name {
+        font-family: "Titillium Web", sans-serif;
+        color: #00e399;
+        font-size: 20px;
+        line-height: 150%;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 0em;
+    }
 
-	@media screen and (max-width: 991px) {
-		.bios {
-			flex-direction: column;
-		}	
-	}
+    .portrait {
+    }
+
+    @media screen and (max-width: 991px) {
+        .bios {
+            flex-direction: column;
+        }
+        .title {
+            text-align: center;
+        }
+    }
 
     @media screen and (max-width: 479px) {
         .title {
