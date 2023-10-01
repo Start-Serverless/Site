@@ -7,6 +7,10 @@ export const prerender = true;
 const allBlogPosts = await getCollection("blog", ({ data }) => {
     return data.draft !== true;
 });
+
+const sortedPosts = allBlogPosts.sort((a, b) => {
+    return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+});
 ---
 
 <Layout title="Blog">
@@ -16,7 +20,7 @@ const allBlogPosts = await getCollection("blog", ({ data }) => {
         </div>
         <div class="content">
             <ul class="post-archive">
-                {allBlogPosts.map((post) => <Post post={post} />)}
+                {sortedPosts.map((post) => <Post post={post} />)}
             </ul>
         </div>
     </body>

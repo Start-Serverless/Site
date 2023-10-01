@@ -22,13 +22,13 @@
 		"packages/*"
 	],
 	"dependencies": {
-		"@types/aws-lambda": "^8.10.119",
-		"astro-sst": "^2.16.0",
 		"@astro-aws/adapter": "^0.3.0",
 		"@astrojs/node": "^5.2.0",
 		"@astrojs/vercel": "^3.2.1",
 		"@aws-amplify/api": "^5.0.19",
-		"astro": "^2.6.5",
+		"@types/aws-lambda": "^8.10.119",
+		"astro": "^3.2.0",
+		"astro-sst": "^2.16.0",
 		"aws-amplify": "^5.0.19"
 	}
 }
