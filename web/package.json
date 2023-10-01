@@ -11,15 +11,15 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astro-aws/adapter": "^0.3.0",
-        "@astrojs/node": "^5.2.0",
-        "@astrojs/vercel": "^3.2.1",
-        "@aws-amplify/api": "^5.0.19",
+        "@astro-aws/adapter": "^0.4.0",
+        "@astrojs/node": "^6.0.1",
+        "@astrojs/vercel": "^5.0.1",
+        "@aws-amplify/api": "^5.4.5",
         "astro": "^3.2.0",
         "astro-sst": "2.26.9",
-        "aws-amplify": "^5.0.19"
+        "aws-amplify": "^5.3.11"
     },
     "devDependencies": {
-        "prettier-plugin-astro": "^0.8.0"
+        "prettier-plugin-astro": "^0.12.0"
     }
 }
