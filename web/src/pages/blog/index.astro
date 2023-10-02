@@ -4,7 +4,9 @@ import Layout from "../../layouts/Layout.astro";
 import Post from "../../components/Post.astro";
 
 export const prerender = true;
-const allBlogPosts = await getCollection("blog");
+const allBlogPosts = await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+});
 
 const sortedPosts = allBlogPosts.sort((a, b) => {
     return b.data.publishDate.getTime() - a.data.publishDate.getTime();

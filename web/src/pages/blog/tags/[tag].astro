@@ -10,7 +10,9 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-    const allBlogPosts = await getCollection("blog");
+    const allBlogPosts = await getCollection("blog", ({ data }) => {
+        return import.meta.env.PROD ? data.draft !== true : true;
+    });
     const uniqueTags = [
         ...new Set(allBlogPosts.map((post) => post.data.tags).flat()),
     ];
