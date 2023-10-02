@@ -10,16 +10,14 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-    const allBlogPosts = await getCollection("blog", ({ data }) => {
-        return data.draft !== true;
-    });
+    const allBlogPosts = await getCollection("blog");
     const uniqueTags = [
         ...new Set(allBlogPosts.map((post) => post.data.tags).flat()),
     ];
 
     return uniqueTags.map((tag) => {
         const filteredPosts = allBlogPosts.filter((post) =>
-            post.data.tags.includes(tag),
+            post.data.tags.includes(tag)
         );
 
         const sortedPosts = filteredPosts.sort((a, b) => {
