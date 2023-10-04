@@ -7,8 +7,8 @@ import {
 } from "aws-cdk-lib/aws-appsync";
 import { Expiration, Duration } from "aws-cdk-lib/core";
 import { StackContext, AppSyncApi, use } from "sst/constructs";
-import { StorageStack } from "./storage";
-import { DomainStack } from "./domain";
+import { StorageStack } from "./storage.js";
+import { DomainStack } from "./domain.js";
 
 export function AppsyncStack({ app, stack }: StackContext) {
     const table = use(StorageStack);

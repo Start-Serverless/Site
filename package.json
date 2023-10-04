@@ -1,34 +1,35 @@
 {
-    "name": "backend-sst",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "sst dev",
-        "build": "sst build",
-        "deploy": "sst deploy",
-        "remove": "sst remove",
-        "console": "sst console",
-        "typecheck": "tsc --noEmit"
-    },
-    "devDependencies": {
-        "@tsconfig/node16": "^16.1.1",
-        "aws-cdk-lib": "2.99.1",
-        "constructs": "10.2.70",
-        "sst": "2.26.9",
-        "typescript": "^5.2.2"
-    },
-    "workspaces": [
-        "packages/*"
-    ],
-    "dependencies": {
-        "@astro-aws/adapter": "^0.4.0",
-        "@astrojs/node": "^6.0.1",
-        "@astrojs/vercel": "^5.0.1",
-        "@aws-amplify/api": "^5.4.5",
-        "@types/aws-lambda": "^8.10.122",
-        "astro": "^3.2.0",
-        "astro-sst": "2.26.9",
-        "aws-amplify": "^5.3.11"
-    }
+  "name": "backend-sst",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^16.1.1",
+    "aws-cdk-lib": "2.95.1",
+    "constructs": "10.2.69",
+    "sst": "2.26.10",
+    "typescript": "^5.2.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@astro-aws/adapter": "^0.4.0",
+    "@astrojs/node": "^5.3.6",
+    "@astrojs/vercel": "^3.8.2",
+    "@aws-amplify/api": "^5.4.5",
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.95.1-alpha.0",
+    "@types/aws-lambda": "^8.10.122",
+    "astro": "^2.10.15",
+    "astro-sst": "2.26.10",
+    "aws-amplify": "^5.3.11"
+  }
 }

@@ -1,9 +1,10 @@
 import { SSTConfig } from "sst";
-import { DomainStack } from "./stacks/domain";
-import { StorageStack } from "./stacks/storage";
-import { AppsyncStack } from "./stacks/appsync";
-import { SiteStack } from "./stacks/site";
-import { ComputeStack } from "./stacks/compute";
+import { DomainStack } from "./stacks/domain.js";
+import { StorageStack } from "./stacks/storage.js";
+import { ApiStack } from "./stacks/api.js";
+import { AppsyncStack } from "./stacks/appsync.js";
+import { SiteStack } from "./stacks/site.js";
+import { ComputeStack } from "./stacks/compute.js";
 
 export default {
     config(_input) {
@@ -18,6 +19,7 @@ export default {
             app.stack(DomainStack);
         }
         app.stack(StorageStack)
+            .stack(ApiStack)
             .stack(AppsyncStack)
             .stack(SiteStack)
             .stack(ComputeStack);
