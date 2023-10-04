@@ -1,15 +1,15 @@
 import { StackContext, use } from "sst/constructs";
-// import { HttpIntegrationSubType } from "aws-cdk"
 import { StorageStack } from "./storage.js";
 import { DomainStack } from "./domain.js";
 import {
     AwsIntegration,
     RestApi,
     Cors,
-    JsonSchemaVersion,
-    JsonSchemaType,
+    LogGroupLogDestination,
+    AccessLogFormat,
 } from "aws-cdk-lib/aws-apigateway";
 import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
+import { LogGroup } from "aws-cdk-lib/aws-logs";
 
 export function ApiStack({ app, stack }: StackContext) {
     const table = use(StorageStack);
@@ -79,27 +79,21 @@ export function ApiStack({ app, stack }: StackContext) {
         },
     });
 
-    const api = new RestApi(stack, "Api", {});
+    const logGroup = new LogGroup(stack, "Logs", {});
+
+    const api = new RestApi(stack, "Api", {
+        deployOptions: {
+            accessLogDestination: new LogGroupLogDestination(logGroup),
+            accessLogFormat: AccessLogFormat.custom(
+                '{"requestTime":"$context.requestTime","requestId":"$context.requestId","httpMethod":"$context.httpMethod","path":"$context.path","resourcePath":"$context.resourcePath","status":$context.status,"responseLatency":$context.responseLatency}'
+            ),
+        },
+    });
     const contact = api.root.addResource("contact");
     contact.addCorsPreflight({
         allowOrigins: Cors.ALL_ORIGINS,
         allowMethods: Cors.ALL_METHODS,
     });
-
-    // const requestModel = api.addModel("RequestModel", {
-    //     contentType: "application/json",
-    //     modelName: "RequestModel",
-    //     schema: {
-    //         schema: JsonSchemaVersion.DRAFT7,
-    //         type: JsonSchemaType.OBJECT,
-    //         title: "contact",
-    //         properties: {
-    //             name: { type: JsonSchemaType.STRING },
-    //             email: { type: JsonSchemaType.STRING },
-    //             phone: { type: JsonSchemaType.STRING },
-    //         },
-    //     },
-    // });
 
     contact.addMethod("POST", putItem, {}).addMethodResponse({
         statusCode: "200",
