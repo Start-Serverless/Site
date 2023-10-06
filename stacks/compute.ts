@@ -18,7 +18,6 @@ export function ComputeStack({ stack }: StackContext) {
 
     topic.cdk.topic.grantPublish(streamPipeRole);
 
-    const dlq = new Queue(stack, "DLQ");
     const streamPipe = new CfnPipe(stack, "StreamPipe", {
         roleArn: streamPipeRole.roleArn,
         source: table.cdk.table.tableStreamArn!,

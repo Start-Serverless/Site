@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Post from "../../components/Post.astro";
+import Contact from "../../components/Contact.astro";
 
 export const prerender = true;
 const allBlogPosts = await getCollection("blog", ({ data }) => {
@@ -23,6 +24,7 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
                 {sortedPosts.map((post) => <Post post={post} />)}
             </ul>
         </div>
+        <Contact />
     </body>
 </Layout>
 
