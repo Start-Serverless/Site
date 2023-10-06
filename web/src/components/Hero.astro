@@ -2,9 +2,10 @@
 interface Props {
     mainImg: string;
     backgroundImg: string;
+    about?: boolean;
 }
 
-const { mainImg, backgroundImg } = Astro.props;
+const { mainImg, backgroundImg, about } = Astro.props;
 
 const backgroundSrc = `url(${backgroundImg})`;
 ---
@@ -29,7 +30,7 @@ const backgroundSrc = `url(${backgroundImg})`;
             <img
                 src={mainImg}
                 alt=""
-                class="hero-img"
+                class:list={["hero-img", { about: about }]}
                 width="560"
                 height="444"
             />
@@ -63,9 +64,7 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
     }
     .hero-img {
-        transition:
-            transform 1000ms ease,
-            -webkit-transform 1000ms ease;
+        transition: transform 1000ms ease, -webkit-transform 1000ms ease;
         animation: 1.5s ease-in-out 0s 1 fadeIn;
     }
 
@@ -298,6 +297,10 @@ const backgroundSrc = `url(${backgroundImg})`;
             width: 280px;
         }
 
+        .about {
+            width: 70%;
+        }
+
         .hero-heading-left {
             padding-left: 24px;
             padding-right: 24px;
@@ -306,7 +309,6 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
 
         .bg-arrow {
-            max-width: 300px;
             padding-left: 24px;
             padding-right: 24px;
         }

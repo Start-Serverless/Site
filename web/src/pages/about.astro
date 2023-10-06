@@ -5,12 +5,11 @@ import Hero from "../components/Hero.astro";
 import grid from "../assets/grid.svg";
 import greenLogo from "../assets/green-logo.svg";
 import trevor from "../assets/trevor.png";
-import marcus from "../assets/marcus.png";
 ---
 
 <Layout title="About">
     <main class="page">
-        <Hero mainImg={greenLogo.src} backgroundImg={grid.src}>
+        <Hero mainImg={greenLogo.src} backgroundImg={grid.src} about={true}>
             <h1 class="title" slot="header">
                 Driving Your Success through Frictionless Solutions
             </h1>
@@ -43,12 +42,8 @@ import marcus from "../assets/marcus.png";
 <style>
     .page {
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
         flex-direction: column;
-        -webkit-box-pack: start;
         justify-content: flex-start;
-        -webkit-box-align: start;
         align-items: flex-start;
         grid-column-gap: 0px;
         grid-row-gap: 0px;

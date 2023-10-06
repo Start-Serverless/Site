@@ -7,6 +7,7 @@ import {
     Cors,
     LogGroupLogDestination,
     AccessLogFormat,
+    PassthroughBehavior,
 } from "aws-cdk-lib/aws-apigateway";
 import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 import { LogGroup } from "aws-cdk-lib/aws-logs";
@@ -26,12 +27,19 @@ export function ApiStack({ app, stack }: StackContext) {
         service: "dynamodb",
         action: "PutItem",
         options: {
+            passthroughBehavior: PassthroughBehavior.WHEN_NO_TEMPLATES,
             credentialsRole: role,
             integrationResponses: [
                 {
                     statusCode: "200",
                     responseTemplates: {
-                        "application/json": '{ "message": "Contact created!" }',
+                        "application/json": JSON.stringify({
+                            message: "Contact created!",
+                        }),
+                    },
+                    responseParameters: {
+                        "method.response.header.Access-Control-Allow-Origin":
+                            "'*'",
                     },
                 },
                 {
@@ -42,6 +50,10 @@ export function ApiStack({ app, stack }: StackContext) {
 							"error": "Bad input!"
 						}`,
                     },
+                    responseParameters: {
+                        "method.response.header.Access-Control-Allow-Origin":
+                            "'*'",
+                    },
                 },
                 {
                     selectionPattern: "5\\d{2}",
@@ -50,6 +62,10 @@ export function ApiStack({ app, stack }: StackContext) {
                         "application/json": `{
 							"error": "Internal Service Error!"
 						}`,
+                    },
+                    responseParameters: {
+                        "method.response.header.Access-Control-Allow-Origin":
+                            "'*'",
                     },
                 },
             ],
@@ -88,16 +104,43 @@ export function ApiStack({ app, stack }: StackContext) {
                 '{"requestTime":"$context.requestTime","requestId":"$context.requestId","httpMethod":"$context.httpMethod","path":"$context.path","resourcePath":"$context.resourcePath","status":$context.status,"responseLatency":$context.responseLatency}'
             ),
         },
+        defaultCorsPreflightOptions: {
+            allowOrigins: Cors.ALL_ORIGINS,
+            allowMethods: Cors.ALL_METHODS,
+            allowHeaders: Cors.DEFAULT_HEADERS.concat(["x-api-key"]),
+        },
     });
     const contact = api.root.addResource("contact");
-    contact.addCorsPreflight({
-        allowOrigins: Cors.ALL_ORIGINS,
-        allowMethods: Cors.ALL_METHODS,
-    });
 
-    contact.addMethod("POST", putItem, {}).addMethodResponse({
-        statusCode: "200",
-    });
+    contact
+        .addMethod("POST", putItem, {
+            methodResponses: [
+                {
+                    statusCode: "200",
+                    responseParameters: {
+                        "method.response.header.Access-Control-Allow-Origin":
+                            true,
+                    },
+                },
+            ],
+        })
+        .addMethodResponse({
+            statusCode: "200",
+        });
+
+    // api.root.addMethod(
+    //     "ANY",
+    //     new MockIntegration({
+    //         integrationResponses: [{ statusCode: "200" }],
+    //         passthroughBehavior: PassthroughBehavior.NEVER,
+    //         requestTemplates: {
+    //             "application/json": '{"statusCode": 200}',
+    //         },
+    //     }),
+    //     {
+    //         methodResponses: [{ statusCode: "200" }],
+    //     }
+    // );
 
     return {
         api,
