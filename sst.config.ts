@@ -20,7 +20,6 @@ export default {
         }
         app.stack(StorageStack)
             .stack(ApiStack)
-            .stack(AppsyncStack)
             .stack(SiteStack)
             .stack(ComputeStack);
     },
