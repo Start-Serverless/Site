@@ -2,7 +2,6 @@ import { SSTConfig } from "sst";
 import { DomainStack } from "./stacks/domain.js";
 import { StorageStack } from "./stacks/storage.js";
 import { ApiStack } from "./stacks/api.js";
-import { AppsyncStack } from "./stacks/appsync.js";
 import { SiteStack } from "./stacks/site.js";
 import { ComputeStack } from "./stacks/compute.js";
 
