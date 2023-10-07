@@ -11,19 +11,19 @@ import trevor from "../assets/trevor.png";
     <main class="page">
         <Hero mainImg={greenLogo.src} backgroundImg={grid.src} about={true}>
             <h1 class="title" slot="header">
-                Driving Your Success through Frictionless Solutions
+                Driving Your Success Through Frictionless Solutions
             </h1>
-            <span class="subline" slot="subline">
-                At Start Serverless, we are dedicated to helping businesses
-                thrive with the power of serverless solutions. Our expert team
-                delivers scalable, cost-efficient, and event-driven
-                architectures tailored to your meet business goals.
-            </span>
+            <p class="subline">Are you tired of slow development cycles?</p>
+            <p class="subline">
+                Are you overwhelmed by the amount of services in AWS?
+            </p>
+            <p class="subline">Is your AWS bill spiraling out of control?</p>
+            <p class="subline">Do you want your business to win?</p>
         </Hero>
         <div class="team">
             <h2 class="title">About Me</h2>
-            <div class="bios">
-                <div class="bio">
+            <div class="bio">
+                <div class="frame">
                     <img
                         class="portrait"
                         src={trevor.src}
@@ -33,6 +33,12 @@ import trevor from "../assets/trevor.png";
                     />
                     <h3 class="name">TREVOR COHEN</h3>
                 </div>
+                <p class="subline who">
+                    Hi, I'm Trevor Cohen, and I have shipped serverless
+                    soulutions nationwide. I help small teams dream big and
+                    achieve even bigger.
+                </p>
+                <p class="subline who"></p>
             </div>
         </div>
         <Contact />
@@ -48,6 +54,11 @@ import trevor from "../assets/trevor.png";
         grid-column-gap: 0px;
         grid-row-gap: 0px;
         background-color: #181818;
+    }
+
+    .who {
+        padding-left: 64px;
+        padding-right: 64px;
     }
 
     .title {
@@ -69,6 +80,8 @@ import trevor from "../assets/trevor.png";
         line-height: 150%;
         font-weight: 400;
         letter-spacing: 0em;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .team {
@@ -86,6 +99,10 @@ import trevor from "../assets/trevor.png";
         font-size: 32px;
     }
 
+    .bio {
+        display: flex;
+    }
+
     .bios {
         display: flex;
         justify-content: center;
@@ -98,19 +115,46 @@ import trevor from "../assets/trevor.png";
         font-size: 20px;
         line-height: 150%;
         font-weight: 700;
-        text-align: center;
+        text-align: left;
+        margin-left: 70px;
         letter-spacing: 0em;
     }
 
     .portrait {
+        display: flex;
+        align-self: center;
+    }
+
+    .frame {
+        display: flex;
+        flex-direction: column;
     }
 
     @media screen and (max-width: 991px) {
-        .bios {
+        .bio {
             flex-direction: column;
         }
+
+        .portrait {
+            display: flex;
+            align-self: center;
+        }
+
         .title {
             text-align: center;
+        }
+
+        .frame {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .name {
+            margin-left: 0%;
+        }
+
+        .subline {
+            align-self: center;
         }
     }
 
@@ -120,6 +164,16 @@ import trevor from "../assets/trevor.png";
             text-align: center;
             width: 100%;
             margin: 0;
+        }
+
+        .who {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+
+        .subline {
+            font-size: 22px;
+            text-align: left;
         }
     }
 </style>
