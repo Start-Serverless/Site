@@ -1,0 +1,47 @@
+---
+export interface Props {
+    title: string;
+    body: string;
+    buttonText: string;
+}
+
+const { title, body, buttonText } = Astro.props;
+---
+
+<div class="service">
+    <h2 class="name">{title}</h2>
+    <p class="description">{body}</p>
+    <button class="start"></button>
+</div>
+<style>
+    .service {
+        font-family:
+            Titillium Web,
+            sans-serif;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .description {
+        font-family: Titillium Web, sans-serif;
+
+    }
+
+    .name {
+        font-family: Electrolize, sans-serif;
+        color: #fff;
+        font-size: 32px;
+    }
+
+    .start {
+        display: block;
+        padding: 8px 16px;
+        font-family: "Titillium Web",sans-serif;
+        color: #fff;
+        font-size: 16px;
+        line-height: 139.9999976158142%;
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+</style>
