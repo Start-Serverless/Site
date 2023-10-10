@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Contact from "../components/Contact.astro";
 import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
 import arrow from "../assets/arrow.svg";
 import atom from "../assets/atom.svg";
 import consulting from "../assets/consulting.svg";
@@ -21,97 +22,10 @@ import training from "../assets/training.svg";
                     cost-effective and fast-to-market technology.
                 </span>
             </Hero>
-            <!--  		#TODO MAKE SERVICE LIST INTO COMPONENTS-->
-            <div class="team-circles">
-                <div class="container-2">
-                    <div class="title-section">
-                        <div class="text-3">Services</div>
-                    </div>
-                    <div class="columns hero-content">
-                        <div class="card">
-                            <div class="image-wrapper-2">
-                                <div class="image-wrapper-2">
-                                    <img
-                                        src={consulting.src}
-                                        width="240"
-                                        height="241"
-                                        loading="lazy"
-                                        alt=""
-                                        class="graphic"
-                                    />
-                                </div>
-                            </div>
-                            <div class="content-2">
-                                <div class="info">
-                                    <div class="services-headings">
-                                        SERVERLESS CONSULTING
-                                    </div>
-                                </div>
-                                <div class="services-copy">
-                                    We specialize in business logic to maximize
-                                    your outcomes while transitioning to a
-                                    serverless environment.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="image-wrapper-2">
-                                <div class="image-2">
-                                    <div class="image-2">
-                                        <img
-                                            src={development.src}
-                                            loading="lazy"
-                                            width="240"
-                                            height="241"
-                                            alt=""
-                                            class="graphic"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content-2">
-                                <div class="info">
-                                    <div class="services-headings">
-                                        DEVELOPMENT
-                                    </div>
-                                </div>
-                                <div class="services-copy">
-                                    We collaborate with your team to architect
-                                    the most effective framework using our
-                                    knowledge of best practices.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="image-wrapper-2">
-                                <img
-                                    src={training.src}
-                                    width="240"
-                                    height="241"
-                                    loading="lazy"
-                                    alt=""
-                                    class="graphic"
-                                />
-                            </div>
-                            <div class="content-2">
-                                <div class="info">
-                                    <div class="services-headings">
-                                        TRAINING
-                                    </div>
-                                </div>
-                                <div class="services-copy">
-                                    We provide continuing education
-                                    opportunities to expand the knowledge of
-                                    your development team.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Contact />
+            <Services />
         </div>
     </main>
+    <Contact />
 </Layout>
 
 <style>
