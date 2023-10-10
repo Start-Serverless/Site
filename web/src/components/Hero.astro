@@ -64,7 +64,9 @@ const backgroundSrc = `url(${backgroundImg})`;
         }
     }
     .hero-img {
-        transition: transform 1000ms ease, -webkit-transform 1000ms ease;
+        transition:
+            transform 1000ms ease,
+            -webkit-transform 1000ms ease;
         animation: 1.5s ease-in-out 0s 1 fadeIn;
     }
 
@@ -289,6 +291,10 @@ const backgroundSrc = `url(${backgroundImg})`;
             padding-right: 60px;
             background-clip: padding-box;
         }
+
+        .about {
+            width: 70%;
+        }
     }
 
     @media screen and (max-width: 500px) {
@@ -297,15 +303,15 @@ const backgroundSrc = `url(${backgroundImg})`;
             width: 280px;
         }
 
-        .about {
-            width: 70%;
-        }
-
         .hero-heading-left {
             padding-left: 24px;
             padding-right: 24px;
             padding-bottom: 64px;
             overflow-x: hidden;
+        }
+
+        .about {
+            width: 70%;
         }
 
         .bg-arrow {

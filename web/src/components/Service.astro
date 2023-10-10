@@ -1,0 +1,100 @@
+---
+export interface Props {
+    title: string;
+    body: string;
+    buttonText: string;
+}
+
+const { title, body, buttonText } = Astro.props;
+---
+
+<div class="service">
+    <h2 class="name">{title}</h2>
+    <p class="description">{body}</p>
+    <a href="#contact-form" class="action">
+        <span class="start">{buttonText}</span>
+    </a>
+</div>
+<style>
+    .service {
+        font-family: Titillium Web, sans-serif;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        background-color: #303030;
+        border-radius: 20px;
+        border: #00e399 1px solid;
+        max-width: 80vw;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        min-height: 300px;
+        justify-content: space-around;
+        align-items: stretch;
+    }
+
+    .description {
+        font-family: Titillium Web, sans-serif;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 10px;
+        font-size: 16px;
+    }
+
+    .name {
+        font-family: Electrolize, sans-serif;
+        color: #fff;
+        font-size: 32px;
+        padding-left: 32px;
+    }
+
+    a.action {
+        transition: background-color 200ms ease;
+        display: flex;
+        justify-content: center;
+        flex: 0 auto;
+        grid-column-gap: 8px;
+        grid-row-gap: 8px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #00e399;
+        color: #00e399;
+        text-decoration: none;
+        width: 150px;
+        margin-left: 32px;
+        margin-bottom: 10px;
+    }
+
+    .action:hover {
+        background-color: #00e399;
+    }
+
+    .start::before {
+        content: "//";
+    }
+
+    .start {
+        display: flex;
+        padding: 8px 0px;
+        font-family: "Titillium Web", sans-serif;
+        color: #fff;
+        font-size: 16px;
+        line-height: 139.9999976158142%;
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+
+    .start:hover {
+        color: #181818;
+    }
+
+    @media screen and (max-width: 780px) {
+        .service {
+            max-width: 90vw;
+        }
+
+        .name {
+            font-size: 28px;
+        }
+    }
+</style>

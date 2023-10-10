@@ -1,0 +1,69 @@
+---
+import Service from "./Service.astro";
+---
+
+<div class="services">
+    <div class="grid">
+        <Service
+            title="System Design"
+            body="Beginning a fresh project without any prior serverless know-how? I'm available to offer my expertise. Whether you need assistance with system design or streamlining your development process, I'm here to ensure you avoid costly mistakes and accelerate your product's progress right from the start."
+            buttonText="Contact me"
+        />
+        <Service
+            title="Projects"
+            body="Do you possess an exceptional product concept but lack a clear starting point? Allow me to assist you in bringing your product vision to life. I can take your concept from initial phase to a fully functional product."
+            buttonText="Contact me"
+        />
+        <Service
+            title="Architecture Review"
+            body="If your existing serverless application is causing concerns about scalability and manageability as it expands, let me step in and assist. I will conduct a comprehensive examination of your codebase and system design and work closely with your team to identify potential issues and propose improvements."
+            buttonText="Contact me"
+        />
+        <Service
+            title="Consulting Calls"
+            body="Encountering challenges with an AWS-related issue? In need of rapid assistance with architecture design trade-offs? Or perhaps you seek the expertise to outline your choices and provide recommendations? Schedule a 60-minute consulting call with me and break through your obstacles today."
+            buttonText="Contact me"
+        />
+        <Service
+            title="Advisory Retainer"
+            body="Should your team require dependable and ongoing support while embarking on their serverless journey, I provide a monthly retainer service that grants unrestricted access to me for calls, emails, asynchronous reviews, or brief conversations."
+            buttonText="Contact me"
+        />
+        <Service
+            title="General Inquiry"
+            body="Rest assured, if you don't come across a service that precisely matches your requirements, we can collaboratively design a tailored engagement framework to discover a solution that suits your needs.  Feel free to get in touch, and we'll delve into the most effective means for me to assist you and contribute to your success.."
+            buttonText="Contact me"
+        />
+    </div>
+</div>
+
+<style>
+    .services {
+        /* background-image: linear-gradient(301deg, #303030, #181818); */
+        /* background-color: #303030; */
+        background-color: #181818;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .grid {
+        display: grid;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        grid-template-columns: repeat(2, minmax(400px, 2fr));
+        padding: 60px;
+        width: 100%;
+        justify-items: center;
+        gap: 20px;
+        max-width: 1000px;
+    }
+
+    @media screen and (max-width: 790px) {
+        .grid {
+            padding: 30px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+</style>
