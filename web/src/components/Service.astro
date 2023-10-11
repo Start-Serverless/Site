@@ -46,6 +46,8 @@ const { title, body, buttonText } = Astro.props;
         color: #fff;
         font-size: 32px;
         padding-left: 32px;
+        padding-right: 32px;
+        line-height: 1;
     }
 
     a.action {
@@ -95,6 +97,18 @@ const { title, body, buttonText } = Astro.props;
 
         .name {
             font-size: 28px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .description {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        a.action {
+            margin-left: 16px;
+            margin-bottom: 16px;
         }
     }
 </style>
