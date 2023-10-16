@@ -27,7 +27,7 @@ export async function getStaticPaths() {
         });
         return {
             params: { author },
-            props: { posts: filteredPosts },
+            props: { posts: sortedPosts },
         };
     });
 }
@@ -37,17 +37,14 @@ const { posts } = Astro.props;
 ---
 
 <BlogCollectionLayout title={author}>
-    <div class="content">
-        <h1 class="tag">Author: {author}</h1>
-        <ul class="post-archive">
-            {posts.map((post) => <Post post={post} />)}
-        </ul>
-    </div>
+    <h1 class="tag">Author: {author}</h1>
+    <ul class="post-archive">
+        {posts.map((post) => <Post post={post} />)}
+    </ul>
 </BlogCollectionLayout>
 
 <style>
     .content {
-        /* max-width: 1000px; */
         padding-top: 64px;
         margin-right: auto;
         margin-left: auto;
@@ -59,17 +56,15 @@ const { posts } = Astro.props;
 
     h1.tag {
         text-transform: capitalize;
-        padding-left: 40px;
         display: inline;
         font-family: Electrolize, sans-serif;
         color: #333;
     }
 
     .post-archive {
-        align-self: center;
+        max-width: 1000px;
         list-style-type: none;
-        padding-top: 64px;
-        padding-bottom: 64px;
+        padding: 64px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -77,7 +72,7 @@ const { posts } = Astro.props;
     @media screen and (max-width: 991px) {
         .post-archive {
             margin-top: 0px;
-            padding-top: 64px;
+            padding: 20px;
         }
     }
 </style>

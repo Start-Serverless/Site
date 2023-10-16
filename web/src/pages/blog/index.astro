@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import BlogCollectionLayout from "../../layouts/BlogCollectionLayout.astro";
 import Post from "../../components/Post.astro";
-import Contact from "../../components/Contact.astro";
 
 export const prerender = true;
 const allBlogPosts = await getCollection("blog", ({ data }) => {
@@ -14,19 +13,11 @@ const sortedPosts = allBlogPosts.sort((a, b) => {
 });
 ---
 
-<Layout title="Blog">
-    <body>
-        <div class="hero">
-            <h1 class="heading">THINK / SERVERLESS</h1>
-        </div>
-        <div class="content">
-            <ul class="post-archive">
-                {sortedPosts.map((post) => <Post post={post} />)}
-            </ul>
-        </div>
-        <Contact />
-    </body>
-</Layout>
+<BlogCollectionLayout>
+    <ul class="post-archive">
+        {sortedPosts.map((post) => <Post post={post} />)}
+    </ul>
+</BlogCollectionLayout>
 
 <style>
     .hero {

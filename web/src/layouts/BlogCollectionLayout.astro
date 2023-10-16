@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import Contact from "../components/Contact.astro";
 ---
 
 <Layout title="Blog">
@@ -11,6 +12,7 @@ import Layout from "./Layout.astro";
             <slot />
         </div>
     </body>
+    <Contact />
 </Layout>
 
 <style>
@@ -18,7 +20,6 @@ import Layout from "./Layout.astro";
         display: flex;
         padding-top: 110px;
         padding-bottom: 110px;
-        -webkit-box-pack: center;
         justify-content: center;
         align-items: center;
         background-image: linear-gradient(45deg, #00d0b7, #00e399);
@@ -34,7 +35,7 @@ import Layout from "./Layout.astro";
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
         background-color: #fff;
     }
 
