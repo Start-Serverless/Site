@@ -3,18 +3,19 @@ title: How to use Amazon Bedrock in your APIs with SST
 authors: ["Trevor Cohen"]
 description:  Learn how to create an API endpoint that utilizes text-generation with Amazon Bedrock.
 tags: [Bedrock, AWS, SST, Typescript, Web Development, Api Gateway, Serverless]
-publishDate: 2023-10-12
+publishDate: 2023-10-16
 image: "/src/assets/sst-bedrock.jpg"
-draft: true
+draft: false
 ---
 ### Introduction
-AWS recently released their  fully managed service for deep learning models, Amazon Bedrock.  Now you can [access these](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported) models through an API, in a serverless, pay-per-use model. 
+AWS recently released their  fully managed service for deep learning models, Amazon Bedrock.  Now you can [access these models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported)  through an API, in a serverless, pay-per-use model. 
 
 ### Overview
 We are going to create a new standalone SST project where we are going to write a lambda function that can take in a prompt from our API Gateay.  It will then send this prompt to Amazon Bedrock where we are going to use the Cohere Command model, and return the response back to the client.
 
-### Prequisites
-We will need to meet the prequisites for SST, as well as requesting access to Bedrock models
+### Prerequisites
+
+We will need to meet the prequisites for SST, and requesting AWS access to Bedrock models
 
 * Nodejs. 16.6 or higher
 * npm 7
@@ -60,7 +61,10 @@ export function API({ stack }: StackContext) {
 }
 ```
 
-Next, we are going to define our lambda function that is located in `packages/functions/src/lambda.ts`
+Next, we are going to define our lambda function that is located in 
+`packages/functions/src/lambda.ts`.  
+
+Our inputBody is going to match the inference parameters for the [cohere.command-text-v14 model](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html#model-parameters-cohere).
 
 ```ts
 import { ApiHandler } from "sst/node/api";
@@ -80,7 +84,6 @@ export const handler = ApiHandler(async (_evt) => {
   const inputBody = {
     prompt: prompt,
     max_tokens: 100,
-    temperature: 0.8,
     return_likelihoods: "NONE",
   };
 
@@ -104,4 +107,17 @@ export const handler = ApiHandler(async (_evt) => {
 });
 ```
 
+### Deploy
+
+We will now deploy our project using `npx sst dev`.  Once deployed you should see an output with API Gateway endpoint, and we can take that endpoint, and invoke it like this
+
+```bash
+curl --location 'https://i5prdhoo3d.execute-api.us-east-1.amazonaws.com/bedrock' \
+--header 'Content-Type: application/json' \
+--data '{
+    "prompt": "Hello"
+}'
+```
+
+Bedrock seems to be a great way to quicky add text generation to your APIs with minimal overhead. If you want to talk more about serverless please reach out!
   
