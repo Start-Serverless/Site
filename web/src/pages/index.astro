@@ -5,12 +5,9 @@ import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
 import arrow from "../assets/arrow.svg";
 import atom from "../assets/atom.svg";
-import consulting from "../assets/consulting.svg";
-import development from "../assets/development.svg";
-import training from "../assets/training.svg";
 ---
 
-<Layout title="START / SERVERLESS">
+<Layout title="START / SERVERLESS" image={atom.src}>
     <main>
         <div class="homepage">
             <Hero mainImg={atom.src} backgroundImg={arrow.src} about={false}>

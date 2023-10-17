@@ -1,9 +1,15 @@
 ---
 import Layout from "./Layout.astro";
 import Contact from "../components/Contact.astro";
+
+interface Props {
+    image: string;
+}
+
+const { image } = Astro.props;
 ---
 
-<Layout title="Blog">
+<Layout title="Blog" image={image}>
     <body>
         <div class="hero">
             <h1 class="heading">THINK / SERVERLESS</h1>
