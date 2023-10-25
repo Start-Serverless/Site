@@ -11,7 +11,11 @@ const { title, body, buttonText } = Astro.props;
 <div class="service">
     <h2 class="name">{title}</h2>
     <p class="description">{body}</p>
-    <a href="#contact-form" class="action">
+    <a
+        href="mailto:trevor.cohen@startserverless.dev"
+        class="action"
+        target="_blank"
+    >
         <span class="start">{buttonText}</span>
     </a>
 </div>
@@ -64,8 +68,7 @@ const { title, body, buttonText } = Astro.props;
         text-decoration: none;
         width: 150px;
         margin-left: 32px;
-        margin-bottom: 10px;
-        /* margin: 16px; */
+        margin-bottom: 16px;
         /* margin: 32px 32px; */
     }
 

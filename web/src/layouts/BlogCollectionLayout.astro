@@ -1,6 +1,5 @@
 ---
 import Layout from "./Layout.astro";
-import Contact from "../components/Contact.astro";
 
 interface Props {
     image: string;
@@ -18,7 +17,6 @@ const { image } = Astro.props;
             <slot />
         </div>
     </body>
-    <Contact />
 </Layout>
 
 <style>

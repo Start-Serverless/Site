@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 import favicon from "../assets/favicon.png";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import Contact from "../components/Contact.astro";
 
 interface Props {
     frontmatter: CollectionEntry<"blog">;
@@ -92,7 +91,6 @@ const backgroundImg = `background-image: url(${frontmatter.data.image.src})`;
         <div class="content">
             <slot />
         </div>
-        <Contact />
     </body>
     <Footer />
 </html>
