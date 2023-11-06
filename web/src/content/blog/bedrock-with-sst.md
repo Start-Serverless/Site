@@ -10,10 +10,10 @@ draft: false
 ### Introduction
 AWS recently released their  fully managed service for deep learning models, Amazon Bedrock.  Now you can [access these models](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported)  through an API, in a serverless, pay-per-use model. 
 
-You can find the [github repository here]()
+You can find the [github repository here](https://github.com/Start-Serverless/Blogs/tree/main/sst-bedrock)
 
 ### Overview
-We are going to create a new standalone SST project where we are going to write a lambda function that can take in a prompt from our API Gateay.  It will then send this prompt to Amazon Bedrock where we are going to use the Cohere Command model, and return the response back to the client.
+We are going to create a new standalone SST project where we are going to write a lambda function that can take in a prompt from our API Gateway.  It will then send this prompt to Amazon Bedrock where we are going to use the Cohere Command model, and return the response back to the client.
 
 [SST is is a framework](https://docs.sst.dev/what-is-sst) that makes it easy to build modern full-stack applications on AWS.
 
