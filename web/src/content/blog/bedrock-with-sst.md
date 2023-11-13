@@ -19,7 +19,7 @@ We are going to create a new standalone SST project where we are going to write 
 
 ### Prerequisites
 
-We will need to meet the prequisites for SST, and requesting AWS access to Bedrock models
+We will need to meet the prerequisites for SST, and requesting AWS access to Bedrock models
 
 * Nodejs. 16.6 or higher
 * npm 7
