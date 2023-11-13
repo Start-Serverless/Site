@@ -128,5 +128,5 @@ and you should receive a response that is similar to this.
 `Hi, how can I help you today?`
 
 
-Bedrock seems to be a great way to quicky add text generation to your APIs with minimal overhead. If you want to talk more about serverless please reach out!
+Bedrock seems to be a great way to quickly add text generation to your APIs with minimal overhead. If you want to talk more about serverless please reach out!
   
